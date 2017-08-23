@@ -16,10 +16,7 @@
    
       
       <mapping resource="member.hbm.xml"/>
-   <!--    <mapping resource="Seeker.hbm.xml"/>
-       -->
-      <!-- <mapping resource="student.hbm.xml"/> -->
-      
+       
     </session-factory>  
  
  

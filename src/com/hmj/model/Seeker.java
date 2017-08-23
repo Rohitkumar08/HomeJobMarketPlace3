@@ -2,9 +2,17 @@ package com.hmj.model;
 
 
 public class Seeker extends Member{
+
+	
 	private static int noOfChilds;
 	private static String spouseName;
-	
+	private static Member member;
+	public static Member getMember() {
+		return member;
+	}
+	public static void setMember(Member member) {
+		Seeker.member = member;
+	}
 	public static int getNoOfChilds() {
 		return noOfChilds;
 	}

@@ -5,14 +5,20 @@
  <struts-config>
 	<form-beans>
 		<form-bean name="registerForm" type="com.hmj.FormBeans.RegisterForm"/>
-		
+		<form-bean name="loginForm" type="com.hmj.FormBeans.LoginForm"/>
 	</form-beans>
 	
 	<action-mappings>
 	
-		<action path="/register" name="registerForm" type="com.hmj.action.RegisterAction" scope="session" validate="false" input="/register.jsp">
+		<action path="/register" name="registerForm" type="com.hmj.action.RegisterAction" scope="session" validate="true" input="/register.jsp">
 			<forward name="success" path="/success.jsp"/> 
 			<forward name="failure" path="/failure.jsp"/> 
+		</action>
+		
+		<action path="/login" name="loginForm" type="com.hmj.action.LoginAction" scope="session" validate="false" input="/login.jsp">
+			<forward name="noEmail" path="/noEmail.jsp"/> 
+			<forward name="invalid" path="/failure.jsp"/> 
+			<forward name="valid" path="/success.jsp"/> 
 		</action>
 	</action-mappings>
 

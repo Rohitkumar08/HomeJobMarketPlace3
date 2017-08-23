@@ -47,8 +47,23 @@ public class RegisterForm extends ActionForm {
 	private String email;
 	private String password;
 	private String status;
-	private static int noOfChilds;
+	private  int noOfChilds;
 	private int yearsOfExperience;
+	
+	private String memberType;
+	
+	public int getYearsOfExperience() {
+		return yearsOfExperience;
+	}
+	public void setYearsOfExperience(int yearsOfExperience) {
+		this.yearsOfExperience = yearsOfExperience;
+	}
+	public String getMemberType() {
+		return memberType;
+	}
+	public void setMemberType(String memberType) {
+		this.memberType = memberType;
+	}
 	private int expectedPay;
 	
 	public int getExpectedPay() {
@@ -57,20 +72,21 @@ public class RegisterForm extends ActionForm {
 	public void setExpectedPay(int expectedPay) {
 		this.expectedPay = expectedPay;
 	}
-	public static int getNoOfChilds() {
+	public  int getNoOfChilds() {
 		return noOfChilds;
 	}
-	public static void setNoOfChilds(int noOfChilds) {
-		RegisterForm.noOfChilds = noOfChilds;
+	public  void setNoOfChilds(int noOfChilds) {
+		this.noOfChilds = noOfChilds;
 	}
-	public static String getSpouseName() {
+	public  String getSpouseName() {
 		return spouseName;
 	}
-	public static void setSpouseName(String spouseName) {
-		RegisterForm.spouseName = spouseName;
+	public  void setSpouseName(String spouseName) {
+		this.spouseName = spouseName;
 	}
-	private static String spouseName;
+	private  String spouseName;
 	
+
 	 @Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -81,6 +97,8 @@ public class RegisterForm extends ActionForm {
 		 Pattern p = Pattern.compile("[0-9]");
 		 System.out.println("**************"+firstName);
 		 System.out.println("**************"+phone);
+		 System.out.println(spouseName);
+		 System.out.println(noOfChilds);
 			Matcher m = p.matcher(firstName);
 			boolean b = m.find();
 		 if(b){
@@ -94,7 +112,37 @@ public class RegisterForm extends ActionForm {
 			 System.out.println("Inside validation");
 			 ae.add("phone", new ActionMessage("phoneNoError"));
 		 }
-			 
+		 
+		 //-------------------validation for seeker additional fields--------------
+		 
+		if(getMemberType().equals("Seeker")){
+				if(getNoOfChilds()<0)
+					ae.add("noOfChild", new ActionMessage("noOfChildError"));
+				if(spouseName==null){
+					ae.add("spouseName", new ActionMessage("spouseNameError"));
+				}
+				m = p.matcher(spouseName);
+				b = m.find();
+				if(b){
+				 ae.add("spouseName", new ActionMessage("spouseNameError"));
+		 
+			 }
+		}
+		//-----------validation for sitter additional fields------------
+		if(getMemberType().equals("Sitter")){
+			
+			if(getExpectedPay()<0){
+				ae.add("expectedPay", new ActionMessage("expectedPayError"));
+			}
+			if(getYearsOfExperience()<0){
+				ae.add("yearsOfExperience", new ActionMessage("yoeError"));
+			}
+			
+			
+			
+			
+			
+		}
 		 
 		 //--------------------
 		

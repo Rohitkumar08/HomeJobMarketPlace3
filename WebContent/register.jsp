@@ -34,13 +34,13 @@
 	  
 	   
 	<tbody id ="div1">
-		<tr><td>No of Childs:</td><td><input type = "number" name="noOfChilds" placeholder="Enter no of childs" ></td></tr>
-		<tr><td>Spouse name:</td><td><input type = "textarea" name="spouseName" placeholder="Enter spouse name" ></td></tr>
+		<tr><td>No of Childs:</td><td><input type = "number" name="noOfChilds" placeholder="Enter no of childs" ><html:errors property="noOfChild"/></td></tr>
+		<tr><td>Spouse name:</td><td><input type = "text" name="spouseName" placeholder="Enter spouse name" ><html:errors property="spouseName"/></td></tr>
 	</tbody>
 	
 	 <tbody id = "div2">
 		<tr><td>Expected pay:</td><td><input type = "number" name="expectedPay" placeholder="Enter expectedPay" ></td></tr>
-		<tr><td>Years OF experience:</td><td><input type = "number" name="yoe" placeholder="Enter years of experience" 90></td></tr>
+		<tr><td>Years OF experience:</td><td><input type = "number" name="yearsOfExperience" placeholder="Enter years of experience" 90></td></tr>
 	</tbody>
 	
 	<tr><td colspan="2" align="right" ><input type="submit" value="submit" style="font-size:7pt;"></td></tr>

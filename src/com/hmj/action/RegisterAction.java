@@ -3,14 +3,17 @@ package com.hmj.action;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.hmj.dao.*;
 import com.hmj.FormBeans.RegisterForm;
 import com.hmj.model.*;
 import com.hmj.service.MemberServiceImp;
@@ -22,36 +25,44 @@ public class RegisterAction extends Action{
 	public static final String SALT = "my-salt-text";
 //	Member mem=new Member();
 //	MemberServiceImp svc= new MemberServiceImp();
-	 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
-     Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
+	
+    
 	MemberServiceImp svc = (MemberServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBERSERVICEIMP);
+	UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		RegisterForm registerForm= (RegisterForm)form;
-		
-		 System.out.println("********** "+registerForm.getFirstName());
-		 
-		mem.setFirstName(request.getParameter("firstName"));
-		mem.setPhone(request.getParameter("phone"));
-		mem.setEmail(request.getParameter("email"));
-		
-		String password=request.getParameter("password");
+		String password=registerForm.getPassword();
 		String saltedPassword = SALT + password;
 		String hashedPassword = generateHash(saltedPassword);
 		System.out.println("*******"+hashedPassword);
-		mem.setPassword(hashedPassword);
-		
-		mem.setAdd(request.getParameter("address"));
-		mem.setMemberType(request.getParameter("memberType"));
-		System.out.println(mem.getMemberType());
-		
-		
-		boolean registered=svc.doRegister(mem);
-		
-		
+		registerForm.setPassword(hashedPassword);
+		 System.out.println("********** "+request.getParameter("noOfChilds"));
+		 System.out.println("********** "+request.getParameter("spouseName"));
+		int id=svc.doRegister(registerForm.getFirstName(),  registerForm.getPhone(),registerForm.getEmail(),registerForm.getPassword(),registerForm.getMemberType(), registerForm.getNoOfChilds(), registerForm.getSpouseName(), registerForm.getExpectedPay(),registerForm.getYearsOfExperience());
+//		if(registered){
+//			String uType = mem.getMemberType();
+//			int uid = ud.getID(mem.getEmail());
+//			HttpSession session = request.getSession();
+//			session.setAttribute("uname", mem.getFirstName());
+//			session.setAttribute("utype", uType);
+//	        session.setAttribute("uid",uid);  
+//			if(uType.equals("Sitter")){
+//				sitter.setExpectedPay(Integer.parseInt(request.getParameter("expectedPay")));
+//				sitter.setYearsOfExperience(Integer.parseInt(request.getParameter("yoe")));
+//				svc.doRegisterSitter(uid,sitter);
+//				
+//				RequestDispatcher rd= request.getRequestDispatcher("PerformSitter");
+//				rd.forward(request, response);
+//				
+//					//TODO sitter operations
+////				fillSitterDetails(uid,sc);
+////				performSitterTask(uid,sc);
+//			}
+//		
 		return mapping.findForward("success");
 	}
 	  public static String generateHash(String input) {
