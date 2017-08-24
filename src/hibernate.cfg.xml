@@ -16,7 +16,7 @@
    
       
       <mapping resource="member.hbm.xml"/>
-       
+       <mapping resource="jobs.hbm.xml"/>
     </session-factory>  
  
  

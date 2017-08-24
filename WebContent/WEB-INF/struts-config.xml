@@ -6,20 +6,61 @@
 	<form-beans>
 		<form-bean name="registerForm" type="com.hmj.FormBeans.RegisterForm"/>
 		<form-bean name="loginForm" type="com.hmj.FormBeans.LoginForm"/>
+		<form-bean name="createJobForm" type="com.hmj.FormBeans.CreateJobForm"/>
+		<!-- <form-bean name="updateJobForm" type="com.hmj.FormBeans.UpdateJobForm"/> -->
 	</form-beans>
 	
 	<action-mappings>
 	
+		<action path="/logout"  type="com.hmj.action.LogoutAction" scope="session" validate="false" >
+			<forward name="success" path="/logout.jsp"/>
+		</action>
+	
+		<action path="/seeker"  type="com.hmj.action.SeekerAction" scope="session" validate="false">
+			<forward name="success" path="/PerformSeeker.jsp"/>
+		</action>
+		 
 		<action path="/register" name="registerForm" type="com.hmj.action.RegisterAction" scope="session" validate="true" input="/register.jsp">
-			<forward name="success" path="/success.jsp"/> 
+			<forward name="seeker" path="/seeker.do"/> 
+			<forward name="sitter" path="/seeker.do"/> 
 			<forward name="failure" path="/failure.jsp"/> 
 		</action>
+		
 		
 		<action path="/login" name="loginForm" type="com.hmj.action.LoginAction" scope="session" validate="false" input="/login.jsp">
 			<forward name="noEmail" path="/noEmail.jsp"/> 
 			<forward name="invalid" path="/failure.jsp"/> 
-			<forward name="valid" path="/success.jsp"/> 
+			<forward name="seeker" path="/seeker.do"/> 
+			<forward name="sitter" path="/sitter.do"/>
 		</action>
+		<action path="/createJob"  type="com.hmj.action.JobCreationAction" scope="session" validate="false">
+			<forward name="success" path="/createJob.jsp"/>
+		</action>
+		<action path="/CreateJob" name="createJobForm" type="com.hmj.action.CreateJobAction" scope="session" validate="true" input="/createJob.jsp">
+			<forward name="success" path="/successJob.do"/> 
+			
+		</action>
+		<action path="/successJob"  type="com.hmj.action.SuccessJobAction" scope="session" validate="false">
+			<forward name="success" path="/successJob.jsp"/>
+		</action>
+		
+		
+		<action path="/updateJob"  type="com.hmj.action.UpdateJobAction" scope="session" validate="false">
+			<forward name="success" path="/updateJob.jsp"/>
+			<forward name="noJobs" path="/noJobs.jsp"/>
+		</action>
+		
+		<action path="/updateChoosenJob"  type="com.hmj.action.UpdateChoosenJobAction" scope="session" validate="false">
+			<forward name="success" path="/jobUpdateDetail.jsp"/>
+		</action>
+		
+		<action path="/updateChoosenParameter" name="createJobForm" type="com.hmj.action.UpdateParameterJobAction" scope="session" validate="false">
+			<forward name="success" path="/updateJob.jsp"/>
+			<forward name="noJobs" path="/noJobs.jsp"/>
+		</action>
+		
+		
+		
 	</action-mappings>
 
 	<message-resources parameter="com.hmj.FormBeans/Messages"/>

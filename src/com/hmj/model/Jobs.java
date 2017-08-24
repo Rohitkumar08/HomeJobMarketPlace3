@@ -1,8 +1,14 @@
 package com.hmj.model;
 
 public class Jobs {
-	int jobId;
-	 private String jobTitle;
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	private String jobTitle;
 	private int postedBy;
 	private String status;
 	

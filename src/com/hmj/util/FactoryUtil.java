@@ -1,7 +1,9 @@
 package com.hmj.util;
 
+import com.hmj.dao.JobsData;
 import com.hmj.dao.UserData;
 import com.hmj.model.*;
+import com.hmj.service.JobServiceImp;
 import com.hmj.service.MemberServiceImp;
 
 import java.util.HashMap;
@@ -26,8 +28,8 @@ public class FactoryUtil {
 		 mapClassInstance.put(SITTER, new Sitter());
 		 mapClassInstance.put(JOBS, new Jobs());
 		 mapClassInstance.put(MEMBERSERVICEIMP, new MemberServiceImp());
-//		 mapClassInstance.put(JOBSERVICEIMP, new JobServiceImp());
-//		 mapClassInstance.put(JOBSDATA, new JobsData());
+		 mapClassInstance.put(JOBSERVICEIMP, new JobServiceImp());
+		 mapClassInstance.put(JOBSDATA, new JobsData());
 	}
 //	public static  <T> T getInstance(String className){
 //		

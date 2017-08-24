@@ -45,20 +45,19 @@ public class LoginAction extends Action {
 			System.out.println("********"+uType);
 			session.setAttribute("utype", uType);
 			if(uType.equals("Seeker")){
-				RequestDispatcher rd = request.getRequestDispatcher("PerformSeeker");
-				rd.forward(request, response);
+				
+				return mapping.findForward("seeker");
 			}
 			if(uType.equals("Sitter")){
-				RequestDispatcher rd = request.getRequestDispatcher("PerformSitter");
-				rd.forward(request, response);
+				return mapping.findForward("sitter");
 			}
-			if(uType.equals("Admin")){
-				RequestDispatcher rd = request.getRequestDispatcher("AdminLoggedIn");
-				rd.forward(request, response);
+//			if(uType.equals("Admin")){
+//				RequestDispatcher rd = request.getRequestDispatcher("AdminLoggedIn");
+//				rd.forward(request, response);
+//			
+//			}
+//		
 			
-			}
-		
-			return mapping.findForward("valid");
 		}
 		if(loginStatus.equals("invalid")){
 			return mapping.findForward("invalid");
