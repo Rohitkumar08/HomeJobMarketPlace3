@@ -16,6 +16,17 @@ public class SeekerAction extends Action{
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		HttpSession session= request.getSession();
+		System.out.println("inside seeker action");
+		if(session.getAttribute("uname").equals(null)) {
+			
+			return mapping.findForward("loginFirst");
+		}
+		if(!(session.getAttribute("utype").equals("Seeker"))) {
+			
+			return mapping.findForward("notSeeker");
+		}
+		
+		
 		System.out.println("inside session"+session.getAttribute("uname"));
 		return mapping.findForward("success");
 	}

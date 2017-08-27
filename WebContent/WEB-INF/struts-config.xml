@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <!DOCTYPE struts-config PUBLIC
+<!DOCTYPE struts-config PUBLIC
        "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
        "http://struts.apache.org/dtds/struts-config_1_3.dtd">
  <struts-config>
@@ -7,6 +7,12 @@
 		<form-bean name="registerForm" type="com.hmj.FormBeans.RegisterForm"/>
 		<form-bean name="loginForm" type="com.hmj.FormBeans.LoginForm"/>
 		<form-bean name="createJobForm" type="com.hmj.FormBeans.CreateJobForm"/>
+		<form-bean name="jobIdForm" type="com.hmj.FormBeans.JobIdForm"/>
+		
+		<form-bean name="deleteSeeker" type="com.hmj.FormBeans.DeleteSeekerForm"/>
+		<form-bean name="applyThisJobForm" type="com.hmj.FormBeans.ApplyJobForm"/>
+		
+		<form-bean name="searchEmailForm" type="com.hmj.FormBeans.SearchEmailForm"/>
 		<!-- <form-bean name="updateJobForm" type="com.hmj.FormBeans.UpdateJobForm"/> -->
 	</form-beans>
 	
@@ -18,18 +24,26 @@
 	
 		<action path="/seeker"  type="com.hmj.action.SeekerAction" scope="session" validate="false">
 			<forward name="success" path="/PerformSeeker.jsp"/>
+			<forward name="loginFirst" path="/error.jsp"/>
+			<forward name="notSeeker" path="/notSeeker.jsp"/>
+		</action>
+		
+		<action path="/sitter"  type="com.hmj.action.SitterAction" scope="session" validate="false">
+			<forward name="success" path="/PerformSitter.jsp"/>
+			<forward name="loginFirst" path="/error.jsp"/>
+			<forward name="notSeeker" path="/notSitter.jsp"/>
 		</action>
 		 
 		<action path="/register" name="registerForm" type="com.hmj.action.RegisterAction" scope="session" validate="true" input="/register.jsp">
 			<forward name="seeker" path="/seeker.do"/> 
-			<forward name="sitter" path="/seeker.do"/> 
+			<forward name="sitter" path="/sitter.do"/> 
 			<forward name="failure" path="/failure.jsp"/> 
 		</action>
 		
 		
-		<action path="/login" name="loginForm" type="com.hmj.action.LoginAction" scope="session" validate="false" input="/login.jsp">
+		<action path="/login" name="loginForm" type="com.hmj.action.LoginAction" scope="session" validate="true" input="/login.jsp">
 			<forward name="noEmail" path="/noEmail.jsp"/> 
-			<forward name="invalid" path="/failure.jsp"/> 
+			<forward name="invalid" path="/invalidCredentialsForLogin.jsp"/> 
 			<forward name="seeker" path="/seeker.do"/> 
 			<forward name="sitter" path="/sitter.do"/>
 		</action>
@@ -50,7 +64,7 @@
 			<forward name="noJobs" path="/noJobs.jsp"/>
 		</action>
 		
-		<action path="/updateChoosenJob"  type="com.hmj.action.UpdateChoosenJobAction" scope="session" validate="false">
+		<action path="/updateChoosenJob" name="jobIdForm" type="com.hmj.action.UpdateChoosenJobAction" scope="session" validate="false" input="updateJob.jsp">
 			<forward name="success" path="/jobUpdateDetail.jsp"/>
 		</action>
 		
@@ -59,7 +73,83 @@
 			<forward name="noJobs" path="/noJobs.jsp"/>
 		</action>
 		
+		<action path="/deleteJob"  type="com.hmj.action.UpdateJobAction" scope="session" validate="false">
+			<forward name="success" path="/deleteJob.jsp"/>
+			<forward name="noJobs" path="/noJobs.jsp"/>
+		</action>
 		
+		<action path="/deleteChoosenJob" name="jobIdForm" type="com.hmj.action.DeleteChoosenJobAction" scope="session" validate="false">
+			<forward name="success" path="/successDeletionOfJob.jsp"/>
+			<forward name="failure" path="/errorInDeletionOfJob.jsp"/>	
+		</action>
+		
+		<action path="/ViewProfile"  type="com.hmj.action.ViewProfileSeekerAction" scope="session" validate="false">
+			<forward name="success" path="/profileUpdateDetail.jsp"/>
+			<forward name="failure" path="/errorInDeletionOfJob.jsp"/>	
+		</action>
+		
+		
+		<action path="/ViewProfileSitter"  type="com.hmj.action.ViewProfileSitterAction" scope="session" validate="false">
+			<forward name="success" path="/profileUpdateDetailSitter.jsp"/>
+			<forward name="failure" path="/errorInDeletionOfJob.jsp"/>	
+		</action>
+		
+		<action path="/updateChoosenParameterSeeker" name="registerForm" type="com.hmj.action.UpdateProfileSeekerAction" scope="session" validate="false">
+			<forward name="success" path="/profileUpdatedSeeker.jsp"/>
+			<forward name="failure" path="/errorInDeletionOfJob.jsp"/>	
+		</action>
+		<action path="/UpdateChoosenParameterSitter" name="registerForm" type="com.hmj.action.UpdateProfileSitterAction" scope="session" validate="false">
+			<forward name="success" path="/profileUpdatedSitter.jsp"/>
+			<forward name="failure" path="/errorInDeletionOfJob.jsp"/>	
+		</action>
+		
+		<action path="/deleteSeeker" name="deleteSeeker" type="com.hmj.action.DeleteSeekerAction" scope="session" validate="false">
+			<forward name="success" path="/successUserDeletion.jsp"/>
+		</action>
+		
+		<action path="/deleteSitter" name="deleteSeeker" type="com.hmj.action.DeleteSitterAction" scope="session" validate="false">
+			<forward name="success" path="/successUserDeletion.jsp"/>
+		</action>
+		
+		<action path="/loginAgain" type="com.hmj.action.LoginAgainAction">
+			<forward name="success" path="/login.jsp"/>	
+		</action>
+		
+		<action path="/applyNewJob" type="com.hmj.action.ApplyNewJobAction">
+			<forward name="success" path="/applyNewJob.jsp"/>	
+			<forward name="failure" path="/noJobsAvail.jsp"/>
+		</action>
+		
+		
+		<action path="/applyThisJob" name="applyThisJobForm" type="com.hmj.action.ApplyThisJobAction">
+			<forward name="success" path="/successApp.jsp"/>	
+			<forward name="failure" path="/alreadyApplied.jsp"/>
+		</action>
+		
+		<action path="/listOfJobs" type="com.hmj.action.ListAllJobAction">
+			<forward name="success" path="/listOfAllJobs.jsp"/>	
+			<forward name="failure" path="/noJobsAvail.jsp"/>
+		</action>
+		
+		<action path="/deleteJobApp" type="com.hmj.action.DeleteJobAction">
+			<forward name="success" path="/applyNewJob.jsp"/>	
+			<forward name="failure" path="/noJobsAvail.jsp"/>
+		</action>
+		
+		<action path="/applicantsJob" type="com.hmj.action.UpdateJobAction">
+			<forward name="success" path="/chooseJobForApp.jsp"/>	
+			<forward name="failure" path="/noJobsAvail.jsp"/>
+		</action>
+		
+		<action path="/ShowApplicants" name="jobIdForm" type="com.hmj.action.ShowApplicantsAction" validate="false">
+			<forward name="success" path="/allApplicants.jsp"/>	
+			<forward name="failure" path="/noJobsAvail.jsp"/>
+		</action>
+		
+		<action path="/SearchEmail" name="searchEmailForm" type="com.hmj.action.SearchEmailAction">
+			<forward name="success" path="/emailResults.jsp"/>	
+			<forward name="failure" path="/noJobsAvail.jsp"/>
+		</action>
 		
 	</action-mappings>
 

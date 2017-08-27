@@ -39,8 +39,8 @@
 	</tbody>
 	
 	 <tbody id = "div2">
-		<tr><td>Expected pay:</td><td><input type = "number" name="expectedPay" placeholder="Enter expectedPay" ></td></tr>
-		<tr><td>Years OF experience:</td><td><input type = "number" name="yearsOfExperience" placeholder="Enter years of experience" 90></td></tr>
+		<tr><td>Expected pay:</td><td><input type = "number" name="expectedPay" placeholder="Enter expectedPay"><html:errors property="expectedPay"/></td></tr>
+		<tr><td>Years OF experience:</td><td><input type = "number" name="yearsOfExperience" placeholder="Enter years of experience"><html:errors property="yearsOfExperience"/></td></tr>
 	</tbody>
 	
 	<tr><td colspan="2" align="right" ><input type="submit" value="submit" style="font-size:7pt;"></td></tr>

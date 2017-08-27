@@ -26,10 +26,10 @@ public class UpdateChoosenJobAction extends Action {
 		
 		int uid=(int) session.getAttribute("uid");
 		
-//		String selected[]= request.getParameterValues("inputed");
-//		String jobTitle=selected[0].substring(7);  //job title choosen for edit purpose
-//			System.out.println(selected[0].substring(7));
-			int jobId=Integer.parseInt(request.getParameter("inputed"));
+		String selected[]= request.getParameterValues("inputed");
+		int selectedJobId=Integer.parseInt(selected[0].substring(7));  //job title choosen for edit purpose
+			System.out.println(selected[0].substring(7));
+			int jobId=selectedJobId;
 			Jobs job = jbs.getJobDetails(jobId);
 			System.out.println(job.getJobTitle());
 			System.out.println(job.getStartDate());

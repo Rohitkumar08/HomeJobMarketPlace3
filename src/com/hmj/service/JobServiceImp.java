@@ -155,6 +155,57 @@ public boolean updateChoosenParam(int jobId, String jobTitle, String startDate, 
 }
 
 
+public boolean deleteJob(int id) {
+	// TODO Auto-generated method stub
+	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
+	boolean deleted = jd.deleteThisJob(id);
+	if(deleted) {
+		return true;
+		}
+	else
+	return false;
+}
+
+
+public List<Jobs> listAllJobsForSeekers() {
+	// TODO Auto-generated method stub
+	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
+	List<Jobs> lst=jd.listAllJobs();
+	return lst;
+}
+
+
+public int applyThisJob(int jobId, int uid) {
+	// TODO Auto-generated method stub
+	
+	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
+	int applied = jd.applyJobDao(jobId,uid);
+	
+	return applied;
+}
+
+
+public List<Jobs> fetchAllJobsSitter(int uid) {
+	// TODO Auto-generated method stub
+	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
+	Applications app= new Applications();
+//	app.set
+	List<Jobs> lst = jd.fetchSitterApps(uid);
+	
+	
+	
+	return null;
+}
+
+
+public List<Sitter> showApplicants(int uid, int jobId) {
+	// TODO Auto-generated method stub
+	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
+	List<Sitter> sitter=jd.fetchSitterDetails(uid,jobId);
+	return sitter;
+}
+
+
 
 
 

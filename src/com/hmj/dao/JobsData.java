@@ -1,10 +1,6 @@
 package com.hmj.dao;
 import java.text.ParseException;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +10,9 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.hmj.FormBeans.*;
+import com.hmj.model.Applications;
 import com.hmj.model.Jobs;
+import com.hmj.model.Sitter;
 import com.hmj.service.*;
 import com.hmj.util.FactoryUtil;
 import com.hmj.util.HibernateUtil;
@@ -258,8 +256,9 @@ public class JobsData {
 			//Tra
 		//	Session session = HibernateUtil.
 			System.out.println("*inside dao***");
-			Query query=ses.createQuery("from Jobs where postedBy=:id");
+			Query query=ses.createQuery("from Jobs where postedBy=:id and status=:status");
 			query.setParameter("id", uid);
+			query.setParameter("status", "ACTIVE");
 			lst = query.list();
 			
 			
@@ -476,8 +475,9 @@ public class JobsData {
 			Session ses= HibernateUtil.getSession().openSession();
 			//Tra
 		//	Session session = HibernateUtil.
+			Transaction tx= ses.beginTransaction();
 			System.out.println("*inside dao***");
-			Query query=ses.createQuery("update Jobs set jobTitle=:jobTitle, startDate=:startDate, endDate=:endDate, startTime=:startTime, endTime=:endTime, payPerhour=:payperHour where id=:jobId");
+			Query query=ses.createQuery("update Jobs set jobTitle=:jobTitle, startDate=:startDate, endDate=:endDate, startTime=:startTime, endTime=:endTime, payPerHour=:payPerHour where id=:jobId");
 			query.setParameter("jobId", jobId);
 			query.setParameter("jobTitle", job.getJobTitle());
 			query.setParameter("startDate", job.getStartDate());
@@ -485,8 +485,10 @@ public class JobsData {
 			query.setParameter("startTime", job.getStartTime());
 			query.setParameter("endTime", job.getEndTime());
 			query.setParameter("payPerHour", job.getPayPerHour());
-			query.executeUpdate();
-			System.out.println("inside update dao");
+			System.out.println("befire execute update statement");
+			int res=query.executeUpdate();
+			System.out.println("inside update dao     "+res);
+			tx.commit();
 				return true;
 			
 			
@@ -496,6 +498,170 @@ public class JobsData {
 		}
 		
 		return false;
+	}
+
+	public boolean deleteThisJob(int id) {
+		// TODO Auto-generated method stub
+		
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			//Tra
+		//	Session session = HibernateUtil.
+			Transaction tx= ses.beginTransaction();
+			System.out.println("*inside dao***");
+			System.out.println(id);
+			System.out.println();
+			Query query=ses.createQuery("update Jobs set status=:new where id=:id ");
+			
+			query.setParameter("new", "INACTIVE");
+			query.setParameter("id", id);
+			
+			System.out.println("befire execute update statement");
+			int res=query.executeUpdate();
+			System.out.println("inside update dao     "+res);
+			tx.commit();
+				return true;
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	public List<Jobs> listAllJobs() {
+		// TODO Auto-generated method stub
+		List<Jobs> lst=null;
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			Transaction tx= ses.beginTransaction();
+			System.out.println("*inside dao***");
+			Query query=ses.createQuery("from Jobs where status=:status");
+			query.setParameter("status", "ACTIVE");
+			lst = query.list();
+			return lst;
+				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lst;
+	}
+
+	public int applyJobDao(int jobId, int uid) {
+		// TODO Auto-generated method stub
+	
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			Transaction tx= ses.beginTransaction();
+			Query q= ses.createQuery("from Sitter where id=:uid");
+			q.setParameter("uid", uid);
+			List<Sitter> lst = q.list();
+			
+			Sitter sitter = lst.get(0);
+			
+			q= ses.createQuery("from Jobs where id=:jobId");
+			q.setParameter("jobId", jobId);
+			List<Jobs> lst1 = q.list();
+			Jobs job = lst1.get(0);
+			
+			
+			Applications app= new Applications();
+			app.setExpectedPay(sitter.getExpectedPay());
+			app.setJobs(job);
+			app.setSitter(sitter);
+			int res= (int) ses.save(app);
+			
+			tx.commit();
+			return res;
+			
+//			int expectedPay=sitter.getExpectedPay();
+//			System.out.println(expectedPay);
+//			Transaction tx= ses.beginTransaction();
+//			System.out.println("*inside dao***");
+//			Query query=ses.createSQLQuery("insert into Application(jobId, expectedPay, uid) values(:jobId, :expectedPay, :uid)");
+//			query.setParameter("jobId", jobId);
+//			query.setParameter("uid", uid);
+//			query.setParameter("expectedPay", expectedPay);
+//			int res= query.executeUpdate();
+//			tx.commit();
+//			return res;
+				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public List<Jobs> fetchSitterApps(int uid) {
+		// TODO Auto-generated method stub
+		List<Jobs> lstJob=null;
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			Transaction tx= ses.beginTransaction();
+			Query q= ses.createQuery("from Applications where uid=:uid");
+			q.setParameter("uid", uid);
+			List<Applications> lst = q.list();
+			
+			for(Applications app: lst) {
+				int jobId= app.getJobId();
+				System.out.println("****************"+jobId+"*******");
+				q= ses.createQuery("from Jobs where id=:jobId");
+				q.setParameter("jobId", jobId);
+				List<Jobs> tmpJob= q.list();
+				Jobs job= tmpJob.get(0);
+				lstJob.add(job);
+			}
+			
+			
+				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return null;
+	}
+//------------method for view all applicants-----
+	public List<Sitter> fetchSitterDetails(int uid, int jobId) {
+		// TODO Auto-generated method stub
+		List<Sitter> allSitters=null;
+		List<Integer> sitters=null;
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			Transaction tx= ses.beginTransaction();
+			Query q= ses.createQuery("from Applications where jobId=:jobId");
+			q.setParameter("jobId",	jobId);
+			List<Applications> lst = q.list();
+		
+			for(Applications app : lst) {
+				sitters.add(app.getUid());
+			}
+			for(int allUid:sitters) {
+			
+				q= ses.createQuery("from Sitter where id=:sitterId");
+				q.setParameter("sitterId",	allUid);
+				List<Sitter> sit = q.list();
+				allSitters.add(sit.get(0));
+			}
+			return allSitters;
+
+				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return null;
 	}
 
 	

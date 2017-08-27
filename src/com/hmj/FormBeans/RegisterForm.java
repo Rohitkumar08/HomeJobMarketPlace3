@@ -132,9 +132,11 @@ public class RegisterForm extends ActionForm {
 		if(getMemberType().equals("Sitter")){
 			
 			if(getExpectedPay()<0){
+				System.out.println(getExpectedPay());
 				ae.add("expectedPay", new ActionMessage("expectedPayError"));
 			}
 			if(getYearsOfExperience()<0){
+				System.out.println(getYearsOfExperience());
 				ae.add("yearsOfExperience", new ActionMessage("yoeError"));
 			}
 			

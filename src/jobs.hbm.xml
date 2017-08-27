@@ -5,8 +5,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
  
  <hibernate-mapping>
-	<class name = "com.hmj.model.Jobs" table="Jobs">
-	<id name="id" column="job_id">
+	<class name = "com.hmj.model.Jobs" table="jobs">
+	<id name="id" column="job_Id">
 	<generator class="increment"/></id>
 	<!-- <discriminator column="user_type"/> -->
 	

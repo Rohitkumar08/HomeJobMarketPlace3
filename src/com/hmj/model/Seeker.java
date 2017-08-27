@@ -3,7 +3,13 @@ package com.hmj.model;
 
 public class Seeker extends Member{
 
-	
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	private static int noOfChilds;
 	private static String spouseName;
 	private static Member member;

@@ -35,7 +35,11 @@ public class MemberServiceImp {
 			 id=ud.registerSeeker(seeker);
 		 }
 		 if(memberType.equals("Sitter")){
-			 
+			 sitter.setFirstName(name);
+			 sitter.setPhone(phone);
+			 sitter.setEmail(email);
+			 sitter.setPassword(password);
+			 sitter.setMemberType(memberType);
 			 sitter.setExpectedPay(expectedPay);
 			 sitter.setYearsOfExperience(yearsOfExperience);
 			id=ud.registerSitter(sitter);
@@ -75,6 +79,95 @@ public class MemberServiceImp {
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		Member mem = ud.getPassword(email);
 		return mem;
+	}
+
+	public Seeker getUserDetails(int uid) {
+		// TODO Auto-generated method stub
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+
+		Seeker seeker = ud.getUserDetailsDao(uid);
+		return seeker;
+	}
+
+	public boolean updateUser(int uid, String firstName, String phone, int noOfChilds, String spouseName) {
+		// TODO Auto-generated method stub
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+		 Seeker seeker = (Seeker) FactoryUtil.mapClassInstance.get(FactoryUtil.SEEKER);
+		 mem.setFirstName(firstName);
+		 mem.setPhone(phone);
+		 seeker.setFirstName(firstName);
+		 seeker.setPhone(phone);
+		 seeker.setNoOfChilds(noOfChilds);
+		 seeker.setSpouseName(spouseName);
+		 
+		 
+		int updatedUserData= ud.updateSeekerDetails(seeker, uid);
+		
+		
+		
+		return false;
+	}
+
+	public boolean deleteSeekerDetails(int uid, String email) {
+		// TODO Auto-generated method stub
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+		 
+		 int res=ud.deleteSeeker(uid,email);
+
+		
+		return false;
+	}
+
+	public Sitter getSitterUserDetails(int uid) {
+		// TODO Auto-generated method stub
+		
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+
+		Sitter sitter = ud.getSitterUserDetailsDao(uid);
+		return sitter;
+		
+	}
+
+	public boolean updateUserSitter(int uid, String firstName, String phone, int expectedPay, int yearsOfExperience) {
+		// TODO Auto-generated method stub
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+		 Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
+		 mem.setFirstName(firstName);
+		 mem.setPhone(phone);
+		sitter.setFirstName(firstName);
+		 sitter.setPhone(phone);
+		sitter.setExpectedPay(expectedPay);
+		sitter.setYearsOfExperience(yearsOfExperience);
+		 
+		 
+		int updatedUserData= ud.updateSitterDetails(sitter, uid);
+		
+		
+		
+		return true;
+	}
+
+	public List<Member> getSearchData(String keyWord) {
+		// TODO Auto-generated method stub
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+
+		List<Member> members= ud.getSearchedEmails(keyWord);
+		
+		return members;
+	}
+
+	public int deleteSitterDetails(int uid, String email) {
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+		 
+		 int res=ud.deleteSitter(uid,email);
+
+		
+		// TODO Auto-generated method stub
+		return res;
 	}
 
 	

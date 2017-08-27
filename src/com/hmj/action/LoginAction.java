@@ -40,6 +40,7 @@ public class LoginAction extends Action {
 	        mem=svc.getUserData(email);
 	        session.setAttribute("uname",mem.getFirstName()); 
 	        session.setAttribute("uid", mem.getId());
+	        session.setAttribute("uemail", mem.getEmail());
 	        System.out.println(session.getAttribute("uid"));
 			String uType=mem.getMemberType();
 			System.out.println("********"+uType);

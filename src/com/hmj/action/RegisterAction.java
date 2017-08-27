@@ -48,10 +48,12 @@ public class RegisterAction extends Action{
 		session.setAttribute("uid", uid);
 		if(registerForm.getMemberType().equals("Seeker")){
 			session.setAttribute("uname", registerForm.getFirstName());
+			 session.setAttribute("uemail", registerForm.getEmail());
 			return mapping.findForward("seeker");
 		}
 		if(registerForm.getMemberType().equals("Sitter")){
 			session.setAttribute("uname", registerForm.getFirstName());
+			session.setAttribute("uemail", registerForm.getEmail());
 			return mapping.findForward("sitter");
 		}
 		return mapping.findForward("failure");

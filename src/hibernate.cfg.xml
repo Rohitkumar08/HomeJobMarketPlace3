@@ -8,15 +8,17 @@
  	<session-factory>  
       <!--    <property name="hbm2ddl.auto">update</property> -->
       <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-      <property name="connection.url">jdbc:mysql://localhost:3306/MarketPlace</property>
+      <property name="connection.url">jdbc:mysql://localhost:3306/marketplace</property>
       <property name="connection.user">root</property>
-      <property name="connection.password">admin321</property>
+      <property name="connection.password">admin</property>
       <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
       <property name="show_sql">true</property>
    
       
       <mapping resource="member.hbm.xml"/>
        <mapping resource="jobs.hbm.xml"/>
+       <mapping resource="seeker.hbm.xml"/>
+       <mapping resource="application.hbm.xml"/>
     </session-factory>  
  
  

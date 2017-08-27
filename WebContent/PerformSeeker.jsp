@@ -27,8 +27,8 @@
 <tr><th align="center">WELCOME AS A SEEKER</th></tr>
 <tr><td><a href="createJob.do">Create a new Job</a></td></tr>
 <tr><td><a href="updateJob.do">Update a Job</a></td></tr>
-<tr><td><a href="deleteJobServlet">Delete a job</a></td></tr>
-<tr><td><a href="ApplicantsJobServlet">View all jobs</a></td></tr>
+<tr><td><a href="deleteJob.do">Delete a job</a></td></tr>
+<tr><td><a href="applicantsJob.do">View all jobs</a></td></tr>
 </table>
 </center>
 </body>

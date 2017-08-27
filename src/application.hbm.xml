@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+ 
+ <hibernate-mapping>
+	<class name = "com.hmj.model.Applications" table="application">
+	<id name="id" column="app_id">
+	<generator class="increment"/></id>
+	<!-- <discriminator column="user_type"/> -->
+	
+		<property name="expectedPay" column="Expected_pay" not-null="true"/>
+		
+			<many-to-one name="sitter" class="com.hmj.model.Sitter"
+            column="member_id" unique="true" not-null="true"
+            cascade="all" />
+            
+            <many-to-one name="jobs" class="com.hmj.model.Jobs"
+            column="job_id" unique="true" not-null="true"
+            cascade="all" />	
+	
+	</class>
+	
+	
+	
+	
+	
+</hibernate-mapping>

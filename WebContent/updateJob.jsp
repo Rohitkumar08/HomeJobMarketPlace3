@@ -21,27 +21,28 @@
 <c:import url="header.jsp"></c:import>
 
 <center>
-<html:form action = "/updateChoosenJob" method="POST">
+<html:form action ="updateChoosenJob.do" method="POST">
 <table border="2" style="background-color:salmon">
 
 <tr><th colspan="4">LIST OF ALL JOBS POSTED BY YOU</th></tr>
-<tr><b><td>JOB TITLE</td><td>STARTDATE</td><td>END DATE</td><td>PAY PER HOUR</td></b></tr>
+<tr><b><td>ID</td><td>JOB TITLE</td><td>STARTDATE</td><td>END DATE</td><td>PAY PER HOUR</td></b></tr>
 	<c:forEach items="${jobs}" var ="job">
 
 		<tr>
-			<input type="hidden" name="inputed" value="${job.getId()}"/>
+			<input type="hidden"  value="${job.getId()}"/>
+			<td><c:out  value="${job.getId()}"></c:out></td>
 			<td><c:out  value="${job.getJobTitle()}"></c:out></td>
 			<td><c:out  value="${job.getStartDate()}"></c:out></td>
 			<td><c:out  value="${job.getEndDate()}"></c:out></td>
 			<td><c:out  value="${job.getPayPerHour()}"></c:out></td>
-			<td><input type="submit"  value="update" <%-- onclick="this.value += ' <c:out  value="${job.getJobTitle()}" -<%-- -%>/>'" --%>></td>
+			<td><input type="submit" name="inputed" value="update" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"/></td>
 		</tr>
 	
 	</c:forEach>
 </table>
 
 </html:form>
-<a href="PerformSeeker"><b>GO BACK.....</b></a>
+<a href="seeker.do"><b>GO BACK.....</b></a>
 
 </center>
 

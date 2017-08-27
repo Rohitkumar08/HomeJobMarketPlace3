@@ -11,7 +11,7 @@
 <c:import url="header.jsp"></c:import>
 <center>
 <h2 style="color:red">YOU HAVENT'T CREATED ANY JOB...!!!!</h2>
-<a href="PerformSeeker"><b>GO BACK.....</b></a>
+<a href="seeker.do"><b>GO BACK.....</b></a>
 </center>
 
 </body>

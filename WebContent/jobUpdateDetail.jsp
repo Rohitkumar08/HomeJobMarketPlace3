@@ -47,7 +47,7 @@
 		<tr>
 		
 			<td>START TIME</td>
-			<td><input type="text" ReadOnly="true" name="endDate" value="${jobs.getStartTime()}"></td>
+			<td><input type="text"  name="startTime" value="${jobs.getStartTime()}"></td>
 			
 			<%-- <td><input type="submit" disabled="disabled" name="inputed" value="update" onclick="this.value += ' <c:out  value="startTime"/>'"></td> --%>
 		</tr>
@@ -55,7 +55,7 @@
 		<tr>
 		
 			<td>END TIME</td>
-			<td><input type="text" ReadOnly ="true" name="endDate" value="${jobs.getEndTime()}"></td>
+			<td><input type="text" name="endTime" value="${jobs.getEndTime()}"></td>
 			
 			<%-- <td><input type="submit"disabled="disabled"  name="inputed" value="update" onclick="this.value += ' <c:out  value="endTime"/>'"></td> --%>
 		</tr>
@@ -104,7 +104,7 @@
 </table>
 
 </html:form> 
-<a href="/updateJob.do"><b>GO BACK.....</b></a>
+<a href="updateJob.do"><b>GO BACK.....</b></a>
 
 </center>
 </body>
