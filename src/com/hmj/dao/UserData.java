@@ -15,7 +15,7 @@ import com.hmj.model.Jobs;
 import com.hmj.model.Member;
 import com.hmj.model.Seeker;
 import com.hmj.model.Sitter;
-import com.hmj.util.HibernateUtil;
+import com.hmj.util.*;
 
 public class UserData {
 
@@ -42,6 +42,8 @@ public class UserData {
 		transaction.commit();
 		ses.close();
 		
+		ActivityUtil.add("Seeker profile created");
+		
 		System.out.println("successfully registered seeker");
 		return id;
 	}
@@ -57,7 +59,7 @@ public class UserData {
 		
 		transaction.commit();
 		ses.close();
-		
+		ActivityUtil.add("Seeker profile created");
 		System.out.println("successfully registered sitter");
 		return id;
 	}
@@ -131,6 +133,7 @@ public class UserData {
 		Query query = ses.createQuery("from Seeker where id=:e");
 		query.setParameter("e", uid);
 		Seeker seeker= (Seeker) query.uniqueResult();
+		
 		return seeker;
 	
 	}
@@ -163,6 +166,8 @@ public class UserData {
 			int res=query.executeUpdate();
 			System.out.println("inside update dao     "+res);
 			tx.commit();
+			
+			ActivityUtil.add("Seeker profile updated");
 				return res;
 			
 			
@@ -272,6 +277,7 @@ public class UserData {
 		query.setParameter("status", "ACTIVE");
 		mem= query.list();
 		System.out.println("$$$$$$$$$$$$$$"+mem.get(0).getEmail());
+		ActivityUtil.add("Seeker email searched");
 		return mem;
 
 		

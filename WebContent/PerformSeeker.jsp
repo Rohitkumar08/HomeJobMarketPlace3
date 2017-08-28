@@ -19,7 +19,16 @@
 <tr><td><a href="deleteJob.do">Delete a job</a></td></tr>
 <tr><td><a href="applicantsJob.do">View all jobs</a></td></tr>
 </table>
-
+<br>
+<br>
+<table border="1" width="25%" style="background-color:Bisque ">
+<th>Recent Activities</th>
+	<c:forEach items="${activity}" var ="activity">
+		<tr>
+			<td><c:out  value="${activity}"></c:out></td>
+		</tr>
+	</c:forEach>
+</table>
 </center>
 </body>
 </html>

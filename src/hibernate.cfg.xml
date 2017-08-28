@@ -19,6 +19,7 @@
        <mapping resource="jobs.hbm.xml"/>
        <mapping resource="seeker.hbm.xml"/>
        <mapping resource="application.hbm.xml"/>
+       <mapping resource="seekerActivity.hbm.xml"/>
     </session-factory>  
  
  

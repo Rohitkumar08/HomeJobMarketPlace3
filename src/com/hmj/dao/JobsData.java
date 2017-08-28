@@ -12,8 +12,10 @@ import org.hibernate.query.Query;
 import com.hmj.FormBeans.*;
 import com.hmj.model.Applications;
 import com.hmj.model.Jobs;
+import com.hmj.model.SeekerActivity;
 import com.hmj.model.Sitter;
 import com.hmj.service.*;
+import com.hmj.util.ActivityUtil;
 import com.hmj.util.FactoryUtil;
 import com.hmj.util.HibernateUtil;
 
@@ -21,7 +23,7 @@ public class JobsData {
 	
 	
 	
-	public int createJob(Jobs job) {
+	public int createJob(Jobs job, SeekerActivity seekerAct) {
 		int id=0;
 		try{
 			
@@ -32,12 +34,13 @@ public class JobsData {
 			Transaction transaction  = ses.beginTransaction();
 			
 			id=(int) ses.save(job);
-			
+			ses.save(seekerAct);
 			transaction.commit();
-			ses.close();
 			
 			System.out.println("successfully Job created");
-		
+			
+			ActivityUtil.add(job.getJobTitle()+" job created");
+			
 			return id;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -325,7 +328,7 @@ public class JobsData {
 				Jobs jb=job.get(0);
 				
 				//jobs.add(jb);
-				
+				ActivityUtil.add(jb.getJobTitle()+" details displayed");	
 				System.out.println("inside dao"+jb.getJobTitle());
 				return jb;
 			
@@ -468,7 +471,7 @@ public class JobsData {
 //		return false;
 //	}
 
-	public boolean updateThisJob(int jobId, Jobs job) {
+	public boolean updateThisJob(int jobId, Jobs job, SeekerActivity seekerAct) {
 		// TODO Auto-generated method stub
 		
 		try {
@@ -488,7 +491,10 @@ public class JobsData {
 			System.out.println("befire execute update statement");
 			int res=query.executeUpdate();
 			System.out.println("inside update dao     "+res);
+			ses.save(seekerAct);
 			tx.commit();
+			
+			ActivityUtil.add(job.getJobTitle()+" Job profile updated");
 				return true;
 			
 			
@@ -500,7 +506,7 @@ public class JobsData {
 		return false;
 	}
 
-	public boolean deleteThisJob(int id) {
+	public boolean deleteThisJob(int id, SeekerActivity seekerAct) {
 		// TODO Auto-generated method stub
 		
 		try {
@@ -516,10 +522,12 @@ public class JobsData {
 			query.setParameter("new", "INACTIVE");
 			query.setParameter("id", id);
 			
-			System.out.println("befire execute update statement");
+			System.out.println("before execute update statement");
 			int res=query.executeUpdate();
 			System.out.println("inside update dao     "+res);
+			ses.save(seekerAct);
 			tx.commit();
+			ActivityUtil.add("selected job was deleted");
 				return true;
 			
 			
@@ -576,6 +584,7 @@ public class JobsData {
 			int res= (int) ses.save(app);
 			
 			tx.commit();
+			ActivityUtil.add("applied to a new job"+job.getJobTitle());
 			return res;
 			
 //			int expectedPay=sitter.getExpectedPay();
@@ -619,6 +628,7 @@ public class JobsData {
 //				lstJob.add(job);
 //			}
 //			
+			ActivityUtil.add("sitter applications fetched");
 			return lst;
 				
 		} catch (Exception e) {
@@ -643,17 +653,6 @@ public class JobsData {
 			List<Applications> lst = q.list();
 			System.out.println("&&&&&&&"+lst.size());
 			return lst;
-//			for(Applications app : lst) {
-//				sitters.add(app.getUid());
-//			}
-//			for(int allUid:sitters) {
-//			
-//				q= ses.createQuery("from Sitter where id=:sitterId");
-//				q.setParameter("sitterId",	allUid);
-//				List<Sitter> sit = q.list();
-//				allSitters.add(sit.get(0));
-//			}
-//			return allSitters;
 
 				
 		} catch (Exception e) {
@@ -679,7 +678,7 @@ public class JobsData {
 			
 			tx.commit();
 		
-		
+			ActivityUtil.add("Job Application was deleted");
 	}catch(Exception e) {
 		
 		

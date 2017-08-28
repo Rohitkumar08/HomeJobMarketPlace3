@@ -30,7 +30,9 @@ public class DeleteChoosenJobAction  extends Action{
 			int jobId=selectedJobId;
 		System.out.println(request.getParameter("inputed"));
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
-		 boolean deleted= jbs.deleteJob(jobId);
+		
+		int uid= (int) session.getAttribute("uid");
+		 boolean deleted= jbs.deleteJob(jobId, uid);
 		 if(deleted)
 		return mapping.findForward("success");
 		 else

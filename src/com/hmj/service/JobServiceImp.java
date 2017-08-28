@@ -27,7 +27,11 @@ public class JobServiceImp {
 		job.setPostedBy(uid);
 		job.setPayPerHour(payPerHour);
 		System.out.println(job.getStartDate()+"***********");
-		int created = jd.createJob(job);
+		
+		SeekerActivity seekerAct=new SeekerActivity();
+		seekerAct.setUid(uid);
+		seekerAct.setMessage("New job posted");
+		int created = jd.createJob(job, seekerAct);
 			
 		return created;
 		
@@ -37,6 +41,7 @@ public class JobServiceImp {
 	public List<Jobs> updateJob(int uid){
 		Jobs job = (Jobs)FactoryUtil.mapClassInstance.get(FactoryUtil.JOBS);
 		JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
+	
 		List<Jobs> jobs=jd.fetchSeekerJobs(uid);
 		return jobs;
 	
@@ -147,7 +152,11 @@ public boolean updateChoosenParam(int jobId, String jobTitle, String startDate, 
 	job.setStartTime(startTime);
 	job.setEndTime(endTime);
 	job.setPayPerHour(payPerHour);
-	boolean check=jd.updateThisJob(jobId, job);
+	
+	SeekerActivity seekerAct=new SeekerActivity();
+	seekerAct.setUid(job.getPostedBy());
+	seekerAct.setMessage("updated  job"+job.getJobTitle());
+	boolean check=jd.updateThisJob(jobId, job,seekerAct);
 	if(check)
 		return true;
 	else
@@ -155,10 +164,13 @@ public boolean updateChoosenParam(int jobId, String jobTitle, String startDate, 
 }
 
 
-public boolean deleteJob(int id) {
+public boolean deleteJob(int id,int uid) {
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
-	boolean deleted = jd.deleteThisJob(id);
+	SeekerActivity seekerAct=new SeekerActivity();
+	seekerAct.setUid(uid);
+	seekerAct.setMessage("deleted a job");
+	boolean deleted = jd.deleteThisJob(id, seekerAct);
 	if(deleted) {
 		return true;
 		}

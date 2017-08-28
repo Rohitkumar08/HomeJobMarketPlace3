@@ -34,6 +34,8 @@ public class RegisterAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
+		
+		
 		RegisterForm registerForm= (RegisterForm)form;
 		String password=registerForm.getPassword();
 		String saltedPassword = SALT + password;
@@ -43,8 +45,7 @@ public class RegisterAction extends Action{
 		 System.out.println("********** "+request.getParameter("noOfChilds"));
 		 System.out.println("********** "+request.getParameter("spouseName"));
 		int uid=svc.doRegister(registerForm.getFirstName(),  registerForm.getPhone(),registerForm.getEmail(),registerForm.getPassword(),registerForm.getMemberType(), registerForm.getNoOfChilds(), registerForm.getSpouseName(), registerForm.getExpectedPay(),registerForm.getYearsOfExperience());
-		
-		HttpSession session=request.getSession();
+		HttpSession session = request.getSession();
 		session.setAttribute("uid", uid);
 		if(registerForm.getMemberType().equals("Seeker")){
 			session.setAttribute("uname", registerForm.getFirstName());

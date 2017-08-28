@@ -18,18 +18,23 @@
 	</form-beans>
 	
  
-	<global-exceptions>
+	<!-- <global-exceptions>
 				
   		<exception
   			    key="error.global.mesage"
-	      type="java.io.IOException"
+	      type="java.lang.NullPointerException"
 	      path="/error.jsp" />
 	</global-exceptions>
-	
+	 -->
 	<action-mappings>
 	
 		<action path="/logout"  type="com.hmj.action.LogoutAction" scope="session" validate="false" >
 			<forward name="success" path="/logout.jsp"/>
+		</action>
+	
+		<action path="/register" type="com.hmj.action.HitRegisterAction" scope="session" validate="false" >
+			<forward name="success" path="/register.jsp"/>
+			<forward name="alreadyLoggedIn" path="/error.jsp"/>
 		</action>
 	
 		<action path="/seeker"  type="com.hmj.action.SeekerAction" scope="session" validate="false">
@@ -48,6 +53,7 @@
 			<forward name="seeker" path="/seeker.do"/> 
 			<forward name="sitter" path="/sitter.do"/> 
 			<forward name="failure" path="/failure.jsp"/> 
+			
 		</action>
 		
 		
@@ -79,7 +85,7 @@
 		</action>
 		
 		<action path="/updateChoosenParameter" name="createJobForm" type="com.hmj.action.UpdateParameterJobAction" scope="request" validate="false">
-			<forward name="success" path="/updateJob.jsp"/>
+			<forward name="success" path="/updatedJob.jsp"/>
 			<forward name="noJobs" path="/noJobs.jsp"/>
 		</action>
 		
