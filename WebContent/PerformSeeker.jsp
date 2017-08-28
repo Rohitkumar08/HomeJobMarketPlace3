@@ -8,17 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- <%
-
-	if(session.getAttribute("uname")==null){
-		out.print("dscdcewdccwdc");
-		response.sendRedirect("login.jsp");
-	}
-	
-
-%>   --%>
-
-
 <c:import url="header.jsp"></c:import>
 
 <center>
@@ -30,6 +19,7 @@
 <tr><td><a href="deleteJob.do">Delete a job</a></td></tr>
 <tr><td><a href="applicantsJob.do">View all jobs</a></td></tr>
 </table>
+
 </center>
 </body>
 </html>

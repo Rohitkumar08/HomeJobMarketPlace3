@@ -91,6 +91,38 @@ public class UserData {
 		return mem;
 	
 	}
+	public Member getMemberDetailsDao(int uid) {
+		// TODO Auto-generated method stub
+		Session ses= HibernateUtil.getSession().openSession();
+		
+		Query query = ses.createQuery("from Member where id=:e");
+		query.setParameter("e", uid);
+		Member seeker= (Member) query.uniqueResult();
+		return seeker;
+	
+	}
+	public void deleteMember(Member mem) {
+		// TODO Auto-generated method stub
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			//Tra
+		//	Session session = HibernateUtil.
+			Transaction tx1= ses.beginTransaction();
+			ses.saveOrUpdate(mem);
+			System.out.println("inside member update");
+			tx1.commit();
+			
+			Transaction tx2 =ses.beginTransaction();
+			Query q= ses.createQuery("update Jobs set status=:status where postedBy=:uid");
+			q.setParameter("status", "INACTIVE");
+			q.setParameter("uid", mem.getId());
+			q.executeUpdate();
+			tx2.commit();
+	
+		}catch(Exception e) {
+			
+		}
+	}
 
 	public Seeker getUserDetailsDao(int uid) {
 		// TODO Auto-generated method stub
@@ -264,6 +296,13 @@ public class UserData {
 			System.out.println("inside member update");
 			tx1.commit();
 			
+			Transaction tx= ses.beginTransaction();
+			query1=ses.createQuery("update Applications set status=:ustatus where sitter.id=:uid");
+			query1.setParameter("uid", uid);
+			query1.setParameter("ustatus", "INACTIVE");
+			query1.executeUpdate();
+			System.out.println("inside application update");
+			tx.commit();
 //			Transaction tx= ses.beginTransaction();
 //			Query query=ses.createQuery("update Jobs set status=:status where postedBy=:uid");
 //			query.setParameter("status", "INACTIVE");

@@ -112,12 +112,15 @@ public class MemberServiceImp {
 	public boolean deleteSeekerDetails(int uid, String email) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
-		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
-		 
-		 int res=ud.deleteSeeker(uid,email);
-
+		 //Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+		 Member mem= ud.getMemberDetailsDao(uid);
+		 mem.setStatus("INACTIVE");
+		 String pipedEmail=email.concat("|");
+		 mem.setEmail(pipedEmail);
+		 //int res=ud.deleteSeeker(uid,email);
+		 ud.deleteMember(mem);
 		
-		return false;
+		return true;
 	}
 
 	public Sitter getSitterUserDetails(int uid) {

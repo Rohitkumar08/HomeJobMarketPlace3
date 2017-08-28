@@ -22,7 +22,7 @@
 <c:import url="header.jsp"></c:import>
 <center>
 
-<html:form action = "/updateChoosenParameterSeeker" method="POST" onsubmit="return confirm('Do you really want to Delete your Seeker profile?');"> 
+<html:form action = "/updateChoosenParameterSeeker" method="POST" > 
 <table border="2" style="background-color:salmon">
 
 <tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
@@ -97,7 +97,7 @@
 
 </html:form> 
 
-<html:form action="/deleteSeeker" method="Post">
+<html:form action="/deleteSeeker" method="Post" onsubmit="return confirm('Do you really want to Delete your Seeker profile?');">
     <input type="submit" value="Delete Profile">
 </html:form>
 </center>

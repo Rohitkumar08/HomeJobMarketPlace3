@@ -2,6 +2,7 @@
 <!DOCTYPE struts-config PUBLIC
        "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
        "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+       
  <struts-config>
 	<form-beans>
 		<form-bean name="registerForm" type="com.hmj.FormBeans.RegisterForm"/>
@@ -15,6 +16,15 @@
 		<form-bean name="searchEmailForm" type="com.hmj.FormBeans.SearchEmailForm"/>
 		<!-- <form-bean name="updateJobForm" type="com.hmj.FormBeans.UpdateJobForm"/> -->
 	</form-beans>
+	
+ 
+	<global-exceptions>
+				
+  		<exception
+  			    key="error.global.mesage"
+	      type="java.io.IOException"
+	      path="/error.jsp" />
+	</global-exceptions>
 	
 	<action-mappings>
 	
@@ -47,28 +57,28 @@
 			<forward name="seeker" path="/seeker.do"/> 
 			<forward name="sitter" path="/sitter.do"/>
 		</action>
-		<action path="/createJob"  type="com.hmj.action.JobCreationAction" scope="session" validate="false">
+		<action path="/createJob"  type="com.hmj.action.JobCreationAction" scope="request" validate="false">
 			<forward name="success" path="/createJob.jsp"/>
 		</action>
-		<action path="/CreateJob" name="createJobForm" type="com.hmj.action.CreateJobAction" scope="session" validate="true" input="/createJob.jsp">
+		<action path="/CreateJob" name="createJobForm" type="com.hmj.action.CreateJobAction" scope="request" validate="true" input="/createJob.jsp">
 			<forward name="success" path="/successJob.do"/> 
 			
 		</action>
-		<action path="/successJob"  type="com.hmj.action.SuccessJobAction" scope="session" validate="false">
+		<action path="/successJob"  type="com.hmj.action.SuccessJobAction" validate="false">
 			<forward name="success" path="/successJob.jsp"/>
 		</action>
 		
 		
-		<action path="/updateJob"  type="com.hmj.action.UpdateJobAction" scope="session" validate="false">
+		<action path="/updateJob"  type="com.hmj.action.UpdateJobAction" scope="request" validate="false">
 			<forward name="success" path="/updateJob.jsp"/>
 			<forward name="noJobs" path="/noJobs.jsp"/>
 		</action>
 		
-		<action path="/updateChoosenJob" name="jobIdForm" type="com.hmj.action.UpdateChoosenJobAction" scope="session" validate="false" input="updateJob.jsp">
+		<action path="/updateChoosenJob" name="jobIdForm" type="com.hmj.action.UpdateChoosenJobAction" scope="request" validate="false" input="updateJob.jsp">
 			<forward name="success" path="/jobUpdateDetail.jsp"/>
 		</action>
 		
-		<action path="/updateChoosenParameter" name="createJobForm" type="com.hmj.action.UpdateParameterJobAction" scope="session" validate="false">
+		<action path="/updateChoosenParameter" name="createJobForm" type="com.hmj.action.UpdateParameterJobAction" scope="request" validate="false">
 			<forward name="success" path="/updateJob.jsp"/>
 			<forward name="noJobs" path="/noJobs.jsp"/>
 		</action>
@@ -132,8 +142,13 @@
 		</action>
 		
 		<action path="/deleteJobApp" type="com.hmj.action.DeleteJobAction">
-			<forward name="success" path="/applyNewJob.jsp"/>	
-			<forward name="failure" path="/noJobsAvail.jsp"/>
+			<forward name="success" path="/listOfSitterJobs.jsp"/>	
+			<forward name="failure" path="/noApps.jsp"/>
+		</action>
+		
+		<action path="/deleteThisApp" name="jobIdForm" type="com.hmj.action.DeleteThisAppAction">
+			<forward name="success" path="/deletedApplication.jsp"/>	
+			<forward name="failure" path="/noApps.jsp"/>
 		</action>
 		
 		<action path="/applicantsJob" type="com.hmj.action.UpdateJobAction">

@@ -185,24 +185,38 @@ public int applyThisJob(int jobId, int uid) {
 }
 
 
-public List<Jobs> fetchAllJobsSitter(int uid) {
+public List<Applications> fetchAllJobsSitter(int uid) {
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 	Applications app= new Applications();
 //	app.set
-	List<Jobs> lst = jd.fetchSitterApps(uid);
+	List<Applications> lst = jd.fetchSitterApps(uid);
 	
 	
 	
-	return null;
+	return lst;
 }
 
 
-public List<Sitter> showApplicants(int uid, int jobId) {
+public List<Applications> showApplicants(int uid, int jobId) {
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
-	List<Sitter> sitter=jd.fetchSitterDetails(uid,jobId);
+	List<Applications> sitter=jd.fetchSitterDetails(uid,jobId);
 	return sitter;
+}
+
+
+public boolean deleteApp(int jobId, int uid) {
+	// TODO Auto-generated method stub
+	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
+	
+	boolean deleted = jd.deleteThisAppDao(jobId,uid);
+	if(deleted) {
+		return true;
+		}
+	else
+	return false;
+	
 }
 
 

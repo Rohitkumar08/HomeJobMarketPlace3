@@ -3,20 +3,21 @@ package com.hmj.model;
 public class Applications {
 	private Jobs jobs;
 	private Sitter sitter;
-	private int uid;
-	private int jobId;
-	public int getJobId() {
-		return jobId;
+	private String status;
+public String getStatus() {
+		return status;
 	}
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	public int getUid() {
-		return uid;
-	}
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
+	//	private String status;
+//	
+//	public String getStatus() {
+//		return status;
+//	}
+//	public void setStatus(String status) {
+//		this.status = status;
+//	}
 	public Jobs getJobs() {
 		return jobs;
 	}

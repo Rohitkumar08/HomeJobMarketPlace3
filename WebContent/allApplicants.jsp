@@ -28,15 +28,15 @@
 
 		<tr>
 			
-			<td><c:out  value="${sitter.getFirstName()}"></c:out></td>
+			<td><c:out  value="${sitter.getSitter().getFirstName()}"></c:out></td>
 			<td><c:out  value="${sitter.getExpectedPay()}"></c:out></td>
-			<td><c:out  value="${sitter.getYearsOfExperience()}"></c:out></td>
+			<td><c:out  value="${sitter.getSitter().getYearsOfExperience()}"></c:out></td>
 		
 		</tr>
 	
 	</c:forEach>
 </table>
-<a href="ApplicantsJobServlet">GO BACK..</a>
+<a href="applicantsJob.do">GO BACK..</a>
 </center>
 </body>
 </html>

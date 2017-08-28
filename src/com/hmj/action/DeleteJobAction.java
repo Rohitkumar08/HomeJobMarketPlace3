@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.hmj.model.Applications;
 import com.hmj.model.Jobs;
 import com.hmj.service.JobServiceImp;
 import com.hmj.util.FactoryUtil;
@@ -24,9 +25,14 @@ public class DeleteJobAction extends Action {
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
 		HttpSession session = request.getSession();
 		int uid= (int) session.getAttribute("uid");
-		List<Jobs> lst = jbs.fetchAllJobsSitter(uid);
-
-		return super.execute(mapping, form, request, response);
+		List<Applications> lst = jbs.fetchAllJobsSitter(uid);
+		request.setAttribute("apps", lst);
+		
+		
+		if(lst.size()!=0)
+		return mapping.findForward("success");
+		else
+			return mapping.findForward("failure");
 	}
 
 

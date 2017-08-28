@@ -11,7 +11,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hibernate"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/struts"/>
-	<classpathentry kind="lib" path="C:/Users/rohitbit123/Downloads/Compressed/mysql-connector-java-5.1.40/mysql-connector-java-5.1.40-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rohitbit123/Downloads/jstl-1.2 (1).jar"/>
+	<classpathentry kind="lib" path="/Users/rohit/Downloads/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/rohit/Downloads/mysql-connector.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

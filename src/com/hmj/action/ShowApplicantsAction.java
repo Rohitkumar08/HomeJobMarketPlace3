@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.hmj.model.Applications;
 import com.hmj.model.Sitter;
 import com.hmj.service.JobServiceImp;
 import com.hmj.util.FactoryUtil;
@@ -30,11 +31,11 @@ public class ShowApplicantsAction extends Action{
 		int jobId=Integer.parseInt(selected[0].substring(16));
 			System.out.println(selected[0].substring(16));
 			
-			List<Sitter> applicants =jbs.showApplicants(uid,jobId);
-			System.out.println("******************"+applicants.size());
+			List<Applications> applicants =jbs.showApplicants(uid,jobId);
+			System.out.println("^^^^^^^^^^^^^"+applicants.get(0).getExpectedPay()+" ,"+applicants.get(0).getSitter().getFirstName());
 			if(applicants.size()!=0){
 				
-				System.out.println("*****************"+applicants.get(0).getFirstName());
+				//System.out.println("*****************"+applicants.get(0).getFirstName());
 				
 				request.setAttribute("sitter", applicants);
 				return mapping .findForward("success");

@@ -15,17 +15,20 @@
 	<property name="email" column="uemail" not-null="true"/>
 	<property name="password" column="upassword" not-null="true"/>
 	<property name="memberType" column="utype" not-null="true"/>
+	<property name="status" column="ustatus" />
 	
 	<joined-subclass name="com.hmj.model.Seeker" extends="com.hmj.model.Member" table="seeker">
 		<key column="seeker_id"></key>
 		<property name="noOfChilds" column="no_of_child"/>
 		<property name="spouseName" column="spouse_name"/>
+		
 	</joined-subclass>
 	
 	<joined-subclass name="com.hmj.model.Sitter" extends ="com.hmj.model.Member" table="sitter">
 		<key column="sitter_id"></key>
 		<property name="expectedPay" column="expected_pay"/>
 		<property name="yearsOfExperience" column="years_of_exp"/>
+		
 	</joined-subclass>
 	</class>
 	

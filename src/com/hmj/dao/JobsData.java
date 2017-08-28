@@ -598,27 +598,28 @@ public class JobsData {
 		return 0;
 	}
 
-	public List<Jobs> fetchSitterApps(int uid) {
+	public List<Applications> fetchSitterApps(int uid) {
 		// TODO Auto-generated method stub
-		List<Jobs> lstJob=null;
+		
 		try {
 			Session ses= HibernateUtil.getSession().openSession();
 			Transaction tx= ses.beginTransaction();
-			Query q= ses.createQuery("from Applications where uid=:uid");
+			Query q= ses.createQuery("from Applications where sitter.id=:uid and status=:status");
 			q.setParameter("uid", uid);
+			q.setParameter("status", "ACTIVE");
 			List<Applications> lst = q.list();
 			
-			for(Applications app: lst) {
-				int jobId= app.getJobId();
-				System.out.println("****************"+jobId+"*******");
-				q= ses.createQuery("from Jobs where id=:jobId");
-				q.setParameter("jobId", jobId);
-				List<Jobs> tmpJob= q.list();
-				Jobs job= tmpJob.get(0);
-				lstJob.add(job);
-			}
-			
-			
+//			for(Applications app: lst) {
+//				int jobId= app.getJobId();
+//				System.out.println("****************"+jobId+"*******");
+//				q= ses.createQuery("from Jobs where id=:jobId");
+//				q.setParameter("jobId", jobId);
+//				List<Jobs> tmpJob= q.list();
+//				Jobs job= tmpJob.get(0);
+//				lstJob.add(job);
+//			}
+//			
+			return lst;
 				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -630,28 +631,29 @@ public class JobsData {
 		return null;
 	}
 //------------method for view all applicants-----
-	public List<Sitter> fetchSitterDetails(int uid, int jobId) {
+	public List<Applications> fetchSitterDetails(int uid, int jobId) {
 		// TODO Auto-generated method stub
 		List<Sitter> allSitters=null;
 		List<Integer> sitters=null;
 		try {
 			Session ses= HibernateUtil.getSession().openSession();
 			Transaction tx= ses.beginTransaction();
-			Query q= ses.createQuery("from Applications where jobId=:jobId");
+			Query q= ses.createQuery("from Applications where jobs.id=:jobId");
 			q.setParameter("jobId",	jobId);
 			List<Applications> lst = q.list();
-		
-			for(Applications app : lst) {
-				sitters.add(app.getUid());
-			}
-			for(int allUid:sitters) {
-			
-				q= ses.createQuery("from Sitter where id=:sitterId");
-				q.setParameter("sitterId",	allUid);
-				List<Sitter> sit = q.list();
-				allSitters.add(sit.get(0));
-			}
-			return allSitters;
+			System.out.println("&&&&&&&"+lst.size());
+			return lst;
+//			for(Applications app : lst) {
+//				sitters.add(app.getUid());
+//			}
+//			for(int allUid:sitters) {
+//			
+//				q= ses.createQuery("from Sitter where id=:sitterId");
+//				q.setParameter("sitterId",	allUid);
+//				List<Sitter> sit = q.list();
+//				allSitters.add(sit.get(0));
+//			}
+//			return allSitters;
 
 				
 		} catch (Exception e) {
@@ -664,6 +666,25 @@ public class JobsData {
 		return null;
 	}
 
-	
+	public boolean deleteThisAppDao(int jobId, int uid) {
+		// TODO Auto-generated method stub
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			Transaction tx= ses.beginTransaction();
+			Query q= ses.createQuery("update Applications set status=:status where jobs.id=:jobId and sitter.id=:sid");
+			q.setParameter("status",	"INACTIVE");
+			q.setParameter("jobId",	jobId);
+			q.setParameter("sid",uid);
+			q.executeUpdate();
+			
+			tx.commit();
+		
+		
+	}catch(Exception e) {
+		
+		
+	}
+		return true;
 
+	}
 }
