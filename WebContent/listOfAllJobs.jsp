@@ -10,15 +10,21 @@
 <body>
 <c:import url="headerSitter.jsp"></c:import>
 <center>
+<h3>LIST OF ALL JOBS</h3>
 <table border="2" style="background-color:salmon">
 
-<tr><th colspan="2">LIST OF ALL JOBS</th></tr>
+<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>START TIME</th><th>END TIME</th><th>PAY PER HOUR</th></tr>
 
 	<c:forEach items="${jobs}" var ="job">
 
 		<tr>
 		
 			<td><c:out value="${job.getJobTitle()}"></c:out></td>
+			<td><c:out value="${job.getStartDate()}"></c:out></td>
+			<td><c:out value="${job.getEndDate()}"></c:out></td>
+			<td><c:out value="${job.getStartTime()}"></c:out></td>
+			<td><c:out value="${job.getEndTime()}"></c:out></td>
+			<td><c:out value="${job.getPayPerHour()}"></c:out></td>
 			
 		</tr>
 	

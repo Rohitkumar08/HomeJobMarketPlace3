@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -19,8 +20,10 @@ public class ApplyNewJobAction  extends Action{
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
+		HttpSession session= request.getSession();
+		int uid= (int) session.getAttribute("uid");
 		try {
-            List<Jobs> job = jbs.listAllJobsForSeekers();
+            List<Jobs> job = jbs.listAllJobsForSitters(uid);
            // System.out.println(job.get(0).getJobTitle());
             if(job.size()==0){
             	return mapping.findForward("failure");

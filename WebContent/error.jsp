@@ -11,9 +11,8 @@
 <center>
 
 <h2 style="color: red">Something bad happened...!!!</h2>
-<h2 style="color: blue">You are not authorized to access this url..!!!</h2>
-<!-- 
-<a href="login.jsp"><b>Log in again</b></a> -->
+
+<a href="login.jsp"><b>Log in again</b></a>
 </center>
 
 </body>

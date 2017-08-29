@@ -11,11 +11,12 @@
 	<!-- <discriminator column="user_type"/> -->
 	
 	<property name="firstName" column="uname" not-null="true"/>
+	<property name="lastName" column="ulastname" not-null="true"/>
 	<property name="phone" not-null="true"/>
 	<property name="email" column="uemail" not-null="true"/>
 	<property name="password" column="upassword" not-null="true"/>
 	<property name="memberType" column="utype" not-null="true"/>
-	<property name="status" column="ustatus" />
+	<property name="status" not-null="true"/>
 	
 	<joined-subclass name="com.hmj.model.Seeker" extends="com.hmj.model.Member" table="seeker">
 		<key column="seeker_id"></key>

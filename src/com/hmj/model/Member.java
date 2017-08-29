@@ -11,6 +11,13 @@ public class Member {
 		this.id = id;
 	}
 	private  String firstName;
+	private String lastName;
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	private String phone;
 	private String email;
 	private String password;

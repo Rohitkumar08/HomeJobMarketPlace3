@@ -2,6 +2,8 @@ package com.hmj.FormBeans;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -85,19 +87,29 @@ public class CreateJobForm extends ActionForm{
 		 }
 		 
 		//-----------validation for end date------------
-		
-		 String date1 = startDate;
-			String date2 = endDate;
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
+		 String date1 = startDate;
+		 
+		 Date currentDate = new Date();
+		
+	        System.out.println(format.format(currentDate));
+	   
+		 
+			String date2 = endDate;
+			
 			Date startDate;
 			Date endDate;
 			try {
 				startDate = format.parse(date1);
 				 endDate= format.parse(date2);
-			
-
-			if (startDate.compareTo(endDate) >0) {
+				 boolean before = startDate.before(currentDate);
+				 if(before) {
+					 System.out.println("start date is before today");
+					 ae.add("startDate", new ActionMessage("startDateError"));
+				 }
+				 
+			if (endDate.before(startDate)) {
 			    System.out.println("earlier");
 			    System.out.println("");
 			    ae.add("endDate", new ActionMessage("endDateError"));

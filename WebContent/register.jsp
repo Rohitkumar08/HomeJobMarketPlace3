@@ -18,7 +18,8 @@
 
 <table border="2" width="50%" style="background-color:salmon">
 	<tr><th colspan="2">Registration form:</th></tr>
-	<tr><td>First Name:</td><td> <input type = "text" name="firstName" placeholder="Enter only Alphabets name" required><html:errors property="firstName"/></td></tr>
+	<tr><td>First Name:</td><td> <input type = "text" name="firstName" placeholder="Enter min 3 Alphabets" required><html:errors property="firstName"/></td></tr>
+	<tr><td>Last Name:</td><td> <input type = "text" name="lastName" placeholder="Enter only Alphabets name" required><html:errors property="lastName"/></td></tr>
 	<tr><td>Mobile no: </td><td><input type = "text" name="phone" placeholder="Enter 10 digit Mobile no" required><html:errors property="phone"/></td></tr>
 	<tr><td>Email: </td><td><input type = "email" name="email" placeholder="Someone@example.com" required></td></tr>
 	<tr><td>password: </td><td><input type = "password" name="password" placeholder="Enter password" required></td></tr>

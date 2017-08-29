@@ -17,7 +17,7 @@
 <tr><th colspan="2">CREATE A NEW JOB</th></tr>
 
 <tr><td>Job Title:</td><td> <input type = "text" name="jobTitle" placeholder="Enter Job-Title" required><html:errors property="jobTitle"/></td></tr>
-<tr><td>Start Date: </td><td><input type = "date" name="startDate" required></td></tr>
+<tr><td>Start Date: </td><td><input type = "date" name="startDate" required><html:errors property="startDate"/></td></tr>
 <tr><td>End Date:</td><td><input type = "date" name="endDate" required><html:errors property="endDate"/></td></tr>
 <tr><td>Start Time: </td><td><input type = "text" name="startTime" placeholder="hh:mm[24hour]" required></td></tr>
 <tr><td>End Time:</td><td><input type = "text" name="endTime" placeholder="hh:mm[24hour]" required><html:errors property="endTime"/></td></tr>

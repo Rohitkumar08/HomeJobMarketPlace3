@@ -31,9 +31,7 @@ public class ApplyThisJobAction extends Action{
 		int uid= (int) session.getAttribute("uid");
 		 int applied= jbs.applyThisJob(jobId,uid);
 		 System.out.println(applied);
-		 if(applied==0)
-		return mapping.findForward("failure");
-		 else
+		 
 			 return mapping.findForward("success");
 		 
 	}

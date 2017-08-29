@@ -9,7 +9,7 @@
 <body>
 <center>
 
-<h2 style="color: red">You are not a Seeker....</h2>
+<h2 style="color: red">You are not a Seeker....Not Autorised to access thsi url</h2>
 
 <!-- <a href="login.jsp"><b>login again</b></a> -->
 </center>

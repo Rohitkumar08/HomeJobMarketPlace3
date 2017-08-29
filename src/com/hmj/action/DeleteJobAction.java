@@ -26,8 +26,11 @@ public class DeleteJobAction extends Action {
 		HttpSession session = request.getSession();
 		int uid= (int) session.getAttribute("uid");
 		List<Applications> lst = jbs.fetchAllJobsSitter(uid);
+		if(lst==null) {
+			return mapping.findForward("failure");
+		}
 		request.setAttribute("apps", lst);
-		
+		System.out.println("list= "+lst.size());
 		
 		if(lst.size()!=0)
 		return mapping.findForward("success");

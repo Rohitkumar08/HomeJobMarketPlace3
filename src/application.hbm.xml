@@ -11,7 +11,7 @@
 	<!-- <discriminator column="user_type"/> -->
 	
 		<property name="expectedPay" column="Expected_pay" not-null="true"/>
-		<property name="status" column="appstatus" />
+		
 		
 			<many-to-one name="sitter" class="com.hmj.model.Sitter"
             column="member_id" unique="true" not-null="true"

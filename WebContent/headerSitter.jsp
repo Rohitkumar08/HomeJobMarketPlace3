@@ -19,24 +19,27 @@ $(document).ready(function(){
 
 </head>
 <body>
-<center>
-
-<span style="float:left">
-<a href="sitter.do"><img src="images/images.jpeg" /></a>
-
+<div class="container">
+<div class="row">
+<div class="col-sm-4">
+<!-- <span style="float:left"> -->
+<a href="sitter.do"><img src="images/images.jpeg" width="30%" height="50%"/></a></div>
+<!-- <span> -->
+<div class="col-sm-4" style="position:relative;top:20px">
 <html:form action="/SearchEmail">
 <input type = "text" placeholder="Enter Seeker's email" name="searchEmail">
 <input type="submit" value="search" name="searchButton"><html:errors property="error"/>
 </html:form>
-</span> 
-
-<span style="float:right">
+<!-- </span>
+</span>  -->
+</div>
+<div class="col-sm-4">
 <a href="ViewProfileSitter.do" data-toggle="tooltip" title="Edit your profile"><button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-user"></span> <c:out value="${sessionScope.uname}"/> 
         </button></a>
 <a href="logout.do">Logout</a></b>
-
-</span>
-</center>
+</div>
+</div>
+</div>
 </body>
 </html>

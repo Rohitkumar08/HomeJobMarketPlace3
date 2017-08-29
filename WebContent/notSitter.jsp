@@ -9,7 +9,7 @@
 <body>
 <center>
 
-<h2 style="color: red">You are not a Sitter....</h2>
+<h2 style="color: red">You are not a Sitter....Not authorised to access this url</h2>
 
 <!-- <a href="login.jsp"><b>login again</b></a> -->
 </center>

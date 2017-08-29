@@ -13,14 +13,19 @@
 <center>
 <html:form action="/deleteThisApp" method="POST">
 <table border="2" style="background-color:salmon">
-
-<tr><th colspan="2">LIST OF ALL APPLIED JOBS</th></tr>
+<h2>LIST OF ALL APPLIED JOBS</h2>
+<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>START TIME</th><th>END TIME</th><th>PAY PER HOUR</th></tr>
 
 	<c:forEach items="${apps}" var ="job">
 
 		<tr>
 		
 			<td><c:out value="${job.getJobs().getJobTitle()}"></c:out></td>
+			<td><c:out value="${job.getJobs().getStartDate()}"></c:out></td>
+			<td><c:out value="${job.getJobs().getEndDate()}"></c:out></td>
+			<td><c:out value="${job.getJobs().getStartTime()}"></c:out></td>
+			<td><c:out value="${job.getJobs().getEndTime()}"></c:out></td>
+			<td><c:out value="${job.getJobs().getPayPerHour()}"></c:out></td>
 			<td><input type="submit" name="inputed" value="delete" onclick="this.value += ' <c:out  value="${job.getJobs().getId()}"/>'"></td>
 		</tr>
 	

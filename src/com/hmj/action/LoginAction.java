@@ -47,11 +47,11 @@ public class LoginAction extends Action {
 			System.out.println("********"+uType);
 			session.setAttribute("utype", uType);
 			if(uType.equals("Seeker")){
-				ActivityUtil.add("Logged in as a Seeker");
+//				ActivityUtil.add("Logged in as a Seeker");
 				return mapping.findForward("seeker");
 			}
 			if(uType.equals("Sitter")){
-				ActivityUtil.add("Logged in as Sitter");
+//				ActivityUtil.add("Logged in as Sitter");
 				return mapping.findForward("sitter");
 			}
 //			if(uType.equals("Admin")){

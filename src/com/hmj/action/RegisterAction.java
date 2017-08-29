@@ -44,17 +44,26 @@ public class RegisterAction extends Action{
 		registerForm.setPassword(hashedPassword);
 		 System.out.println("********** "+request.getParameter("noOfChilds"));
 		 System.out.println("********** "+request.getParameter("spouseName"));
-		int uid=svc.doRegister(registerForm.getFirstName(),  registerForm.getPhone(),registerForm.getEmail(),registerForm.getPassword(),registerForm.getMemberType(), registerForm.getNoOfChilds(), registerForm.getSpouseName(), registerForm.getExpectedPay(),registerForm.getYearsOfExperience());
+		int uid=svc.doRegister(registerForm.getFirstName(), registerForm.getLastName(), registerForm.getPhone(),registerForm.getEmail(),registerForm.getPassword(),registerForm.getMemberType(), registerForm.getNoOfChilds(), registerForm.getSpouseName(), registerForm.getExpectedPay(),registerForm.getYearsOfExperience());
+		if(uid==0) {
+			
+			return mapping.findForward("emailAlreadyExist");
+		}
+		
+		
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("uid", uid);
 		if(registerForm.getMemberType().equals("Seeker")){
 			session.setAttribute("uname", registerForm.getFirstName());
 			 session.setAttribute("uemail", registerForm.getEmail());
+			 session.setAttribute("utype", "Seeker");
 			return mapping.findForward("seeker");
 		}
 		if(registerForm.getMemberType().equals("Sitter")){
 			session.setAttribute("uname", registerForm.getFirstName());
 			session.setAttribute("uemail", registerForm.getEmail());
+			 session.setAttribute("utype", "Sitter");
 			return mapping.findForward("sitter");
 		}
 		return mapping.findForward("failure");

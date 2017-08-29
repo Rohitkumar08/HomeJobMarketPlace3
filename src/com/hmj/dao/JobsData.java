@@ -521,9 +521,13 @@ public class JobsData {
 			
 			query.setParameter("new", "INACTIVE");
 			query.setParameter("id", id);
-			
-			System.out.println("before execute update statement");
 			int res=query.executeUpdate();
+			
+			query=ses.createQuery("update Applications set status=:new where jobs.id=:id ");
+			
+			query.setParameter("new", "INACTIVE");
+			query.setParameter("id", id);
+			query.executeUpdate();
 			System.out.println("inside update dao     "+res);
 			ses.save(seekerAct);
 			tx.commit();
@@ -539,24 +543,60 @@ public class JobsData {
 		return false;
 	}
 
-	public List<Jobs> listAllJobs() {
+	public List<Jobs> listAllJobsSitters(int uid) {
 		// TODO Auto-generated method stub
-		List<Jobs> lst=null;
+		List<Applications> lst=null;
+		List<Integer> jobsList=new ArrayList<>();
+		List<Jobs> result=null;
 		try {
 			Session ses= HibernateUtil.getSession().openSession();
 			Transaction tx= ses.beginTransaction();
 			System.out.println("*inside dao***");
-			Query query=ses.createQuery("from Jobs where status=:status");
-			query.setParameter("status", "ACTIVE");
+			Query query=ses.createQuery("from Applications where sitter.id=:uid");
+			query.setParameter("uid", uid);
 			lst = query.list();
-			return lst;
+//			System.out.println("list of sitters "+lst.get(0).getJobs().getId());
+			
+			for(Applications app:lst) 
+				jobsList.add(app.getJobs().getId());
+			
+			query=ses.createQuery("from Jobs where id not in(:jobsList)");
+			query.setParameter("jobsList", jobsList);
+			result=query.list();
+			
+			
+			
+			return result;
 				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return lst;
+		return result;
+	}
+	public List<Jobs> listAllJobs(int uid) {
+		// TODO Auto-generated method stub
+		
+		List<Jobs> result=null;
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			Transaction tx= ses.beginTransaction();
+			System.out.println("*inside dao***");
+			Query query=ses.createQuery("from Jobs where status=:status");
+			query.setParameter("status", "ACTIVE");
+			result=query.list();
+			
+			
+			
+			return result;
+				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	public int applyJobDao(int jobId, int uid) {
@@ -582,7 +622,7 @@ public class JobsData {
 			app.setJobs(job);
 			app.setSitter(sitter);
 			int res= (int) ses.save(app);
-			
+			System.out.println(res);
 			tx.commit();
 			ActivityUtil.add("applied to a new job"+job.getJobTitle());
 			return res;
@@ -677,13 +717,14 @@ public class JobsData {
 			q.executeUpdate();
 			
 			tx.commit();
-		
 			ActivityUtil.add("Job Application was deleted");
+			return true;
+			
 	}catch(Exception e) {
 		
-		
+		return false;
 	}
-		return true;
+		
 
 	}
 }

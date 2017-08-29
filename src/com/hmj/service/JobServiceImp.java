@@ -26,11 +26,12 @@ public class JobServiceImp {
 		job.setEndTime(endTime);
 		job.setPostedBy(uid);
 		job.setPayPerHour(payPerHour);
+		
 		System.out.println(job.getStartDate()+"***********");
 		
 		SeekerActivity seekerAct=new SeekerActivity();
 		seekerAct.setUid(uid);
-		seekerAct.setMessage("New job posted");
+		seekerAct.setMessage("New job posted: "+job.getJobTitle());
 		int created = jd.createJob(job, seekerAct);
 			
 		return created;
@@ -140,7 +141,7 @@ public Jobs getJobDetails(int JobId) {
 //	}
 
 
-public boolean updateChoosenParam(int jobId, String jobTitle, String startDate,  String endDate, String startTime, String endTime,int payPerHour) {
+public boolean updateChoosenParam(int uid,int jobId, String jobTitle, String startDate,  String endDate, String startTime, String endTime,int payPerHour) {
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 	Jobs job = (Jobs)FactoryUtil.mapClassInstance.get(FactoryUtil.JOBS);
@@ -154,8 +155,8 @@ public boolean updateChoosenParam(int jobId, String jobTitle, String startDate, 
 	job.setPayPerHour(payPerHour);
 	
 	SeekerActivity seekerAct=new SeekerActivity();
-	seekerAct.setUid(job.getPostedBy());
-	seekerAct.setMessage("updated  job"+job.getJobTitle());
+	seekerAct.setUid(uid);
+	seekerAct.setMessage("updated  job: "+job.getJobTitle());
 	boolean check=jd.updateThisJob(jobId, job,seekerAct);
 	if(check)
 		return true;
@@ -179,13 +180,18 @@ public boolean deleteJob(int id,int uid) {
 }
 
 
-public List<Jobs> listAllJobsForSeekers() {
+public List<Jobs> listAllJobsForSeekers(int uid) {
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
-	List<Jobs> lst=jd.listAllJobs();
+	List<Jobs> lst=jd.listAllJobs(uid);
 	return lst;
 }
-
+public List<Jobs> listAllJobsForSitters(int uid) {
+	// TODO Auto-generated method stub
+	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
+	List<Jobs> lst=jd.listAllJobsSitters(uid);
+	return lst;
+}
 
 public int applyThisJob(int jobId, int uid) {
 	// TODO Auto-generated method stub

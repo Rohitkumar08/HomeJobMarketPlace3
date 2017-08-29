@@ -14,6 +14,14 @@ public class RegisterForm extends ActionForm {
 
 	private  String firstName;
 	private String phone;
+	private String lastName;
+	
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -94,14 +102,10 @@ public class RegisterForm extends ActionForm {
 		 
 		 //-----------validation for first name-------------------
 		 
-		 Pattern p = Pattern.compile("[0-9]");
-		 System.out.println("**************"+firstName);
-		 System.out.println("**************"+phone);
-		 System.out.println(spouseName);
-		 System.out.println(noOfChilds);
+		 Pattern p = Pattern.compile("[a-zA-Z]{3,30}");
 			Matcher m = p.matcher(firstName);
 			boolean b = m.find();
-		 if(b){
+		 if(!b){
 			 ae.add("firstName", new ActionMessage("firstNameError"));
 	 
 		 }
@@ -123,7 +127,7 @@ public class RegisterForm extends ActionForm {
 				}
 				m = p.matcher(spouseName);
 				b = m.find();
-				if(b){
+				if(!b){
 				 ae.add("spouseName", new ActionMessage("spouseNameError"));
 		 
 			 }

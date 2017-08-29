@@ -10,36 +10,46 @@ import com.hmj.util.FactoryUtil;
 public class MemberServiceImp {
 
 
-	public int doRegister(String name, String phone, String email, String password, String memberType, int noOfChild, String spouseName, int expectedPay, int yearsOfExperience) {
+	public int doRegister(String name,String lname, String phone, String email, String password, String memberType, int noOfChild, String spouseName, int expectedPay, int yearsOfExperience) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 		 Seeker seeker =(Seeker) FactoryUtil.mapClassInstance.get(FactoryUtil.SEEKER); 
 		 Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
-		 
 		 int id=0;
+		if(ud.checkEmail(email)) {
+			return 0;
+			
+		}
+		
 		 mem.setFirstName(name);
+		mem.setLastName(lname);
 		 mem.setPhone(phone);
 		 mem.setEmail(email);
 		 mem.setPassword(password);
 		 mem.setMemberType(memberType);
+		 mem.setStatus("ACTIVE");
 		
 		 if(memberType.equals("Seeker")){
 			 seeker.setFirstName(name);
+			 seeker.setLastName(lname);
 			 seeker.setPhone(phone);
 			 seeker.setEmail(email);
 			 seeker.setPassword(password);
 			 seeker.setMemberType(memberType);
+			 seeker.setStatus("ACTIVE");
 			 seeker.setNoOfChilds(noOfChild);
 			 seeker.setSpouseName(spouseName);
 			 id=ud.registerSeeker(seeker);
 		 }
 		 if(memberType.equals("Sitter")){
 			 sitter.setFirstName(name);
+			 sitter.setLastName(lname);
 			 sitter.setPhone(phone);
 			 sitter.setEmail(email);
 			 sitter.setPassword(password);
 			 sitter.setMemberType(memberType);
+			 sitter.setStatus("ACTIVE");
 			 sitter.setExpectedPay(expectedPay);
 			 sitter.setYearsOfExperience(yearsOfExperience);
 			id=ud.registerSitter(sitter);
@@ -59,6 +69,12 @@ public class MemberServiceImp {
 		 boolean check=ud.checkEmail(email);
 		 if(check){
 			 Member mem=ud.getPassword(email);
+			 
+			 if(mem==null) {
+				 return "invalid";
+			 }
+			 
+			 
 			 String originalPassword=mem.getPassword();
 			 if(password.equals(originalPassword)){
 				 return "valid";
@@ -114,10 +130,11 @@ public class MemberServiceImp {
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 //Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 		 Member mem= ud.getMemberDetailsDao(uid);
+		System.out.println(mem.getStatus());
 		 mem.setStatus("INACTIVE");
 		 String pipedEmail=email.concat("|");
 		 mem.setEmail(pipedEmail);
-		 //int res=ud.deleteSeeker(uid,email);
+		//int res=ud.deleteSeeker(uid,email);
 		 ud.deleteMember(mem);
 		
 		return true;

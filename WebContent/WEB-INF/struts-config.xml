@@ -32,10 +32,10 @@
 			<forward name="success" path="/logout.jsp"/>
 		</action>
 	
-		<action path="/register" type="com.hmj.action.HitRegisterAction" scope="session" validate="false" >
+		 <action path="/register" type="com.hmj.action.HitRegisterAction" scope="request" validate="false" >
 			<forward name="success" path="/register.jsp"/>
 			<forward name="alreadyLoggedIn" path="/error.jsp"/>
-		</action>
+		</action> 
 	
 		<action path="/seeker"  type="com.hmj.action.SeekerAction" scope="session" validate="false">
 			<forward name="success" path="/PerformSeeker.jsp"/>
@@ -53,6 +53,7 @@
 			<forward name="seeker" path="/seeker.do"/> 
 			<forward name="sitter" path="/sitter.do"/> 
 			<forward name="failure" path="/failure.jsp"/> 
+			<forward name="emailAlreadyExist" path="/emailExist.jsp"/> 
 			
 		</action>
 		
@@ -139,7 +140,6 @@
 		
 		<action path="/applyThisJob" name="applyThisJobForm" type="com.hmj.action.ApplyThisJobAction">
 			<forward name="success" path="/successApp.jsp"/>	
-			<forward name="failure" path="/alreadyApplied.jsp"/>
 		</action>
 		
 		<action path="/listOfJobs" type="com.hmj.action.ListAllJobAction">
@@ -159,12 +159,12 @@
 		
 		<action path="/applicantsJob" type="com.hmj.action.UpdateJobAction">
 			<forward name="success" path="/chooseJobForApp.jsp"/>	
-			<forward name="failure" path="/noJobsAvail.jsp"/>
+			<forward name="noJobs" path="/noJobs.jsp"/>
 		</action>
 		
 		<action path="/ShowApplicants" name="jobIdForm" type="com.hmj.action.ShowApplicantsAction" validate="false">
 			<forward name="success" path="/allApplicants.jsp"/>	
-			<forward name="failure" path="/noJobsAvail.jsp"/>
+			<forward name="failure" path="/noOnehaveApplied.jsp"/>
 		</action>
 		
 		<action path="/SearchEmail" name="searchEmailForm" type="com.hmj.action.SearchEmailAction">

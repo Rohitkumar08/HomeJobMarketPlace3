@@ -14,6 +14,7 @@ import org.hibernate.query.Query;
 import com.hmj.model.Jobs;
 import com.hmj.model.Member;
 import com.hmj.model.Seeker;
+import com.hmj.model.SeekerActivity;
 import com.hmj.model.Sitter;
 import com.hmj.util.*;
 
@@ -30,7 +31,7 @@ public class UserData {
 
 	public int registerSeeker(Seeker seeker) {
 		// TODO Auto-generated method stub
-		
+		ActivityUtil activity= new ActivityUtil();
 		Session ses= HibernateUtil.getSession().openSession();
 		//Tra
 	//	Session session = HibernateUtil.
@@ -42,7 +43,7 @@ public class UserData {
 		transaction.commit();
 		ses.close();
 		
-		ActivityUtil.add("Seeker profile created");
+		activity.add("Seeker profile created");
 		
 		System.out.println("successfully registered seeker");
 		return id;
@@ -59,7 +60,6 @@ public class UserData {
 		
 		transaction.commit();
 		ses.close();
-		ActivityUtil.add("Seeker profile created");
 		System.out.println("successfully registered sitter");
 		return id;
 	}
@@ -86,9 +86,10 @@ public class UserData {
 	public Member getPassword(String email) {
 		// TODO Auto-generated method stub
 		Session ses= HibernateUtil.getSession().openSession();
-		hql="from Member where email=:e";
+		hql="from Member where email=:e and status=:status";
 		Query query = ses.createQuery(hql);
 		query.setParameter("e", email);
+		query.setParameter("status", "ACTIVE");
 		Member mem= (Member) query.uniqueResult();
 		return mem;
 	
@@ -120,6 +121,11 @@ public class UserData {
 			q.setParameter("uid", mem.getId());
 			q.executeUpdate();
 			tx2.commit();
+			
+			SeekerActivity seekerAct = new SeekerActivity();
+			seekerAct.setUid(mem.getId());
+			seekerAct.setMessage(mem.getFirstName()+" deleted his profile");
+			ses.save(seekerAct);
 	
 		}catch(Exception e) {
 			
@@ -179,42 +185,6 @@ public class UserData {
 		return 0;
 	}
 
-	public int deleteSeeker(int uid, String email) {
-		// TODO Auto-generated method stub
-		try {
-			Session ses= HibernateUtil.getSession().openSession();
-			//Tra
-		//	Session session = HibernateUtil.
-			Transaction tx1= ses.beginTransaction();
-			System.out.println("*inside seeker dao***");
-			String pipedEmail=email.concat("|");
-			System.out.println(pipedEmail+"***"+uid);
-			Query query1=ses.createQuery("update Member set status=:ustatus, email=:uemail where id=:uid");
-			query1.setParameter("ustatus", "INACTIVE");
-			query1.setParameter("uid", uid);
-			query1.setParameter("uemail", pipedEmail);
-			int res1=query1.executeUpdate();
-			System.out.println("inside member update");
-			tx1.commit();
-			
-			Transaction tx= ses.beginTransaction();
-			Query query=ses.createQuery("update Jobs set status=:status where postedBy=:uid");
-			query.setParameter("status", "INACTIVE");
-			query.setParameter("uid", uid);
-			System.out.println("befire execute update statement");
-			int res=query.executeUpdate();
-			System.out.println("inside update dao"+res);
-			tx.commit();
-			System.out.println("outside job update");	
-			return res;
-			
-			
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
 
 	public Sitter getSitterUserDetailsDao(int uid) {
 		// TODO Auto-generated method stub
