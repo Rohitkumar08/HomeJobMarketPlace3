@@ -19,6 +19,8 @@ import com.hmj.util.ActivityUtil;
 import com.hmj.util.FactoryUtil;
 import com.hmj.util.HibernateUtil;
 
+import sun.invoke.empty.Empty;
+
 public class JobsData {
 	
 	
@@ -26,7 +28,7 @@ public class JobsData {
 	public int createJob(Jobs job, SeekerActivity seekerAct) {
 		int id=0;
 		try{
-			
+			ActivityUtil activityUtil=new ActivityUtil();
 			Session ses= HibernateUtil.getSession().openSession();
 			//Tra
 		//	Session session = HibernateUtil.
@@ -39,7 +41,7 @@ public class JobsData {
 			
 			System.out.println("successfully Job created");
 			
-			ActivityUtil.add(job.getJobTitle()+" job created");
+			activityUtil.add(job.getJobTitle()+" job created");
 			
 			return id;
 		} catch (Exception e) {
@@ -314,7 +316,7 @@ public class JobsData {
 	public Jobs findDetailsOfJob(int jobId) {
 		// TODO Auto-generated method stub
 		
-		
+		ActivityUtil activityUtil=new ActivityUtil();
 		try {
 			Session ses= HibernateUtil.getSession().openSession();
 			//Tra
@@ -328,7 +330,7 @@ public class JobsData {
 				Jobs jb=job.get(0);
 				
 				//jobs.add(jb);
-				ActivityUtil.add(jb.getJobTitle()+" details displayed");	
+				activityUtil.add(jb.getJobTitle()+" details displayed");	
 				System.out.println("inside dao"+jb.getJobTitle());
 				return jb;
 			
@@ -559,11 +561,13 @@ public class JobsData {
 			
 			for(Applications app:lst) 
 				jobsList.add(app.getJobs().getId());
-			
-			query=ses.createQuery("from Jobs where id not in(:jobsList)");
+			if(jobsList.size()==0) {
+				jobsList.add(0);
+			}
+			query=ses.createQuery("from Jobs where id not in (:jobsList)");
 			query.setParameter("jobsList", jobsList);
 			result=query.list();
-			
+			System.out.println(result.get(0).getJobTitle());
 			
 			
 			return result;
@@ -621,23 +625,15 @@ public class JobsData {
 			app.setExpectedPay(sitter.getExpectedPay());
 			app.setJobs(job);
 			app.setSitter(sitter);
+			app.setStatus("ACTIVE");
 			int res= (int) ses.save(app);
-			System.out.println(res);
+			
+			System.out.println("applied successfully...."+res);
 			tx.commit();
-			ActivityUtil.add("applied to a new job"+job.getJobTitle());
+//			ActivityUtil.add("applied to a new job"+job.getJobTitle());
 			return res;
 			
-//			int expectedPay=sitter.getExpectedPay();
-//			System.out.println(expectedPay);
-//			Transaction tx= ses.beginTransaction();
-//			System.out.println("*inside dao***");
-//			Query query=ses.createSQLQuery("insert into Application(jobId, expectedPay, uid) values(:jobId, :expectedPay, :uid)");
-//			query.setParameter("jobId", jobId);
-//			query.setParameter("uid", uid);
-//			query.setParameter("expectedPay", expectedPay);
-//			int res= query.executeUpdate();
-//			tx.commit();
-//			return res;
+
 				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -667,8 +663,7 @@ public class JobsData {
 //				Jobs job= tmpJob.get(0);
 //				lstJob.add(job);
 //			}
-//			
-			ActivityUtil.add("sitter applications fetched");
+//		
 			return lst;
 				
 		} catch (Exception e) {

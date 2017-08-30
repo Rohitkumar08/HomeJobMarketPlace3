@@ -63,28 +63,78 @@ public class CreateJobForm extends ActionForm{
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public int getPayPerHour() {
+	public String getPayPerHour() {
 		return payPerHour;
 	}
-	public void setPayPerHour(int payPerHour) {
+	public void setPayPerHour(String payPerHour) {
 		this.payPerHour = payPerHour;
 	}
 	private String endDate;
 	private String startTime;
 	private String endTime;
-	private int payPerHour;
+	private String payPerHour;
 	
 	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		ActionErrors ae=new ActionErrors();
-		 Pattern p = Pattern.compile("[0-9]");
+		 Pattern p = Pattern.compile("[a-zA-Z]{3,30}");
 		 Matcher m = p.matcher(jobTitle);
 			boolean b = m.find();
-		 if(b){
+		 if(!b){
 			 ae.add("jobTitle", new ActionMessage("jobTitleError"));
 	 
 		 }
+		 //----start & end time validation----------
+		 
+		 
+		
+		 if(!startTime.matches("\\d{4}")){
+			 ae.add("startTimeFormat", new ActionMessage("startTimeFormatError"));
+	 
+		 }
+		 
+		 else {
+			 int arr[]= new int[4];
+			 for (int i = 0; i < 4; i++){
+			        arr[i] = startTime.charAt(i) - '0';
+			    }
+			 if(arr[0]==2 && arr[1]>=4) {
+				 ae.add("startTimeFormat", new ActionMessage("startTimeFormatError"));
+			 }
+			 
+			 
+			 if(arr[0]>=3 || arr[2]>=6)
+			 {
+				 ae.add("startTimeFormat", new ActionMessage("startTimeFormatError"));
+			 }
+			
+			 
+		 }
+		 if(!endTime.matches("\\d{4}")){
+			 ae.add("endTimeFormat", new ActionMessage("endTimeFormatError"));
+	 
+		 }
+		 else {
+			 int arr[]= new int[4];
+			 for (int i = 0; i < 4; i++){
+			        arr[i] = endTime.charAt(i) - '0';
+			    }
+			 if(arr[0]==2 && arr[1]>=4) {
+				 ae.add("endTimeFormat", new ActionMessage("endTimeFormatError"));
+			 }
+			 
+			 if(arr[0]>=3 || arr[2]>=6)
+			 {
+				 ae.add("endTimeFormat", new ActionMessage("endTimeFormatError"));
+			 }
+			
+			 
+		 }
+		 
+		 
+		 
+		 //------------------
 		 
 		//-----------validation for end date------------
 		 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -92,22 +142,23 @@ public class CreateJobForm extends ActionForm{
 		 String date1 = startDate;
 		 
 		 Date currentDate = new Date();
+		String today=format.format(currentDate);
 		
+		if(startDate.compareTo(today)<0) {
+			 ae.add("startDate", new ActionMessage("startDateError"));
+		}
+			
 	        System.out.println(format.format(currentDate));
 	   
 		 
 			String date2 = endDate;
-			
+			System.out.println(date1+"************"+date2);
 			Date startDate;
 			Date endDate;
 			try {
 				startDate = format.parse(date1);
 				 endDate= format.parse(date2);
-				 boolean before = startDate.before(currentDate);
-				 if(before) {
-					 System.out.println("start date is before today");
-					 ae.add("startDate", new ActionMessage("startDateError"));
-				 }
+				 
 				 
 			if (endDate.before(startDate)) {
 			    System.out.println("earlier");
@@ -116,8 +167,10 @@ public class CreateJobForm extends ActionForm{
 			}
 			if(startDate.compareTo(endDate)==0){
 				
-				 String startTime1 = startTime;
-				    String endTime1 = endTime;
+				String startTime1 = startTime.replaceAll("([01][0-9]|[2][0-3]):?([0-5]+)", "$1:$2");
+				String endTime1  = endTime.replaceAll("([01][0-9]|[2][0-3]):?([0-5]+)", "$1:$2");
+				System.out.println(startTime1);
+				System.out.println(endTime1);
 				    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 				    Date d1;
 				    Date d2;
@@ -126,7 +179,7 @@ public class CreateJobForm extends ActionForm{
 						d2 = sdf.parse(endTime1);
 						 long elapsed = d2.getTime() - d1.getTime(); 
 						 System.out.println(elapsed);
-						 if (elapsed<0) {
+						 if (elapsed<=0) {
 							    System.out.println("earlier");
 							    System.out.println("");
 							    ae.add("endTime", new ActionMessage("endTimeError"));
@@ -144,10 +197,18 @@ public class CreateJobForm extends ActionForm{
 			}
 		
 		//-----------------------------------------------
-		
-			int check=payPerHour;
-			if(check<10){
-				ae.add("payPerHour", new ActionMessage("payPerHourError"));
+
+			Pattern p3 = Pattern.compile("[0-9]+");
+			Matcher m3 = p3.matcher(payPerHour);
+			boolean b3 = m3.find();
+			if(!b3){
+			 ae.add("payPerHour", new ActionMessage("payPerHourError"));
+	 
+			}
+			else {
+				int payPerHours=Integer.parseInt(payPerHour);
+				if(payPerHours<=10)
+					 ae.add("payPerHour", new ActionMessage("payPerHourError"));
 			}
 			
 	return ae;

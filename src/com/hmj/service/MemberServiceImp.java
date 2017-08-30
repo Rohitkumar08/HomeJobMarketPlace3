@@ -10,7 +10,7 @@ import com.hmj.util.FactoryUtil;
 public class MemberServiceImp {
 
 
-	public int doRegister(String name,String lname, String phone, String email, String password, String memberType, int noOfChild, String spouseName, int expectedPay, int yearsOfExperience) {
+	public int doRegister(String name,String lname, String phone, String email, String password, String memberType, String noOfChilds, String spouseName, String expectedPays, String yearsOfExperiences) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
@@ -22,6 +22,8 @@ public class MemberServiceImp {
 			
 		}
 		
+		
+	
 		 mem.setFirstName(name);
 		mem.setLastName(lname);
 		 mem.setPhone(phone);
@@ -31,6 +33,7 @@ public class MemberServiceImp {
 		 mem.setStatus("ACTIVE");
 		
 		 if(memberType.equals("Seeker")){
+			 int noOfChild= Integer.parseInt(noOfChilds);
 			 seeker.setFirstName(name);
 			 seeker.setLastName(lname);
 			 seeker.setPhone(phone);
@@ -43,6 +46,8 @@ public class MemberServiceImp {
 			 id=ud.registerSeeker(seeker);
 		 }
 		 if(memberType.equals("Sitter")){
+				int expectedPay=Integer.parseInt(expectedPays);
+				int yearsOfExperience=Integer.parseInt(yearsOfExperiences);
 			 sitter.setFirstName(name);
 			 sitter.setLastName(lname);
 			 sitter.setPhone(phone);
@@ -105,16 +110,17 @@ public class MemberServiceImp {
 		return seeker;
 	}
 
-	public boolean updateUser(int uid, String firstName, String phone, int noOfChilds, String spouseName) {
+	public boolean updateUser(int uid, String firstName, String phone, String noOfChilds, String spouseName) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 		 Seeker seeker = (Seeker) FactoryUtil.mapClassInstance.get(FactoryUtil.SEEKER);
+		 int noOfChild=Integer.parseInt(noOfChilds);
 		 mem.setFirstName(firstName);
 		 mem.setPhone(phone);
 		 seeker.setFirstName(firstName);
 		 seeker.setPhone(phone);
-		 seeker.setNoOfChilds(noOfChilds);
+		 seeker.setNoOfChilds(noOfChild);
 		 seeker.setSpouseName(spouseName);
 		 
 		 
@@ -150,11 +156,14 @@ public class MemberServiceImp {
 		
 	}
 
-	public boolean updateUserSitter(int uid, String firstName, String phone, int expectedPay, int yearsOfExperience) {
+	public boolean updateUserSitter(int uid, String firstName, String phone, String expectedPays, String yearsOfExperiences) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 		 Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
+		 
+		 int expectedPay= Integer.parseInt(expectedPays);
+		 int yearsOfExperience= Integer.parseInt(yearsOfExperiences);
 		 mem.setFirstName(firstName);
 		 mem.setPhone(phone);
 		sitter.setFirstName(firstName);

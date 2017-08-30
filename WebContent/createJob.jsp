@@ -16,12 +16,21 @@
 <table border="2" width="50%" style="background-color:salmon">
 <tr><th colspan="2">CREATE A NEW JOB</th></tr>
 
-<tr><td>Job Title:</td><td> <input type = "text" name="jobTitle" placeholder="Enter Job-Title" required><html:errors property="jobTitle"/></td></tr>
-<tr><td>Start Date: </td><td><input type = "date" name="startDate" required><html:errors property="startDate"/></td></tr>
-<tr><td>End Date:</td><td><input type = "date" name="endDate" required><html:errors property="endDate"/></td></tr>
-<tr><td>Start Time: </td><td><input type = "text" name="startTime" placeholder="hh:mm[24hour]" required></td></tr>
-<tr><td>End Time:</td><td><input type = "text" name="endTime" placeholder="hh:mm[24hour]" required><html:errors property="endTime"/></td></tr>
-<tr><td>Pay Per Hour:</td><td><input type = "number" name="payPerHour" placeholder="Enter pay per hour" required><html:errors property="payPerHour"/></td></tr>
+<tr><td>Job Title:</td><td> <html:text property="jobTitle" /><html:errors property="jobTitle"/></td></tr>
+<tr><td>Start Date:(yyyy-mm-dd) </td><td><html:text property="startDate" /><html:errors property="startDate"/>
+
+</td></tr>
+<tr><td>End Date:(yyyy-mm-dd)</td><td><html:text property="endDate" /><html:errors property="endDate"/></td></tr>
+<tr><td>Start Time:(hhmm) </td><td><html:text property="startTime" />
+
+<html:errors property="startTimeFormat"/>
+
+</td></tr>
+<tr><td>End Time:(hhmm)</td><td><html:text property="endTime"/><html:errors property="endTime"/>
+<html:errors property="endTimeFormat"/>
+
+</td></tr>
+<tr><td>Pay Per Hour:</td><td><html:text property="payPerHour" /><html:errors property="payPerHour"/></td></tr>
 
 <tr><td colspan="2" align="right" ><input type="submit" value="submit" style="font-size:7pt;"></td></tr>
 

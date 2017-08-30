@@ -8,6 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
 </head>
 <body>
 <%-- <% 
@@ -22,15 +27,15 @@
 
 <center>
 <html:form action ="updateChoosenJob.do" method="POST">
-<table border="2" style="background-color:salmon">
+<h2>LIST OF ALL JOBS POSTED BY YOU</h2>
+<table border="2" style="background-color:salmon" >
 
-<tr><th colspan="4">LIST OF ALL JOBS POSTED BY YOU</th></tr>
-<tr><b><td>ID</td><td>JOB TITLE</td><td>STARTDATE</td><td>END DATE</td><td>PAY PER HOUR</td></b></tr>
+<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>PAY PER HOUR</th>
 	<c:forEach items="${jobs}" var ="job">
 
 		<tr>
 			<input type="hidden"  value="${job.getId()}"/>
-			<td><c:out  value="${job.getId()}"></c:out></td>
+			
 			<td><c:out  value="${job.getJobTitle()}"></c:out></td>
 			<td><c:out  value="${job.getStartDate()}"></c:out></td>
 			<td><c:out  value="${job.getEndDate()}"></c:out></td>

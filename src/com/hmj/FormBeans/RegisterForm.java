@@ -15,7 +15,14 @@ public class RegisterForm extends ActionForm {
 	private  String firstName;
 	private String phone;
 	private String lastName;
+	private String address;
 	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getLastName() {
 		return lastName;
 	}
@@ -55,15 +62,15 @@ public class RegisterForm extends ActionForm {
 	private String email;
 	private String password;
 	private String status;
-	private  int noOfChilds;
-	private int yearsOfExperience;
+	private  String noOfChilds;
+	private String yearsOfExperience;
 	
 	private String memberType;
 	
-	public int getYearsOfExperience() {
+	public String getYearsOfExperience() {
 		return yearsOfExperience;
 	}
-	public void setYearsOfExperience(int yearsOfExperience) {
+	public void setYearsOfExperience(String yearsOfExperience) {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 	public String getMemberType() {
@@ -72,18 +79,18 @@ public class RegisterForm extends ActionForm {
 	public void setMemberType(String memberType) {
 		this.memberType = memberType;
 	}
-	private int expectedPay;
+	private String expectedPay;
 	
-	public int getExpectedPay() {
+	public String getExpectedPay() {
 		return expectedPay;
 	}
-	public void setExpectedPay(int expectedPay) {
+	public void setExpectedPay(String expectedPay) {
 		this.expectedPay = expectedPay;
 	}
-	public  int getNoOfChilds() {
+	public  String getNoOfChilds() {
 		return noOfChilds;
 	}
-	public  void setNoOfChilds(int noOfChilds) {
+	public  void setNoOfChilds(String noOfChilds) {
 		this.noOfChilds = noOfChilds;
 	}
 	public  String getSpouseName() {
@@ -109,7 +116,37 @@ public class RegisterForm extends ActionForm {
 			 ae.add("firstName", new ActionMessage("firstNameError"));
 	 
 		 }
+		 //--------------
+		 
+		 
+		 //----validation for EMAIL---------
+		 
+		 final String EMAIL_REGEX="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})";
+		    //static Pattern object, since pattern is fixed
+		    Pattern pattern;
+		    //non-static Matcher object because it's created from the input String
+		    Matcher matcher;
+		    pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+		    matcher = pattern.matcher(email);
+		    if(matcher.matches()){
+		    	
+		    }
+		    else{
+		    		ae.add("emailError", new ActionMessage("emailError"));
+		    
+		    }
+		 
+		 
+		 //---------------------
 		
+		 
+		 Pattern p1 = Pattern.compile("[a-zA-Z0-9@]{3,30}");
+			Matcher m1 = p1.matcher(password);
+			boolean b1 = m1.find();
+		 if(!b1){
+			 ae.add("pwdError", new ActionMessage("pwdError"));
+	 
+		 }
 		 //-------------------------------validation for phone no----------
 		
 		 if (!(phone.matches("\\d{10}"))) {
@@ -120,8 +157,20 @@ public class RegisterForm extends ActionForm {
 		 //-------------------validation for seeker additional fields--------------
 		 
 		if(getMemberType().equals("Seeker")){
-				if(getNoOfChilds()<0)
-					ae.add("noOfChild", new ActionMessage("noOfChildError"));
+			 
+			 Pattern p3 = Pattern.compile("\\d");
+				Matcher m3 = p3.matcher(noOfChilds);
+				boolean b2 = m3.find();
+			 if(!b2){
+				 ae.add("noOfChildError", new ActionMessage("noOfChildError"));
+		 
+			 }
+			 else {
+					int noOfChild=Integer.parseInt(noOfChilds);
+					if(noOfChild<0)
+						 ae.add("noOfChildError", new ActionMessage("noOfChildError"));
+				}
+				
 				if(spouseName==null){
 					ae.add("spouseName", new ActionMessage("spouseNameError"));
 				}
@@ -135,13 +184,31 @@ public class RegisterForm extends ActionForm {
 		//-----------validation for sitter additional fields------------
 		if(getMemberType().equals("Sitter")){
 			
-			if(getExpectedPay()<0){
-				System.out.println(getExpectedPay());
-				ae.add("expectedPay", new ActionMessage("expectedPayError"));
+			
+			Pattern p3 = Pattern.compile("[0-9]+");
+			Matcher m3 = p3.matcher(expectedPay);
+			boolean b2 = m3.find();
+			if(!b2){
+			 ae.add("expectedPay", new ActionMessage("expectedPayError"));
+	 
 			}
-			if(getYearsOfExperience()<0){
-				System.out.println(getYearsOfExperience());
-				ae.add("yearsOfExperience", new ActionMessage("yoeError"));
+			else {
+				int expectedPays=Integer.parseInt(expectedPay);
+				if(expectedPays<=0)
+					 ae.add("expectedPay", new ActionMessage("expectedPayError"));
+			}
+			
+			
+			m3 = p3.matcher(yearsOfExperience);
+			boolean b3 = m3.find();
+			if(!b3){
+			 ae.add("yearsOfExperience", new ActionMessage("yoeError"));
+	 
+			}
+			else {
+				int yearsOfExperiences=Integer.parseInt(yearsOfExperience);
+				if(yearsOfExperiences<0)
+					 ae.add("yearsOfExperience", new ActionMessage("yoeError"));
 			}
 			
 			

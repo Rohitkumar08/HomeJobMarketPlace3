@@ -12,7 +12,7 @@
 <html:form action = "/login" method ="POST">
 <table border="2" width="50%" style="background-color:salmon">
 <tr><th colspan="2">LOG IN</th></tr>
-<tr><td>Enter Email:</td> <td><input type="text" name="email" placeholder="Enter email id" required></td></tr>
+<tr><td>Enter Email:</td> <td><input type="email" name="email" placeholder="Enter email id" required></td></tr>
 <tr><td>Password:</td> <td><input type="password" name="password" placeholder="password" required></td></tr>
 <tr><td align="center" colspan="2"><input type="submit" name="submit"></td></tr>
 

@@ -11,7 +11,7 @@
 <c:import url="headerSitter.jsp"></c:import>
 <center>
 <h2 style="color:red">NO JOBS ARE AVAILABLE...!!!!</h2>
-<a href="PerformSitter"><b>GO BACK.....</b></a>
+<a href="sitter.do"><b>GO BACK.....</b></a>
 </center>
 
 </body>

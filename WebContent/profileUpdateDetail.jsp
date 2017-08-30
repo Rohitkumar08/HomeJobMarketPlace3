@@ -10,14 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- <% 
-
-	if(session.getAttribute("uname")==null)
-		response.sendRedirect("error.jsp");
-
-
-
-%> --%>
 
 <c:import url="header.jsp"></c:import>
 <center>
@@ -30,8 +22,8 @@
 		<tr>
 		
 			<td>FirstName <input type="hidden" name="oldFirstName" value="${Seeker.getFirstName()}" ></td>
-			<%-- <c:out  value="${jobs.getJobTitle()}"</c:out> --%>
-			<td><input type="text" name="firstName" value="${seeker.getFirstName()}"></td>
+			
+			<td><html:text  property="firstName" value="${seeker.getFirstName()}"/><html:errors property="firstName" /></td>
 			
 			<%-- <td><input type="submit" name="inputed" value="update" onclick=" this.value += ' <c:out  value="jobTitle"/>'"></td> --%>
 		</tr>
@@ -39,52 +31,30 @@
 		
 			<td>Phone No</td>
 			<%-- <c:out  value="${jobs.getStartDate()}"</c:out> --%>
-			<td><input type="text" name="phone" value="${seeker.getPhone()}"></td>
-			<%-- this.value += ' <c:out  value="startDate"/>' --%>
-			<!-- <td><input type="submit" name="inputed" value="update" onclick="window.location='updateStartDate.jsp'"></td> -->
+			<td><html:text property="phone" value="${seeker.getPhone()}"/><html:errors property="phone" /></td>
+			
 		</tr>
 		<tr>
 		
 			<td>Email</td>
-				<td><input type="text" read-only="true" name="email" value="${seeker.getEmail()}"></td>
-			<%-- <td><c:out  value="${jobs.getEndDate()}"></c:out></td>
-			 onclick="this.value += ' <c:out  value="endDate"/>'"
-			<td><input type="submit" name="inputed" value="update" onclick="window.location='updateEndDate.jsp'"></td> --%>
+				<td><html:text readonly="true" property="email" value="${seeker.getEmail()}"/></td>
+			
 		</tr>
-	
-	
-		<%-- <tr>
-		
-			<td>Password</td>
-			<td><input type="text" ReadOnly="true" name="password" value="${seeker.getPassword()}"></td>
-			
-			<td><input type="submit" disabled="disabled" name="inputed" value="update" onclick="this.value += ' <c:out  value="startTime"/>'"></td>
-		</tr> --%>
-		<%-- 	<tr>
-		
-			<td>Address</td>
-			<td><input type="text" ReadOnly="true" name="password" value="${seeker.getAdd()}"></td>
-			
-			<td><input type="submit" disabled="disabled" name="inputed" value="update" onclick="this.value += ' <c:out  value="startTime"/>'"></td>
-		</tr> --%>
-		
+		<html:hidden  property="password" value="${seeker.getPassword()}"/>
+		<html:hidden  property="memberType" value="Seeker"/>
 		
 		<tr>
-		
 			<td>No Of Child</td>
-			<td><input type="text" name="noOfChilds" value="${seeker.getNoOfChilds()}"></td>
+			<td><html:text property="noOfChilds" value="${seeker.getNoOfChilds()}"/><html:errors property="noOfChildError" /></td>
 			
-			<%-- <td><input type="submit"disabled="disabled"  name="inputed" value="update" onclick="this.value += ' <c:out  value="endTime"/>'"></td> --%>
 		</tr>
 		
 		<tr>
 		
 			<td>Spouse name</td>
-			<%-- <c:out  value="${jobs.getPayPerHour()}"</c:out> --%>
-			 	<td><input type="text" name="spouseName" value="${seeker.getSpouseName()}"/></td>
-		<%--	<td><c:out  value="${jobs.getPayPerHour()}"></c:out></td>
-			this.value += ' <c:out  value="payPerHour"/>'
-			<td><input type="submit" name="inputed" value="update" onclick="window.location='updatePayPerHour.jsp'"></td> --%>
+			
+			 	<td><html:text property="spouseName" value="${seeker.getSpouseName()}"/><html:errors property="spouseName" /></td>
+		
 		</tr>
 		
 		<tr>

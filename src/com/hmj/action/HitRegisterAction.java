@@ -20,7 +20,11 @@ public class HitRegisterAction extends Action{
 			return mapping.findForward("alreadyLoggedIn");
 		}
 		else
+		{
+			System.out.println("1234567890-12345678901234567890");
 			return mapping.findForward("success");
+		}
+			
 	
 	}
 }

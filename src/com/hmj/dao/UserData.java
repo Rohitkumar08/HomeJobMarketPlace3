@@ -247,7 +247,7 @@ public class UserData {
 		query.setParameter("status", "ACTIVE");
 		mem= query.list();
 		System.out.println("$$$$$$$$$$$$$$"+mem.get(0).getEmail());
-		ActivityUtil.add("Seeker email searched");
+		
 		return mem;
 
 		

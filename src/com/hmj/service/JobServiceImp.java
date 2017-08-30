@@ -14,19 +14,20 @@ import com.hmj.util.FactoryUtil;
 public class JobServiceImp {
 
 	Sitter sitter=(Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
-	public int newJob(String jobTitle, String startDate, String endDate, String startTime, String endTime,int uid,  int payPerHour){
+	public int newJob(String jobTitle, String startDate, String endDate, String startTime, String endTime,int uid,  String payPerHour){
 		
 		JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 		Jobs job = (Jobs)FactoryUtil.mapClassInstance.get(FactoryUtil.JOBS);
 		
+		int payPerHours= Integer.parseInt(payPerHour);
 		job.setJobTitle(jobTitle);
 		job.setStartDate(startDate);
 		job.setEndDate(endDate);
 		job.setStartTime(startTime);
 		job.setEndTime(endTime);
 		job.setPostedBy(uid);
-		job.setPayPerHour(payPerHour);
-		
+		job.setPayPerHour(payPerHours);
+		job.setStatus("ACTIVE");
 		System.out.println(job.getStartDate()+"***********");
 		
 		SeekerActivity seekerAct=new SeekerActivity();
@@ -141,10 +142,12 @@ public Jobs getJobDetails(int JobId) {
 //	}
 
 
-public boolean updateChoosenParam(int uid,int jobId, String jobTitle, String startDate,  String endDate, String startTime, String endTime,int payPerHour) {
+public boolean updateChoosenParam(int uid,int jobId, String jobTitle, String startDate,  String endDate, String startTime, String endTime,String payPerHour) {
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 	Jobs job = (Jobs)FactoryUtil.mapClassInstance.get(FactoryUtil.JOBS);
+	
+	int payPerHours= Integer.parseInt(payPerHour);
 	job.setId(jobId);
 	job.setJobTitle(jobTitle);
 	job.setStartDate(startDate);
@@ -152,7 +155,7 @@ public boolean updateChoosenParam(int uid,int jobId, String jobTitle, String sta
 	job.setEndDate(endDate);
 	job.setStartTime(startTime);
 	job.setEndTime(endTime);
-	job.setPayPerHour(payPerHour);
+	job.setPayPerHour(payPerHours);
 	
 	SeekerActivity seekerAct=new SeekerActivity();
 	seekerAct.setUid(uid);

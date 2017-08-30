@@ -7,12 +7,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
 </head>
 <body>
 <c:import url="headerSitter.jsp"></c:import>
 <center>
 <html:form action="/deleteThisApp" method="POST">
-<table border="2" style="background-color:salmon">
+<table border="2" style="background-color:salmon" cellpadding="10" cellspacing="5px">
 <h2>LIST OF ALL APPLIED JOBS</h2>
 <tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>START TIME</th><th>END TIME</th><th>PAY PER HOUR</th></tr>
 

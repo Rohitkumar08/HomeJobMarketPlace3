@@ -9,6 +9,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
 </head>
 <body>
 
@@ -16,15 +21,22 @@
 
 <center>
 <html:form action = "/ShowApplicants" method="POST">
-<table border="2" style="background-color:salmon">
+<h3>LIST OF ALL JOBS</h3>
+<table border="2" style="background-color:salmon" cellpadding="10" cellspacing="5px">
 
-<tr><th colspan="2">LIST OF ALL JOBS</th></tr>
+<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>START TIME</th><th>END TIME</th><th>PAY PER HOUR</th></tr>
 
 	<c:forEach items="${jobs}" var ="job">
 
 		<tr>
 		
 			<td><c:out  value="${job.getJobTitle()}"></c:out></td>
+			<td><c:out  value="${job.getStartDate()}"></c:out></td>
+			<td><c:out  value="${job.getEndDate()}"></c:out></td>
+			<td><c:out  value="${job.getStartTime()}"></c:out></td>
+			
+			<td><c:out  value="${job.getEndTime()}"></c:out></td>
+			<td><c:out  value="${job.getPayPerHour()}"></c:out></td>
 			
 			<td><input type="submit" name="inputed" value="Show Applicants" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"></td>
 		</tr>
