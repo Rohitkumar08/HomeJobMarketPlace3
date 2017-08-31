@@ -28,7 +28,7 @@ public class JobsData {
 	public int createJob(Jobs job, SeekerActivity seekerAct) {
 		int id=0;
 		try{
-			ActivityUtil activityUtil=new ActivityUtil();
+			//ActivityUtil activityUtil=new ActivityUtil();
 			Session ses= HibernateUtil.getSession().openSession();
 			//Tra
 		//	Session session = HibernateUtil.
@@ -41,7 +41,7 @@ public class JobsData {
 			
 			System.out.println("successfully Job created");
 			
-			activityUtil.add(job.getJobTitle()+" job created");
+			ActivityUtil.add(job.getJobTitle()+" job created");
 			
 			return id;
 		} catch (Exception e) {
@@ -330,7 +330,7 @@ public class JobsData {
 				Jobs jb=job.get(0);
 				
 				//jobs.add(jb);
-				activityUtil.add(jb.getJobTitle()+" details displayed");	
+				ActivityUtil.add(jb.getJobTitle()+" details displayed");	
 				System.out.println("inside dao"+jb.getJobTitle());
 				return jb;
 			

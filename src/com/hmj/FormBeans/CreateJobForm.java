@@ -85,6 +85,23 @@ public class CreateJobForm extends ActionForm{
 			 ae.add("jobTitle", new ActionMessage("jobTitleError"));
 	 
 		 }
+		 
+		 //--validation for dates inputs--------
+		 
+		if(!isThisDateValid(startDate)) {
+			ae.add("startDateFormat", new ActionMessage("startDateFormatError"));
+			
+		}
+		if(!isThisDateValid(endDate)) {
+			ae.add("endDateFormat", new ActionMessage("endDateFormatError"));
+			
+		}
+		 
+		
+		 
+		 
+		 
+		 
 		 //----start & end time validation----------
 		 
 		 
@@ -212,6 +229,22 @@ public class CreateJobForm extends ActionForm{
 			}
 			
 	return ae;
+	}
+	public static boolean isThisDateValid(String dateToValidate) {
+		String dateFromat = "yyyy-mm-dd";
+		if (dateToValidate == null) {
+			return false;
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
+		sdf.setLenient(false);
+		try {
+			Date date = sdf.parse(dateToValidate);
+			System.out.println(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 }

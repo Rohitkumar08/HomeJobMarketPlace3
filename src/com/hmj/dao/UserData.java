@@ -31,7 +31,7 @@ public class UserData {
 
 	public int registerSeeker(Seeker seeker) {
 		// TODO Auto-generated method stub
-		ActivityUtil activity= new ActivityUtil();
+		
 		Session ses= HibernateUtil.getSession().openSession();
 		//Tra
 	//	Session session = HibernateUtil.
@@ -43,7 +43,7 @@ public class UserData {
 		transaction.commit();
 		ses.close();
 		
-		activity.add("Seeker profile created");
+		ActivityUtil.add("Seeker profile created");
 		
 		System.out.println("successfully registered seeker");
 		return id;
@@ -154,8 +154,9 @@ public class UserData {
 			System.out.println("*inside seeker dao***");
 			System.out.println(seeker.getFirstName()+"*************"+seeker.getPhone());
 			
-			Query query1=ses.createQuery("update Member set firstName=:name, phone=:phone where id=:uid");
+			Query query1=ses.createQuery("update Member set firstName=:name,lastName=:lastname, phone=:phone where id=:uid");
 			query1.setParameter("name", seeker.getFirstName());
+			query1.setParameter("lastname", seeker.getLastName());
 			query1.setParameter("phone", seeker.getPhone());
 			query1.setParameter("uid", uid);
 			int res1=query1.executeUpdate();
@@ -207,8 +208,9 @@ public class UserData {
 			System.out.println("*inside sitter dao***");
 			System.out.println(sitter.getFirstName()+"*************"+sitter.getPhone());
 			
-			Query query1=ses.createQuery("update Member set firstName=:name, phone=:phone where id=:uid");
+			Query query1=ses.createQuery("update Member set firstName=:name,lastName=:lastname, phone=:phone where id=:uid");
 			query1.setParameter("name", sitter.getFirstName());
+			query1.setParameter("lastname", sitter.getLastName());
 			query1.setParameter("phone", sitter.getPhone());
 			query1.setParameter("uid", uid);
 			int res1=query1.executeUpdate();

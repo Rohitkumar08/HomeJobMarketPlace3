@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.hmj.FormBeans.RegisterForm;
+import com.hmj.FormBeans.UpdateSeekerForm;
 import com.hmj.service.MemberServiceImp;
 import com.hmj.util.FactoryUtil;
 
@@ -23,15 +24,17 @@ public class UpdateProfileSeekerAction extends Action {
 
 		HttpSession session= request.getSession();
 		int uid=(int) session.getAttribute("uid");
-		RegisterForm regForm = (RegisterForm) form;
+		UpdateSeekerForm seekerForm= (UpdateSeekerForm) form;
+		System.out.println("(((((((()))))))))");
 		
-		boolean update= svc.updateUser(uid,regForm.getFirstName(),regForm.getPhone(),regForm.getNoOfChilds(),regForm.getSpouseName());
+		boolean update= svc.updateUser(uid,seekerForm.getFirstName(),seekerForm.getLastName(), seekerForm.getPhone(),seekerForm.getNoOfChilds(),seekerForm.getSpouseName());
+
+		System.out.println(update);
+		if(update)
+			return mapping.findForward("success");
+		else
+		return mapping.findForward("failure");
 		
-		
-		
-		
-		
-		return mapping.findForward("success");
 	}
 	
 	

@@ -14,8 +14,8 @@
 <c:import url="headerSitter.jsp"></c:import>
 <center>
 
-<html:form action = "/UpdateChoosenParameterSitter" method="POST"> 
-<table border="2" style="background-color:salmon">
+<html:form action = "UpdateChoosenParameterSitter.do" method="POST"> 
+<table border="2" width="400" style="background-color:salmon">
 
 <tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
 
@@ -24,6 +24,14 @@
 			<td>FirstName <input type="hidden" name="oldFirstName" value="${sitter.getFirstName()}" ></td>
 			
 			<td><html:text  property="firstName" value="${sitter.getFirstName()}"/><html:errors property="firstName" /></td>
+			
+		
+		</tr>
+		<tr>
+		
+			<td>LastName </td>
+			
+			<td><html:text  property="lastName" value="${sitter.getLastName()}"/></td>
 			
 		
 		</tr>
@@ -40,11 +48,10 @@
 				<td><html:text readonly="true" property="email" value="${sitter.getEmail()}"/></td>
 		
 		</tr>
-		<html:hidden  property="password" value="${seeker.getPassword()}"/>
-		<html:hidden  property="memberType" value="Sitter"/>
+	
 		<tr>
 		
-			<td>YEars of experience</td>
+			<td>Years of experience</td>
 			<td><html:text property="yearsOfExperience" value="${sitter.getYearsOfExperience()}"/><html:errors property="yearsOfExperience" /></td>
 			
 		
@@ -55,7 +62,7 @@
 			<td>Expected pay</td>
 			
 			 	<td><html:text property="expectedPay" value="${sitter.getExpectedPay()}"/><html:errors property="expectedPay" /></td>
-	
+				
 		</tr>
 		
 		<tr>

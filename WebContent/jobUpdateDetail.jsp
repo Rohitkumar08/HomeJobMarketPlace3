@@ -14,7 +14,7 @@
 <center>
 
 <html:form action = "/updateChoosenParameter" method="POST"> 
-<table border="2" style="background-color:salmon">
+<table border="2" width="400" style="background-color:salmon">
 
 <tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
 

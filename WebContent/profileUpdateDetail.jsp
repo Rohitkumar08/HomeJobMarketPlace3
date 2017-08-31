@@ -15,7 +15,7 @@
 <center>
 
 <html:form action = "/updateChoosenParameterSeeker" method="POST" > 
-<table border="2" style="background-color:salmon">
+<table border="2" width="400" style="background-color:salmon">
 
 <tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
 
@@ -25,12 +25,12 @@
 			
 			<td><html:text  property="firstName" value="${seeker.getFirstName()}"/><html:errors property="firstName" /></td>
 			
-			<%-- <td><input type="submit" name="inputed" value="update" onclick=" this.value += ' <c:out  value="jobTitle"/>'"></td> --%>
+			
 		</tr>
 		<tr>
 		
 			<td>Phone No</td>
-			<%-- <c:out  value="${jobs.getStartDate()}"</c:out> --%>
+		
 			<td><html:text property="phone" value="${seeker.getPhone()}"/><html:errors property="phone" /></td>
 			
 		</tr>
@@ -40,8 +40,6 @@
 				<td><html:text readonly="true" property="email" value="${seeker.getEmail()}"/></td>
 			
 		</tr>
-		<html:hidden  property="password" value="${seeker.getPassword()}"/>
-		<html:hidden  property="memberType" value="Seeker"/>
 		
 		<tr>
 			<td>No Of Child</td>

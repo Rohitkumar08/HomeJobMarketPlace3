@@ -13,16 +13,19 @@
 <c:import url="headerSitter.jsp"></c:import>
 
 <center>
-
+<h2>LIST OF ALL EMAILS</h2>
 <table border="2" style="background-color:salmon">
 
-<tr><th colspan="2">LIST OF ALL EMAILS</th></tr>
+<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Phone no</th></tr>
 
 
 	<c:forEach items="${member}" var ="member">
 
 		<tr>
+			<td><c:out  value="${member.getFirstName()}"></c:out></td>
+			<td><c:out  value="${member.getLastName()}"></c:out></td>
 			<td><c:out  value="${member.getEmail()}"></c:out></td>
+			<td><c:out  value="${member.getPhone()}"></c:out></td>
 		</tr>
 	
 	</c:forEach>

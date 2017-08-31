@@ -110,15 +110,26 @@ public class MemberServiceImp {
 		return seeker;
 	}
 
-	public boolean updateUser(int uid, String firstName, String phone, String noOfChilds, String spouseName) {
+	public boolean updateUser(int uid, String firstName, String lastName, String phone, String noOfChilds, String spouseName) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 		 Seeker seeker = (Seeker) FactoryUtil.mapClassInstance.get(FactoryUtil.SEEKER);
-		 int noOfChild=Integer.parseInt(noOfChilds);
+		 int noOfChild;
+		 try {
+			 
+			noOfChild=Integer.parseInt(noOfChilds);
+		 }catch(Exception e) {
+			 
+			 
+			 return false;
+		 }
+		
 		 mem.setFirstName(firstName);
+		 mem.setLastName(lastName);
 		 mem.setPhone(phone);
 		 seeker.setFirstName(firstName);
+		 seeker.setLastName(lastName);
 		 seeker.setPhone(phone);
 		 seeker.setNoOfChilds(noOfChild);
 		 seeker.setSpouseName(spouseName);
@@ -128,7 +139,7 @@ public class MemberServiceImp {
 		
 		
 		
-		return false;
+		return true;
 	}
 
 	public boolean deleteSeekerDetails(int uid, String email) {
@@ -156,17 +167,38 @@ public class MemberServiceImp {
 		
 	}
 
-	public boolean updateUserSitter(int uid, String firstName, String phone, String expectedPays, String yearsOfExperiences) {
+	public boolean updateUserSitter(int uid, String firstName, String lastName,String phone, String expectedPays, String yearsOfExperiences) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 		 Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
+		 int expectedPay;
+		 int yearsOfExperience;
+		 try {
+			expectedPay= Integer.parseInt(expectedPays);
+			if(expectedPay<0)
+				return false;
+		 }catch(Exception e) {
+			 
+			 
+			 return false;
+		 }
+		 try {
+			 yearsOfExperience= Integer.parseInt(yearsOfExperiences);
+			 if(yearsOfExperience<0)
+				 return false;
+		 }catch(Exception e) {
+			 
+			 
+			 return false;
+		 }
 		 
-		 int expectedPay= Integer.parseInt(expectedPays);
-		 int yearsOfExperience= Integer.parseInt(yearsOfExperiences);
+		
 		 mem.setFirstName(firstName);
+		 mem.setLastName(lastName);
 		 mem.setPhone(phone);
 		sitter.setFirstName(firstName);
+		sitter.setLastName(lastName);
 		 sitter.setPhone(phone);
 		sitter.setExpectedPay(expectedPay);
 		sitter.setYearsOfExperience(yearsOfExperience);

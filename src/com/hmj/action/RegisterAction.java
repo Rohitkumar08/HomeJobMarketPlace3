@@ -58,12 +58,16 @@ public class RegisterAction extends Action{
 			session.setAttribute("uname", registerForm.getFirstName());
 			 session.setAttribute("uemail", registerForm.getEmail());
 			 session.setAttribute("utype", "Seeker");
+			 Seeker seeker = svc.getUserDetails((int) session.getAttribute("uid"));
+				session.setAttribute("sessionData", seeker);
 			return mapping.findForward("seeker");
 		}
 		if(registerForm.getMemberType().equals("Sitter")){
 			session.setAttribute("uname", registerForm.getFirstName());
 			session.setAttribute("uemail", registerForm.getEmail());
 			 session.setAttribute("utype", "Sitter");
+			 Sitter sitter = svc.getSitterUserDetails((int) session.getAttribute("uid"));
+				session.setAttribute("sessionData", sitter);
 			return mapping.findForward("sitter");
 		}
 		return mapping.findForward("failure");

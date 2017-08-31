@@ -17,7 +17,7 @@
 
 		<html:form action="register.do" method="POST">
 
-			<table border="2" width="50%" style="background-color: salmon">
+			<table border="0" width="500" style="background-color: white">
 				<tr>
 					<th colspan="2">Registration form:</th>
 				</tr>

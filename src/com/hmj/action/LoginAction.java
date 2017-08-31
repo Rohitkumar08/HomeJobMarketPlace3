@@ -15,6 +15,8 @@ import org.apache.struts.action.ActionMapping;
 
 import com.hmj.FormBeans.LoginForm;
 import com.hmj.model.Member;
+import com.hmj.model.Seeker;
+import com.hmj.model.Sitter;
 import com.hmj.service.MemberServiceImp;
 import com.hmj.util.ActivityUtil;
 import com.hmj.util.FactoryUtil;
@@ -48,10 +50,14 @@ public class LoginAction extends Action {
 			session.setAttribute("utype", uType);
 			if(uType.equals("Seeker")){
 //				ActivityUtil.add("Logged in as a Seeker");
+				Seeker seeker = svc.getUserDetails((int) session.getAttribute("uid"));
+				session.setAttribute("sessionData", seeker);
 				return mapping.findForward("seeker");
 			}
 			if(uType.equals("Sitter")){
 //				ActivityUtil.add("Logged in as Sitter");
+				Sitter sitter = svc.getSitterUserDetails((int) session.getAttribute("uid"));
+				session.setAttribute("sessionData", sitter);
 				return mapping.findForward("sitter");
 			}
 //			if(uType.equals("Admin")){

@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.hmj.FormBeans.UpdateSitterForm;
 import com.hmj.model.Member;
 import com.hmj.model.Seeker;
 import com.hmj.model.Sitter;
@@ -25,12 +26,30 @@ public class ViewProfileSitterAction extends Action {
 		Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 		Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
 		MemberServiceImp svc = (MemberServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBERSERVICEIMP);
+		
+		
+		UpdateSitterForm sitterForm= (UpdateSitterForm) form;
 		HttpSession session = request.getSession();
+		int uid= (int) session.getAttribute("uid");
+		if(sitterForm.getFirstName()==null) {
+			System.out.println("first time in view profile");
+			Sitter data=(Sitter) session.getAttribute("sessionData");
+			request.setAttribute("sitter", data);
+			
+		}
+		else {
+			request.setAttribute("sitter", sitterForm);
+			
+//			boolean update= svc.updateUserSitter(uid,sitterForm.getFirstName(),sitterForm.getPhone(),sitterForm.getExpectedPay(),sitterForm.getYearsOfExperience());
+//			System.out.println(update);
+//			if(update)
+//				return mapping.findForward("success");
+//			else
+//			return mapping.findForward("failure");
+		}
+		//int uid=(int) session.getAttribute("uid");
+		//sitter  =svc.getSitterUserDetails(uid);
 		
-		int uid=(int) session.getAttribute("uid");
-		sitter  =svc.getSitterUserDetails(uid);
-		
-		request.setAttribute("sitter", sitter);
 		
 		
 		return mapping.findForward("success");
