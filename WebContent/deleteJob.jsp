@@ -26,7 +26,7 @@ table, th, td {
 <c:import url="header.jsp"></c:import>
 
 <center>
-<html:form action ="deleteChoosenJob.do" method="POST">
+<html:form action ="deleteChoosenJob.do" method="POST" >
 <h2>LIST OF ALL JOBS POSTED BY YOU</h2>
 <table border="2" style="background-color:salmon" cellpadding="10" cellspacing="5px">
 

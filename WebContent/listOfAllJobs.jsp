@@ -24,7 +24,7 @@ table, th, td {
 
 		<tr>
 		
-			<td><c:out value="${job.getJobTitle()}"></c:out></td>
+			<td > <c:out value="${job.getJobTitle()}"></c:out></td>
 			<td><c:out value="${job.getStartDate()}"></c:out></td>
 			<td><c:out value="${job.getEndDate()}"></c:out></td>
 			<td><c:out value="${job.getStartTime()}"></c:out></td>

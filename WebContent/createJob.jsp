@@ -13,13 +13,11 @@
 <c:import url="header.jsp"></c:import>
 <center>
 <html:form action="/CreateJob" method="POST">
-<h2></h2>
-<table border="2" width="75%" style="background-color:salmon">
-<tr>
- <th colspan="2" align="center">CREATE A NEW JOB</th>
-</tr>
+<h2>CREATE A NEW JOB</h2>
+<table border="1" width="00" style="background-color: white">
+
 <tr><td>Job Title:</td><td> <html:text property="jobTitle" /><html:errors property="jobTitle"/></td></tr>
-<tr><td>Start Date:(yyyy-mm-dd) </td><td><html:text property="startDate" /><html:errors property="startDate"/><html:errors property="startDateFormat"/>
+<tr><td>Start Date:(yyyy-mm-dd) </td><td><html:text property="startDate" /><html:errors property="startDateFormat"/><html:errors property="startDate"/>
 
 
 </td></tr>

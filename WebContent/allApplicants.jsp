@@ -28,7 +28,7 @@
 
 		<tr>
 			
-			<td><c:out  value="${sitter.getSitter().getFirstName()}"></c:out></td>
+			<td style="padding-right: 10px"><c:out  value="${sitter.getSitter().getFirstName()}"></c:out></td>
 			<td><c:out  value="${sitter.getExpectedPay()}"></c:out></td>
 			<td><c:out  value="${sitter.getSitter().getYearsOfExperience()}"></c:out></td>
 		

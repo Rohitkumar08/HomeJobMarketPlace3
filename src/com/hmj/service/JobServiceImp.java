@@ -146,8 +146,15 @@ public boolean updateChoosenParam(int uid,int jobId, String jobTitle, String sta
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 	Jobs job = (Jobs)FactoryUtil.mapClassInstance.get(FactoryUtil.JOBS);
+	int payPerHours;
+	try {
+		payPerHours= Integer.parseInt(payPerHour);
+	}catch(NumberFormatException e) {
+		return false;
+		
+		
+	}
 	
-	int payPerHours= Integer.parseInt(payPerHour);
 	job.setId(jobId);
 	job.setJobTitle(jobTitle);
 	job.setStartDate(startDate);

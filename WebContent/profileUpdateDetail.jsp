@@ -15,13 +15,13 @@
 <center>
 
 <html:form action = "/updateChoosenParameterSeeker" method="POST" > 
-<table border="2" width="400" style="background-color:salmon">
+<table border="0" width="00" >
 
 <tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
 
 		<tr>
 		
-			<td>FirstName <input type="hidden" name="oldFirstName" value="${Seeker.getFirstName()}" ></td>
+			<td>FirstName: <input type="hidden" name="oldFirstName" value="${Seeker.getFirstName()}" ></td>
 			
 			<td><html:text  property="firstName" value="${seeker.getFirstName()}"/><html:errors property="firstName" /></td>
 			
@@ -29,27 +29,27 @@
 		</tr>
 		<tr>
 		
-			<td>Phone No</td>
+			<td>Phone No: </td>
 		
 			<td><html:text property="phone" value="${seeker.getPhone()}"/><html:errors property="phone" /></td>
 			
 		</tr>
 		<tr>
 		
-			<td>Email</td>
+			<td>Email: </td>
 				<td><html:text readonly="true" property="email" value="${seeker.getEmail()}"/></td>
 			
 		</tr>
 		
 		<tr>
-			<td>No Of Child</td>
+			<td>No Of Child: </td>
 			<td><html:text property="noOfChilds" value="${seeker.getNoOfChilds()}"/><html:errors property="noOfChildError" /></td>
 			
 		</tr>
 		
 		<tr>
 		
-			<td>Spouse name</td>
+			<td>Spouse name: </td>
 			
 			 	<td><html:text property="spouseName" value="${seeker.getSpouseName()}"/><html:errors property="spouseName" /></td>
 		

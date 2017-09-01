@@ -28,7 +28,7 @@ table, th, td {
 <center>
 <html:form action ="updateChoosenJob.do" method="POST">
 <h2>LIST OF ALL JOBS POSTED BY YOU</h2>
-<table border="2" width="400" style="background-color:salmon" >
+<table width="00" style="background-color:salmon" >
 
 <tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>PAY PER HOUR</th>
 	<c:forEach items="${jobs}" var ="job">

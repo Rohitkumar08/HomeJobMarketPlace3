@@ -91,6 +91,7 @@
 		<action path="/updateChoosenParameter" name="createJobForm" type="com.hmj.action.UpdateParameterJobAction" scope="request" validate="false" input="/jobUpdateDetail.jsp">
 			<forward name="success" path="/updatedJob.jsp"/>
 			<forward name="noJobs" path="/noJobs.jsp"/>
+			<forward name="failure" path="/updateChoosenParameter.do"/>
 		</action>
 		
 		<action path="/deleteJob"  type="com.hmj.action.UpdateJobAction" scope="session" validate="false">

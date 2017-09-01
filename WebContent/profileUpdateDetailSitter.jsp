@@ -15,13 +15,13 @@
 <center>
 
 <html:form action = "UpdateChoosenParameterSitter.do" method="POST"> 
-<table border="2" width="400" style="background-color:salmon">
+<table border="0" width="00">
 
 <tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
 
 		<tr>
 		
-			<td>FirstName <input type="hidden" name="oldFirstName" value="${sitter.getFirstName()}" ></td>
+			<td>FirstName: <input type="hidden" name="oldFirstName" value="${sitter.getFirstName()}" ></td>
 			
 			<td><html:text  property="firstName" value="${sitter.getFirstName()}"/><html:errors property="firstName" /></td>
 			
@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 		
-			<td>LastName </td>
+			<td>LastName: </td>
 			
 			<td><html:text  property="lastName" value="${sitter.getLastName()}"/></td>
 			
@@ -37,21 +37,21 @@
 		</tr>
 		<tr>
 		
-			<td>Phone No</td>
+			<td>Phone No: </td>
 			<%-- <c:out  value="${jobs.getStartDate()}"</c:out> --%>
 			<td><html:text property="phone" value="${sitter.getPhone()}"/><html:errors property="phone" /></td>
 			
 		</tr>
 		<tr>
 		
-			<td>Email</td>
+			<td>Email: </td>
 				<td><html:text readonly="true" property="email" value="${sitter.getEmail()}"/></td>
 		
 		</tr>
 	
 		<tr>
 		
-			<td>Years of experience</td>
+			<td>Years of experience: </td>
 			<td><html:text property="yearsOfExperience" value="${sitter.getYearsOfExperience()}"/><html:errors property="yearsOfExperience" /></td>
 			
 		
@@ -59,7 +59,7 @@
 		
 		<tr>
 		
-			<td>Expected pay</td>
+			<td>Expected pay: </td>
 			
 			 	<td><html:text property="expectedPay" value="${sitter.getExpectedPay()}"/><html:errors property="expectedPay" /></td>
 				
