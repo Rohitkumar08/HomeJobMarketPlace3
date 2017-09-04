@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet Filter implementation class LoginAuthFilter
+ * Servlet Filter implementation class CreateJobFilter
  */
-
-public class LoginAuthFilter implements Filter {
+@WebFilter("/CreateJobFilter")
+public class CreateJobFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public LoginAuthFilter() {
+    public CreateJobFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -51,7 +51,7 @@ public class LoginAuthFilter implements Filter {
 
 		else {
 				if(session.getAttribute("utype").equals("Seeker")) {
-					rd= request.getRequestDispatcher("seeker.do");
+					rd= request.getRequestDispatcher("createJob.do");
 					rd.forward(request, response);
 				}
 				
@@ -62,7 +62,6 @@ public class LoginAuthFilter implements Filter {
 			
 			chain.doFilter(request, response);
 		}
-		
 	}
 
 	/**

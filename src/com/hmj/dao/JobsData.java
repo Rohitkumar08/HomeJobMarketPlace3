@@ -564,8 +564,9 @@ public class JobsData {
 			if(jobsList.size()==0) {
 				jobsList.add(0);
 			}
-			query=ses.createQuery("from Jobs where id not in (:jobsList)");
+			query=ses.createQuery("from Jobs where id not in (:jobsList) and status=:status");
 			query.setParameter("jobsList", jobsList);
+			query.setParameter("status", "ACTIVE");
 			result=query.list();
 			System.out.println(result.get(0).getJobTitle());
 			

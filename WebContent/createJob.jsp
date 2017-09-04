@@ -14,20 +14,20 @@
 <center>
 <html:form action="/CreateJob" method="POST">
 <h2>CREATE A NEW JOB</h2>
-<table border="1" width="00" style="background-color: white">
+<table border="1" width="80%" height="90%" style="background-color: salmon">
 
-<tr><td>Job Title:</td><td> <html:text property="jobTitle" /><html:errors property="jobTitle"/></td></tr>
-<tr><td>Start Date:(yyyy-mm-dd) </td><td><html:text property="startDate" /><html:errors property="startDateFormat"/><html:errors property="startDate"/>
+<tr><td>Job Title :</td><td> <html:text property="jobTitle" /><html:errors property="jobTitle"/></td></tr>
+<tr><td>Start Date(yyyy-mm-dd) : </td><td><html:text property="startDate" /><html:errors property="startDateFormat"/><html:errors property="startDate"/>
 
 
 </td></tr>
-<tr><td>End Date:(yyyy-mm-dd)</td><td><html:text property="endDate" /><html:errors property="endDate"/><html:errors property="endDateFormat"/></td></tr>
-<tr><td>Start Time:(hhmm) </td><td><html:text property="startTime" />
+<tr><td>End Date:(yyyy-mm-dd) :</td><td><html:text property="endDate" /><html:errors property="endDate"/><html:errors property="endDateFormat"/></td></tr>
+<tr><td>Start Time:(hhmm) : </td><td><html:text property="startTime" />
 
 <html:errors property="startTimeFormat"/>
 
 </td></tr>
-<tr><td>End Time:(hhmm)</td><td><html:text property="endTime"/><html:errors property="endTime"/>
+<tr><td>End Time:(hhmm) :</td><td><html:text property="endTime"/><html:errors property="endTime"/>
 <html:errors property="endTimeFormat"/>
 
 </td></tr>

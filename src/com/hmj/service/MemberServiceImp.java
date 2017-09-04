@@ -149,7 +149,8 @@ public class MemberServiceImp {
 		 Member mem= ud.getMemberDetailsDao(uid);
 		System.out.println(mem.getStatus());
 		 mem.setStatus("INACTIVE");
-		 String pipedEmail=email.concat("|");
+		// String pipe=mem.getId();
+		 String pipedEmail=email.concat(""+mem.getId());
 		 mem.setEmail(pipedEmail);
 		//int res=ud.deleteSeeker(uid,email);
 		 ud.deleteMember(mem);

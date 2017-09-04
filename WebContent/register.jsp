@@ -43,7 +43,7 @@
 				</tr>
 				<tr>
 					<td>password:</td>
-					<td><html:text property="password"/>
+					<td><html:password property="password"/>
 					<html:errors property="pwdError" /></td>
 				</tr>
 				<tr>

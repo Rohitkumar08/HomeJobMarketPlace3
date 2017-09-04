@@ -21,14 +21,14 @@ public class SeekerAction extends Action{
 		// TODO Auto-generated method stub
 		HttpSession session= request.getSession();
 		System.out.println("inside seeker action");
-		if(session.getAttribute("uname")==null) {
-			
-			return mapping.findForward("loginFirst");
-		}
-		if(!(session.getAttribute("utype").equals("Seeker"))) {
-			
-			return mapping.findForward("notSeeker");
-		}
+//		if(session.getAttribute("uname")==null) {
+//			
+//			return mapping.findForward("loginFirst");
+//		}
+//		if(!(session.getAttribute("utype").equals("Seeker"))) {
+//			
+//			return mapping.findForward("notSeeker");
+//		}
 		List<String> activities=ActivityUtil.getActivity();
 		session.setAttribute("activity", activities);
 		

@@ -264,7 +264,7 @@ public class UserData {
 		//	Session session = HibernateUtil.
 			Transaction tx1= ses.beginTransaction();
 			System.out.println("*inside sitter dao***");
-			String pipedEmail=email.concat("|");
+			String pipedEmail=email.concat(""+uid);
 			System.out.println(pipedEmail+"***"+uid);
 			Query query1=ses.createQuery("update Member set status=:ustatus, email=:uemail where id=:uid");
 			query1.setParameter("uid", uid);
