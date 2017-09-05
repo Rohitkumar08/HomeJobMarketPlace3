@@ -71,7 +71,13 @@ public class UpdateSeekerForm extends ActionForm {
 		 
 			 }
 			 //--------------
+			 m=p.matcher(lastName);
+				b = m.find();
+				 if(!b){
+					 ae.add("lastName", new ActionMessage("lastNameError"));
 			 
+				 }
+				 
 			 
 			 //----validation for EMAIL---------
 			 
@@ -96,9 +102,14 @@ public class UpdateSeekerForm extends ActionForm {
 			 
 				 }
 				 else {
-						int noOfChild=Integer.parseInt(noOfChilds);
-						if(noOfChild<0)
-							 ae.add("noOfChildError", new ActionMessage("noOfChildError"));
+					 try {
+						 int noOfChild=Integer.parseInt(noOfChilds);
+							if(noOfChild<0)
+								 ae.add("noOfChildError", new ActionMessage("noOfChildError"));
+					 }catch(NumberFormatException e) {
+						 ae.add("noOfChildError", new ActionMessage("noOfChildError"));
+					 }
+						
 					}
 					
 					if(spouseName==null){

@@ -30,7 +30,7 @@ public class SearchEmailAction extends Action {
 		request.setAttribute("member", emails);
 		if(emails.size()==0){
 			
-			return mapping.findForward("noEmail");
+			return mapping.findForward("failure");
 			
 		}
 		else{

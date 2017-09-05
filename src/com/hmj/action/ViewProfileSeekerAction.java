@@ -24,26 +24,30 @@ public class ViewProfileSeekerAction extends Action {
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+		
 		Seeker seeker = (Seeker) FactoryUtil.mapClassInstance.get(FactoryUtil.SEEKER);
 		MemberServiceImp svc = (MemberServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBERSERVICEIMP);
 		HttpSession session = request.getSession();
 		
 		int uid=(int) session.getAttribute("uid");
-		
-		UpdateSeekerForm seekerForm= (UpdateSeekerForm) form;
-		if(seekerForm.getFirstName()==null) {
-			System.out.println("first time in view profile");
-			Seeker data=(Seeker) session.getAttribute("sessionData");
-			request.setAttribute("seeker", data);
-			
-		}
-		else {
-			request.setAttribute("seeker", seekerForm);
-		}
-
+		seeker= svc.getUserDetails(uid);
+		request.setAttribute("seeker", seeker);
 		return mapping.findForward("success");
 		
+		
+//		UpdateSeekerForm seekerForm= (UpdateSeekerForm) form;
+//		if(seekerForm.getFirstName()==null) {
+//			System.out.println("first time in view profile");
+//			Seeker data=(Seeker) session.getAttribute("sessionData");
+//			request.setAttribute("seeker", data);
+//			
+//		}
+//		else {
+//			request.setAttribute("seeker", seekerForm);
+//		}
+//
+//		return mapping.findForward("success");
+//		
 	}
 	
 

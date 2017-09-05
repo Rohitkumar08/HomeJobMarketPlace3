@@ -4,6 +4,13 @@ public class Applications {
 	private Jobs jobs;
 	private Sitter sitter;
 	private String status;
+	private String jobStatus;
+public String getJobStatus() {
+		return jobStatus;
+	}
+	public void setJobStatus(String jobStatus) {
+		this.jobStatus = jobStatus;
+	}
 public String getStatus() {
 		return status;
 	}

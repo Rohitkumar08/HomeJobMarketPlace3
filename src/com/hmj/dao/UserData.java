@@ -22,6 +22,7 @@ public class UserData {
 
 
 	String hql;
+	
 
 	public int getID(String email) {
 		// TODO Auto-generated method stub
@@ -106,6 +107,7 @@ public class UserData {
 	}
 	public void deleteMember(Member mem) {
 		// TODO Auto-generated method stub
+		List<Integer> jobIds=new ArrayList<>();
 		try {
 			Session ses= HibernateUtil.getSession().openSession();
 			//Tra
@@ -115,12 +117,42 @@ public class UserData {
 			System.out.println("inside member update");
 			tx1.commit();
 			
-			Transaction tx2 =ses.beginTransaction();
-			Query q= ses.createQuery("update Jobs set status=:status where postedBy=:uid");
-			q.setParameter("status", "INACTIVE");
+			Query q= ses.createQuery("from Jobs where postedBy=:uid");
 			q.setParameter("uid", mem.getId());
-			q.executeUpdate();
-			tx2.commit();
+			List<Jobs> jobs=q.list();
+			System.out.println(jobs);
+			jobIds.clear();
+			if(jobs!=null) {
+				
+				for(Jobs job:jobs) {
+					System.out.println(job.getId()+"*****");
+					jobIds.add(job.getId());
+					
+				}
+				
+			}
+				Transaction tx2 =ses.beginTransaction();
+				 Query q2= ses.createQuery("update Jobs set status=:status where postedBy=:uid");
+				q2.setParameter("status", "INACTIVE");
+				q2.setParameter("uid", mem.getId());
+				q2.executeUpdate();
+				tx2.commit();
+				
+				
+				
+				Transaction tx3 =ses.beginTransaction();
+				Query q3= ses.createQuery("update Applications set jobStatus=:status where jobs.id in (:jobIds)");
+				q3.setParameter("status", "DELETED");
+				q3.setParameter("jobIds", jobIds);
+				q3.executeUpdate();
+				tx3.commit();
+				
+				
+			
+			
+			
+			
+		
 			
 			SeekerActivity seekerAct = new SeekerActivity();
 			seekerAct.setUid(mem.getId());
@@ -248,7 +280,8 @@ public class UserData {
 		query.setParameter("utype", "Seeker");
 		query.setParameter("status", "ACTIVE");
 		mem= query.list();
-		System.out.println("$$$$$$$$$$$$$$"+mem.get(0).getEmail());
+//		if(mem!=null)
+//		System.out.println("$$$$$$$$$$$$$$"+mem.get(0).getEmail());
 		
 		return mem;
 

@@ -29,6 +29,14 @@
 		</tr>
 		<tr>
 		
+			<td>LastName: </td>
+			
+			<td><html:text  property="lastName" value="${seeker.getLastName()}"/><html:errors property="lastName" /></td>
+			
+		
+		</tr>
+		<tr>
+		
 			<td>Phone No: </td>
 		
 			<td><html:text property="phone" value="${seeker.getPhone()}"/><html:errors property="phone" /></td>

@@ -27,6 +27,7 @@ public class DeleteSitterAction extends Action {
 		
 		int deleted=svc.deleteSitterDetails(uid, email);
 		System.out.println(deleted);
+		session.invalidate();
 				return mapping.findForward("success");
 		
 //			else{

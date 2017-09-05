@@ -31,7 +31,12 @@ table, th, td {
 			<td><c:out value="${job.getJobs().getStartTime()}"></c:out></td>
 			<td><c:out value="${job.getJobs().getEndTime()}"></c:out></td>
 			<td><c:out value="${job.getJobs().getPayPerHour()}"></c:out></td>
-			<td><input type="submit" name="inputed" value="delete" onclick="this.value += ' <c:out  value="${job.getJobs().getId()}"/>'"></td>
+			<c:if test="${job.getJobStatus() eq 'DELETED'}">
+			<td><input type="submit"  value="JOB IS DELETED" disabled /></td>
+			</c:if>
+			<c:if test="${job.getJobStatus() eq 'ACTIVE'}">
+			<td><input type="submit" name="inputed" value="Delete" onclick="this.value += ' <c:out  value="${job.getJobs().getId()}"/>'"></td>
+			</c:if>
 		</tr>
 	
 	</c:forEach>

@@ -223,9 +223,14 @@ public class CreateJobForm extends ActionForm{
 	 
 			}
 			else {
-				int payPerHours=Integer.parseInt(payPerHour);
-				if(payPerHours<=10)
-					 ae.add("payPerHour", new ActionMessage("payPerHourError"));
+				try{
+					int payPerHours=Integer.parseInt(payPerHour);
+					if(payPerHours<10)
+						 ae.add("payPerHour", new ActionMessage("payPerHourError"));
+				}catch(NumberFormatException e) {
+					ae.add("payPerHour", new ActionMessage("payPerHourError"));
+				}
+				
 			}
 			
 	return ae;

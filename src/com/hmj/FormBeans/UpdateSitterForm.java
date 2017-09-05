@@ -77,7 +77,13 @@ public class UpdateSitterForm extends ActionForm{
 	 
 		 }
 		 //--------------
+		 m=p.matcher(lastName);
+			b = m.find();
+			 if(!b){
+				 ae.add("lastName", new ActionMessage("lastNameError"));
 		 
+			 }
+			 
 		 
 		 //----validation for EMAIL---------
 		 
@@ -123,9 +129,14 @@ public class UpdateSitterForm extends ActionForm{
 	 
 			}
 			else {
-				int expectedPays=Integer.parseInt(expectedPay);
-				if(expectedPays<=0)
-					 ae.add("expectedPay", new ActionMessage("expectedPayError"));
+				try {
+					int expectedPays=Integer.parseInt(expectedPay);
+					if(expectedPays<=0)
+						 ae.add("expectedPay", new ActionMessage("expectedPayError"));
+				}
+				catch(NumberFormatException e) {
+					ae.add("expectedPay", new ActionMessage("expectedPayError"));
+				}
 			}
 			
 			
@@ -136,9 +147,14 @@ public class UpdateSitterForm extends ActionForm{
 	 
 			}
 			else {
-				int yearsOfExperiences=Integer.parseInt(yearsOfExperience);
-				if(yearsOfExperiences<0)
+				try {
+					int yearsOfExperiences=Integer.parseInt(yearsOfExperience);
+					if(yearsOfExperiences<0)
+						 ae.add("yearsOfExperience", new ActionMessage("yoeError"));
+				}catch(NumberFormatException e) {
 					 ae.add("yearsOfExperience", new ActionMessage("yoeError"));
+				}
+				
 			}
 			
 		 

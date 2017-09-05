@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.hmj.FormBeans.JobIdForm;
 import com.hmj.model.Jobs;
 import com.hmj.service.JobServiceImp;
 import com.hmj.util.FactoryUtil;
@@ -23,18 +24,17 @@ public class UpdateChoosenJobAction extends Action {
 		
 		HttpSession session = request.getSession(); 
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
-		
+		JobIdForm jobIdForm = (JobIdForm)form;
 		int uid=(int) session.getAttribute("uid");
 		
-		String selected[]= request.getParameterValues("inputed");
-		int selectedJobId=Integer.parseInt(selected[0].substring(7));  //job title choosen for edit purpose
+		String selected[]= request.getParameterValues("inputed");System.out.println(selected[0]);
+		int selectedJobId=Integer.parseInt(selected[0].substring(7));  
 			System.out.println(selected[0].substring(7));
 			int jobId=selectedJobId;
 			Jobs job = jbs.getJobDetails(jobId);
-			System.out.println(job.getJobTitle());
-			System.out.println(job.getStartDate());
+			
 			  request.setAttribute("jobs", job); 
-			  System.out.println("skuvbwkuvchwouvwkuvhwifvgweifwkuvcwifbweufgewifebwu");
+			
 	          
 		
 	

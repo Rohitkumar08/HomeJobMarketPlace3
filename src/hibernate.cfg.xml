@@ -16,7 +16,7 @@
    
       
       <mapping resource="member.hbm.xml"/>
-       <mapping resource="jobs.hbm.xml"/>
+       <mapping resource="job.hbm.xml"/>
        <mapping resource="seeker.hbm.xml"/>
        <mapping resource="application.hbm.xml"/>
        <mapping resource="seekerActivity.hbm.xml"/>

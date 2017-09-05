@@ -11,8 +11,4 @@
 		<property name="spouseName" column="spouse_name"/>
 	</class>
 	
-	
-	
-	
-	
 </hibernate-mapping>	

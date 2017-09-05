@@ -23,9 +23,6 @@ public class ViewProfileSitterAction extends Action {
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
-		Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
-		MemberServiceImp svc = (MemberServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBERSERVICEIMP);
 		
 		
 		UpdateSitterForm sitterForm= (UpdateSitterForm) form;
@@ -39,17 +36,9 @@ public class ViewProfileSitterAction extends Action {
 		}
 		else {
 			request.setAttribute("sitter", sitterForm);
-			
-//			boolean update= svc.updateUserSitter(uid,sitterForm.getFirstName(),sitterForm.getPhone(),sitterForm.getExpectedPay(),sitterForm.getYearsOfExperience());
-//			System.out.println(update);
-//			if(update)
-//				return mapping.findForward("success");
-//			else
-//			return mapping.findForward("failure");
+
 		}
-		//int uid=(int) session.getAttribute("uid");
-		//sitter  =svc.getSitterUserDetails(uid);
-		
+	
 		
 		
 		return mapping.findForward("success");

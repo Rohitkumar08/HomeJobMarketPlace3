@@ -27,6 +27,7 @@ public class DeleteSeekerAction extends Action{
 		
 		svc.deleteSeekerDetails(uid, email);
 		
+		session.invalidate();
 				return mapping.findForward("success");
 		
 //			else{

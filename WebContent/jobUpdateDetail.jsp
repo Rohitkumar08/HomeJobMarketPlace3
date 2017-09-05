@@ -19,7 +19,7 @@
 <tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
 
 		<tr>
-			<input type="hidden" name="jobId" value="${jobs.getId()}">
+			<html:hidden property="jobId" value="${jobs.getId()}"/>
 			<td>JOB TITLE <input type="hidden" name="oldJobTitle" value="${jobs.getJobTitle()}" ></td>
 			<%-- <c:out  value="${jobs.getJobTitle()}"</c:out> --%>
 			<td><html:text property="jobTitle" value="${jobs.getJobTitle()}"/><html:errors property="jobTitle"/></td>

@@ -41,7 +41,7 @@ public class JobServiceImp {
 	
 	
 	public List<Jobs> updateJob(int uid){
-		Jobs job = (Jobs)FactoryUtil.mapClassInstance.get(FactoryUtil.JOBS);
+		
 		JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 	
 		List<Jobs> jobs=jd.fetchSeekerJobs(uid);

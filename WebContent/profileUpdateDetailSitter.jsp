@@ -31,7 +31,7 @@
 		
 			<td>LastName: </td>
 			
-			<td><html:text  property="lastName" value="${sitter.getLastName()}"/></td>
+			<td><html:text  property="lastName" value="${sitter.getLastName()}"/><html:errors property="lastName" /></td>
 			
 		
 		</tr>

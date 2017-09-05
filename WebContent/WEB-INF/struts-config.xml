@@ -21,14 +21,14 @@
 	</form-beans>
 	
  
-	<global-exceptions>
+	<!-- <global-exceptions>
 				
   		<exception
   			    key="error.global.mesage"
 	      type="java.lang.NullPointerException"
 	      path="/error.jsp" />
 	</global-exceptions>
-	
+	-->
 	<action-mappings>
 	
 		<action path="/logout"  type="com.hmj.action.LogoutAction" scope="session" validate="false" >
@@ -89,7 +89,7 @@
 			<forward name="success" path="/jobUpdateDetail.jsp"/>
 		</action>
 		
-		<action path="/updateChoosenParameter" name="createJobForm" type="com.hmj.action.UpdateParameterJobAction" scope="request" validate="false" input="/jobUpdateDetail.jsp">
+		<action path="/updateChoosenParameter" name="createJobForm" type="com.hmj.action.UpdateParameterJobAction" scope="request" validate="true" input="/jobUpdateDetail.jsp">
 			<forward name="success" path="/updatedJob.jsp"/>
 			<forward name="noJobs" path="/noJobs.jsp"/>
 			<forward name="failure" path="/updateChoosenParameter.do"/>
@@ -105,13 +105,13 @@
 			<forward name="failure" path="/errorInDeletionOfJob.jsp"/>	
 		</action>
 		
-		<action path="/ViewProfile" name="updateSeekerForm"  type="com.hmj.action.ViewProfileSeekerAction" scope="session" validate="false">
+		<action path="/ViewProfile"  type="com.hmj.action.ViewProfileSeekerAction" scope="request" validate="false">
 			<forward name="success" path="/profileUpdateDetail.jsp"/>
 			
 		</action>
 		
 		
-		<action path="/updateChoosenParameterSeeker" name="updateSeekerForm"  type="com.hmj.action.UpdateProfileSeekerAction" scope="session" validate="true" input="/ViewProfile.do">
+		<action path="/profileUpdateDetail.jsp" name="updateSeekerForm"  type="com.hmj.action.UpdateProfileSeekerAction" scope="session" validate="true" input="/updateChoosenParameterSeeker.do">
 			<forward name="success" path="/profileUpdatedSeeker.jsp"/>
 			<forward name="failure" path="/ViewProfile.do"/>
 		</action>
@@ -175,7 +175,7 @@
 		
 		<action path="/SearchEmail" name="searchEmailForm" type="com.hmj.action.SearchEmailAction">
 			<forward name="success" path="/emailResults.jsp"/>	
-			<forward name="failure" path="/noJobsAvail.jsp"/>
+			<forward name="failure" path="/noEmailFound.jsp"/>
 		</action>
 		
 	</action-mappings>
