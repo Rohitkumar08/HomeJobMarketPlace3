@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.hmj.FormBeans.CreateJobForm;
+import com.hmj.FormBeans.UpdateJobForm;
 import com.hmj.service.JobServiceImp;
 import com.hmj.util.FactoryUtil;
 
@@ -22,12 +23,14 @@ public class UpdateParameterJobAction extends Action {
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-		CreateJobForm createJobForm = (CreateJobForm) form;
+		UpdateJobForm updateJobForm = (UpdateJobForm) form;
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
-		int jobId= Integer.parseInt(request.getParameter("jobId"));
+		int jobId= updateJobForm.getId();
+	
+		
 		HttpSession session = request.getSession();
 		int uid= (int) session.getAttribute("uid");
-		boolean updated=jbs.updateChoosenParam(uid, jobId, createJobForm.getJobTitle(), createJobForm.getStartDate(), createJobForm.getEndDate(), createJobForm.getStartTime(), createJobForm.getEndTime(),createJobForm.getPayPerHour());
+		boolean updated=jbs.updateChoosenParam(uid, jobId, updateJobForm.getJobTitle(), updateJobForm.getStartDate(), updateJobForm.getEndDate(),updateJobForm.getPayPerHour());
 		if(updated)
 		return mapping.findForward("success");
 		else

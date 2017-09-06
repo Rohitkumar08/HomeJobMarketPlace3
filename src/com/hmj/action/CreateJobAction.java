@@ -25,9 +25,10 @@ public class CreateJobAction extends Action {
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
 		HttpSession session = request.getSession();
 		int uid = (int) session.getAttribute("uid");
+		
 		int id=jbs.newJob(createJobForm.getJobTitle(), createJobForm.getStartDate(), createJobForm.getEndDate(), createJobForm.getStartTime(), createJobForm.getEndTime(),uid, createJobForm.getPayPerHour());
 		
-		
+
 		
 		return mapping.findForward("success");
 	}

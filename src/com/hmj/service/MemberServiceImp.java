@@ -43,6 +43,9 @@ public class MemberServiceImp {
 			 seeker.setStatus("ACTIVE");
 			 seeker.setNoOfChilds(noOfChild);
 			 seeker.setSpouseName(spouseName);
+			 
+			 
+			 
 			 id=ud.registerSeeker(seeker);
 		 }
 		 if(memberType.equals("Sitter")){
@@ -230,6 +233,15 @@ public class MemberServiceImp {
 		
 		// TODO Auto-generated method stub
 		return res;
+	}
+
+	public List<SeekerActivity> getActivity(int uid) {
+		// TODO Auto-generated method stub
+		
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+		List<SeekerActivity> activities= ud.getUserActivity(uid);
+		
+		return activities;
 	}
 
 	

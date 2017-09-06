@@ -1,10 +1,7 @@
 package com.hmj.action;
 
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,8 +26,10 @@ public class UpdateJobAction extends Action {
 		
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
 		HttpSession session = request.getSession();
-		Map map;
+		
 		int uid =(int) session.getAttribute("uid");
+		
+	
 		try {
             List<Jobs> job = jbs.updateJob(uid);
             if(job.size()!=0){

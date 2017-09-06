@@ -2,8 +2,7 @@ package com.hmj.FormBeans;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +16,11 @@ import org.apache.struts.action.ActionMessage;
 
 public class CreateJobForm extends ActionForm{
 	
-	 private int jobId;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int jobId;
 	 private String jobTitle;
 	private int postedBy;
 	private String startDate;
@@ -89,16 +92,22 @@ public class CreateJobForm extends ActionForm{
 		 //--validation for dates inputs--------
 		 
 		if(!isThisDateValid(startDate)) {
+		
 			ae.add("startDateFormat", new ActionMessage("startDateFormatError"));
 			
 		}
+//		if(!checkdate(startDate)) {
+//			ae.add("startDateFormat", new ActionMessage("startDateFormatError"));
+//		}
 		if(!isThisDateValid(endDate)) {
+			
 			ae.add("endDateFormat", new ActionMessage("endDateFormatError"));
 			
 		}
-		 
-		
-		 
+//		if(!checkdate(endDate)) {
+//			ae.add("endDateFormat", new ActionMessage("endDateFormatError"));
+//		}
+//		
 		 
 		 
 		 
@@ -235,8 +244,9 @@ public class CreateJobForm extends ActionForm{
 			
 	return ae;
 	}
+	@SuppressWarnings("deprecation")
 	public static boolean isThisDateValid(String dateToValidate) {
-		String dateFromat = "yyyy-mm-dd";
+		String dateFromat = "yyyy-MM-dd";
 		if (dateToValidate == null) {
 			return false;
 		}
@@ -244,12 +254,51 @@ public class CreateJobForm extends ActionForm{
 		sdf.setLenient(false);
 		try {
 			Date date = sdf.parse(dateToValidate);
+			System.out.println("inside date");
+			int mm=getMonthInt(date);
+			System.out.println(mm);
+			if(mm>12) {
+				System.out.println("greater than 12");
+				return false;
+			}
+				
+			if(date.getDay()>31) {
+				System.out.println("greater than 31");
+				return false;
+			}
+				
 			System.out.println(date);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 			return false;
 		}
 		return true;
 	}
+	
+	public boolean checkdate(String startDate) {
+		
+		String mm=startDate.substring(5,7);
+		System.out.println(mm);
+		String dd=startDate.substring(8);
+		System.out.println(dd);
+		int month= Integer.parseInt(mm);
+		int date= Integer.parseInt(dd);
+		if(month>12) {
+			return false;
+		}
+		if(date>31) {
+			return false;
+		}
+		if(month==2 || month==4 || month==6 || month==9 || month==11  && date==31) {
+			return false;
+		}
+		return true;
+		
+	}
+	public static int getMonthInt(Date date) {
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM");
+		return Integer.parseInt(dateFormat.format(date));
+		}
 	
 }

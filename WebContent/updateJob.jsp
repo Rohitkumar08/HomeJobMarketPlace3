@@ -11,6 +11,7 @@
 <style>
 table, th, td {
     border: 1px solid black;
+    cellpadding:15;
 }
 </style>
 </head>
@@ -28,17 +29,17 @@ table, th, td {
 <center>
 <html:form action ="updateChoosenJob.do" method="POST">
 <h2>LIST OF ALL JOBS POSTED BY YOU</h2>
-<table width="00" style="background-color:salmon" >
+<table margin-left="50px" width="90%"  style="background-color:salmon" >
 
-<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>PAY PER HOUR</th>
+<tr><th align="center">JOB TITLE</th><th align="center">START DATE</th><th align="center">END DATE</th><th align="center">PAY PER HOUR</th>
 	<c:forEach items="${jobs}" var ="job">
 
 		<tr>
 			<input type="hidden"  value="${job.getId()}"/>
 			
-			<td><c:out  value="${job.getJobTitle()}"></c:out></td>
-			<td><c:out  value="${job.getStartDate()}"></c:out></td>
-			<td><c:out  value="${job.getEndDate()}"></c:out></td>
+			<td ><c:out  value="${job.getJobTitle()}"></c:out></td>
+			<td ><c:out  value="${job.getStartDate()}"></c:out></td>
+			<td ><c:out  value="${job.getEndDate()}"></c:out></td>
 			<td><c:out  value="${job.getPayPerHour()}"></c:out></td>
 			<td><input type="submit" name="inputed" value="update" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"/></td>
 		</tr>

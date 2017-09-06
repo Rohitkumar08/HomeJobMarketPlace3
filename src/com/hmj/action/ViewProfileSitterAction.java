@@ -9,9 +9,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.hmj.FormBeans.UpdateSitterForm;
-import com.hmj.model.Member;
-import com.hmj.model.Seeker;
 import com.hmj.model.Sitter;
 import com.hmj.service.MemberServiceImp;
 import com.hmj.util.FactoryUtil;
@@ -23,25 +20,32 @@ public class ViewProfileSitterAction extends Action {
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
-		
-		
-		UpdateSitterForm sitterForm= (UpdateSitterForm) form;
 		HttpSession session = request.getSession();
+		MemberServiceImp svc = (MemberServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBERSERVICEIMP);
+		//Sitter sitter = (Sitter)session.getAttribute("sessionData");
 		int uid= (int) session.getAttribute("uid");
-		if(sitterForm.getFirstName()==null) {
-			System.out.println("first time in view profile");
-			Sitter data=(Sitter) session.getAttribute("sessionData");
-			request.setAttribute("sitter", data);
-			
-		}
-		else {
-			request.setAttribute("sitter", sitterForm);
-
-		}
-	
+		Sitter sitter = svc.getSitterUserDetails(uid);
 		
-		
+		request.setAttribute("updateSitterForm", sitter);
 		return mapping.findForward("success");
+		
+//		UpdateSitterForm sitterForm= (UpdateSitterForm) form;
+//		HttpSession session = request.getSession();
+//		int uid= (int) session.getAttribute("uid");
+//		if(sitterForm.getFirstName()==null) {
+//			System.out.println("first time in view profile");
+//			Sitter data=(Sitter) session.getAttribute("sessionData");
+//			request.setAttribute("sitter", data);
+//			
+//		}
+//		else {
+//			request.setAttribute("sitter", sitterForm);
+//
+//		}
+//	
+//		
+//		
+//		return mapping.findForward("success");
 	}
 	
 	

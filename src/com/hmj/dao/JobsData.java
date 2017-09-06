@@ -115,13 +115,12 @@ public class JobsData {
 		
 			Transaction tx= ses.beginTransaction();
 			System.out.println("*inside dao***");
-			Query query=ses.createQuery("update Jobs set jobTitle=:jobTitle, startDate=:startDate, endDate=:endDate, startTime=:startTime, endTime=:endTime, payPerHour=:payPerHour where id=:jobId");
+			Query query=ses.createQuery("update Jobs set jobTitle=:jobTitle, startDate=:startDate, endDate=:endDate,payPerHour=:payPerHour where id=:jobId");
 			query.setParameter("jobId", jobId);
 			query.setParameter("jobTitle", job.getJobTitle());
 			query.setParameter("startDate", job.getStartDate());
 			query.setParameter("endDate", job.getEndDate());
-			query.setParameter("startTime", job.getStartTime());
-			query.setParameter("endTime", job.getEndTime());
+			
 			query.setParameter("payPerHour", job.getPayPerHour());
 			System.out.println("befire execute update statement");
 			int res=query.executeUpdate();

@@ -15,7 +15,7 @@
 
 <center>
 <html:form action="/applyThisJob" method="POST">
-<table border="2" style="background-color:salmon">
+<table border="2" style="background-color:salmon" cellpadding="15" width="85%">
 
 <tr><th colspan="5">LIST OF CURRENTLY AVAILABLE JOBS</th></tr>
 <tr><td style="color:blue">JOB TITLE</td><td style="color:blue">START DATE</td><td style="color:blue">END DATE</td><td style="color:blue">PAY PER HOUR</td></tr>
@@ -24,11 +24,11 @@
 
 		<tr>
 			<input type="hidden"  value="${job.getId()}"/>
-			<td><c:out  value="${job.getJobTitle()}"></c:out></td>
-			<td><c:out  value="${job.getStartDate()}"></c:out></td>
-			<td><c:out  value="${job.getEndDate()}"></c:out></td>
-			<td><c:out  value="${job.getPayPerHour()}"></c:out></td>
-			<td><input type="submit" name="inputed" value="apply" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"></td>
+			<td ><c:out  value="${job.getJobTitle()}"></c:out></td>
+			<td ><c:out  value="${job.getStartDate()}"></c:out></td>
+			<td ><c:out  value="${job.getEndDate()}"></c:out></td>
+			<td ><c:out  value="${job.getPayPerHour()}"></c:out></td>
+			<td ><input type="submit" name="inputed" value="apply" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"></td>
 		</tr>
 	
 	</c:forEach>

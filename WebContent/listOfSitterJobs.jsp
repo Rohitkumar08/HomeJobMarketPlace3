@@ -10,6 +10,7 @@
 <style>
 table, th, td {
     border: 1px solid black;
+    cellpadding:15;
 }
 </style>
 </head>
@@ -17,20 +18,19 @@ table, th, td {
 <c:import url="headerSitter.jsp"></c:import>
 <center>
 <html:form action="/deleteThisApp" method="POST">
-<table border="2" style="background-color:salmon" cellpadding="10" cellspacing="5px">
+<table border="2" style="background-color:salmon" width="90%">
 <h2>LIST OF ALL APPLIED JOBS</h2>
-<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>START TIME</th><th>END TIME</th><th>PAY PER HOUR</th></tr>
+<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>PAY PER HOUR</th></tr>
 
 	<c:forEach items="${apps}" var ="job">
 
 		<tr>
 		
-			<td><c:out value="${job.getJobs().getJobTitle()}"></c:out></td>
-			<td><c:out value="${job.getJobs().getStartDate()}"></c:out></td>
+			<td ><c:out value="${job.getJobs().getJobTitle()}"></c:out></td>
+			<td ><c:out value="${job.getJobs().getStartDate()}"></c:out></td>
 			<td><c:out value="${job.getJobs().getEndDate()}"></c:out></td>
-			<td><c:out value="${job.getJobs().getStartTime()}"></c:out></td>
-			<td><c:out value="${job.getJobs().getEndTime()}"></c:out></td>
-			<td><c:out value="${job.getJobs().getPayPerHour()}"></c:out></td>
+			
+			<td ><c:out value="${job.getJobs().getPayPerHour()}"></c:out></td>
 			<c:if test="${job.getJobStatus() eq 'DELETED'}">
 			<td><input type="submit"  value="JOB IS DELETED" disabled /></td>
 			</c:if>

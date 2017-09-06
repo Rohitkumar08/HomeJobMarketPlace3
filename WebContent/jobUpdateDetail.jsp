@@ -13,57 +13,41 @@
 <c:import url="header.jsp"></c:import>
 <center>
 
-<html:form action = "/updateChoosenParameter" method="POST"> 
+<html:form action = "/updateChoosenParameter"> 
 <table border="2" width="400" style="background-color:salmon">
 
 <tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
 
 		<tr>
-			<html:hidden property="jobId" value="${jobs.getId()}"/>
-			<td>JOB TITLE <input type="hidden" name="oldJobTitle" value="${jobs.getJobTitle()}" ></td>
-			<%-- <c:out  value="${jobs.getJobTitle()}"</c:out> --%>
-			<td><html:text property="jobTitle" value="${jobs.getJobTitle()}"/><html:errors property="jobTitle"/></td>
+			<html:hidden property="id"/>
+			<td>JOB TITLE</td>
+			
+			<td><html:text property="jobTitle"/><html:errors property="jobTitle"/></td>
 			
 			<%-- <td><input type="submit" name="inputed" value="update" onclick=" this.value += ' <c:out  value="jobTitle"/>'"></td> --%>
 		</tr>
 		<tr>
 		
-			<td>START DATE</td>
+			<td>START DATE(yyyy-mm-dd hh:mm): </td>
 		
-			<td><html:text property="startDate" value="${jobs.getStartDate()}"/><html:errors property="startDate"/></td>
+			<td><html:text readonly="true" property="startDate"/><html:errors property="startDate"/></td>
 			
 		</tr>
 		<tr>
 		
-			<td>END DATE</td>
-				<td><html:text property="endDate" value="${jobs.getEndDate()}"/><html:errors property="endDate"/></td>
+			<td>END DATE(yyyy-mm-dd hh:mm): </td>
+				<td><html:text property="endDate"/><html:errors property="endDateFormat"/></td>
 			<%-- <td><c:out  value="${jobs.getEndDate()}"></c:out></td>
 			 onclick="this.value += ' <c:out  value="endDate"/>'"
 			<td><input type="submit" name="inputed" value="update" onclick="window.location='updateEndDate.jsp'"></td> --%>
 		</tr>
 	
-	
-		<tr>
-		
-			<td>START TIME</td>
-			<td><html:text property="startTime" value="${jobs.getStartTime()}"/><html:errors property="startTime" /><html:errors property="startTimeFormat"/></td>
-			
-			<%-- <td><input type="submit" disabled="disabled" name="inputed" value="update" onclick="this.value += ' <c:out  value="startTime"/>'"></td> --%>
-		</tr>
-		
-		<tr>
-		
-			<td>END TIME</td>
-			<td><html:text property="endTime" value="${jobs.getEndTime()}"/><html:errors property="endTime"/><html:errors property="endTimeFormat"/></td>
-			
-			<%-- <td><input type="submit"disabled="disabled"  name="inputed" value="update" onclick="this.value += ' <c:out  value="endTime"/>'"></td> --%>
-		</tr>
 		
 		<tr>
 		
 			<td>PAY PER HOUR</td>
 			<%-- <c:out  value="${jobs.getPayPerHour()}"</c:out> --%>
-			 	<td><html:text property="payPerHour" value="${jobs.getPayPerHour()}"/><html:errors property="payPerHour"/></td>
+			 	<td><html:text property="payPerHour"/><html:errors property="payPerHour"/></td>
 	
 		<tr>
 		<td colspan="2" align="right">

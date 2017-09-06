@@ -1,14 +1,17 @@
 package com.hmj.service;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
+
 
 import com.hmj.dao.JobsData;
 import com.hmj.model.*;
 import com.hmj.util.FactoryUtil;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 
 public class JobServiceImp {
@@ -19,12 +22,29 @@ public class JobServiceImp {
 		JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 		Jobs job = (Jobs)FactoryUtil.mapClassInstance.get(FactoryUtil.JOBS);
 		
+		String startTimeFormat=startTime.substring(0, 2)+":"+startTime.substring(2);
+		String endTimeFormat=endTime.substring(0, 2)+":"+endTime.substring(2);
+		
+		SimpleDateFormat startDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat endDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
+		System.out.println(startTimeFormat);
+		Date d1 = null, d2 = null;
+		try {
+			d1 = startDateFormat.parse(startDate + " " + startTimeFormat);
+			d2 = endDateFormat.parse(endDate + " " + endTimeFormat);
+		} catch (ParseException | java.text.ParseException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(d1);
+		
+		
+		
 		int payPerHours= Integer.parseInt(payPerHour);
 		job.setJobTitle(jobTitle);
-		job.setStartDate(startDate);
-		job.setEndDate(endDate);
-		job.setStartTime(startTime);
-		job.setEndTime(endTime);
+		job.setStartDate(d1);
+		job.setEndDate(d2);
 		job.setPostedBy(uid);
 		job.setPayPerHour(payPerHours);
 		job.setStatus("ACTIVE");
@@ -142,10 +162,31 @@ public Jobs getJobDetails(int JobId) {
 //	}
 
 
-public boolean updateChoosenParam(int uid,int jobId, String jobTitle, String startDate,  String endDate, String startTime, String endTime,String payPerHour) {
+public boolean updateChoosenParam(int uid,int jobId, String jobTitle, String startDate,  String endDate,String payPerHour) {
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 	Jobs job = (Jobs)FactoryUtil.mapClassInstance.get(FactoryUtil.JOBS);
+	
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+	Date d1 = null, d2 = null;
+	
+		
+		try {
+			d1= sdf.parse(startDate);
+			d2=sdf.parse(endDate);
+		} catch (java.text.ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return false;
+		}
+		
+		
+	
+	
+	
+	
 	int payPerHours;
 	try {
 		payPerHours= Integer.parseInt(payPerHour);
@@ -157,11 +198,10 @@ public boolean updateChoosenParam(int uid,int jobId, String jobTitle, String sta
 	
 	job.setId(jobId);
 	job.setJobTitle(jobTitle);
-	job.setStartDate(startDate);
-	job.setEndDate(endDate);
-	job.setEndDate(endDate);
-	job.setStartTime(startTime);
-	job.setEndTime(endTime);
+	job.setStartDate(d1);
+	job.setEndDate(d2);
+	
+	
 	job.setPayPerHour(payPerHours);
 	
 	SeekerActivity seekerAct=new SeekerActivity();

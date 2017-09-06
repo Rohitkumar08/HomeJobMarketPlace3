@@ -21,9 +21,9 @@
 
 		<tr>
 		
-			<td>FirstName: <input type="hidden" name="oldFirstName" value="${sitter.getFirstName()}" ></td>
+			<td>FirstName:</td>
 			
-			<td><html:text  property="firstName" value="${sitter.getFirstName()}"/><html:errors property="firstName" /></td>
+			<td><html:text  property="firstName" /><html:errors property="firstName" /></td>
 			
 		
 		</tr>
@@ -31,7 +31,7 @@
 		
 			<td>LastName: </td>
 			
-			<td><html:text  property="lastName" value="${sitter.getLastName()}"/><html:errors property="lastName" /></td>
+			<td><html:text  property="lastName"/><html:errors property="lastName" /></td>
 			
 		
 		</tr>
@@ -39,20 +39,20 @@
 		
 			<td>Phone No: </td>
 			<%-- <c:out  value="${jobs.getStartDate()}"</c:out> --%>
-			<td><html:text property="phone" value="${sitter.getPhone()}"/><html:errors property="phone" /></td>
+			<td><html:text property="phone"/><html:errors property="phone" /></td>
 			
 		</tr>
 		<tr>
 		
 			<td>Email: </td>
-				<td><html:text readonly="true" property="email" value="${sitter.getEmail()}"/></td>
+				<td><html:text readonly="true" property="email"/></td>
 		
 		</tr>
 	
 		<tr>
 		
 			<td>Years of experience: </td>
-			<td><html:text property="yearsOfExperience" value="${sitter.getYearsOfExperience()}"/><html:errors property="yearsOfExperience" /></td>
+			<td><html:text property="yearsOfExperience"/><html:errors property="yearsOfExperience" /></td>
 			
 		
 		</tr>
@@ -61,7 +61,7 @@
 		
 			<td>Expected pay: </td>
 			
-			 	<td><html:text property="expectedPay" value="${sitter.getExpectedPay()}"/><html:errors property="expectedPay" /></td>
+			 	<td><html:text property="expectedPay"/><html:errors property="expectedPay" /></td>
 				
 		</tr>
 		

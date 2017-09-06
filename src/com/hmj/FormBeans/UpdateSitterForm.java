@@ -12,6 +12,10 @@ import org.apache.struts.action.ActionMessage;
 
 public class UpdateSitterForm extends ActionForm{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private  String firstName;
 	private String phone;
 	private String lastName;

@@ -10,27 +10,28 @@ public class Seeker extends Member{
 	public void setId(int id) {
 		this.id = id;
 	}
-	private static int noOfChilds;
-	private static String spouseName;
-	private static Member member;
-	public static Member getMember() {
-		return member;
-	}
-	public static void setMember(Member member) {
-		Seeker.member = member;
-	}
-	public static int getNoOfChilds() {
+	private int noOfChilds;
+	public int getNoOfChilds() {
 		return noOfChilds;
 	}
-	public static void setNoOfChilds(int noOfChilds) {
-		Seeker.noOfChilds = noOfChilds;
+	public void setNoOfChilds(int noOfChilds) {
+		this.noOfChilds = noOfChilds;
 	}
-	public static String getSpouseName() {
+	public String getSpouseName() {
 		return spouseName;
 	}
-	public static void setSpouseName(String spouseName) {
-		Seeker.spouseName = spouseName;
+	public void setSpouseName(String spouseName) {
+		this.spouseName = spouseName;
 	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	private  String spouseName;
+	private  Member member;
+
 	
 
 	//for seeker operations

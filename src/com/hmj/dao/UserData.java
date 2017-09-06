@@ -42,6 +42,18 @@ public class UserData {
 		int id=(int) ses.save(seeker);
 		
 		transaction.commit();
+		
+		SeekerActivity seekerAct =new SeekerActivity();
+		seekerAct.setUid(id);
+		seekerAct.setMessage("Seeker Profile Created");
+		
+		
+		Transaction transaction2  = ses.beginTransaction();
+		
+		ses.save(seekerAct);
+		transaction2.commit();
+		
+		
 		ses.close();
 		
 		ActivityUtil.add("Seeker profile created");
@@ -331,6 +343,27 @@ public class UserData {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public List<SeekerActivity> getUserActivity(int uid) {
+		// TODO Auto-generated method stub
+		
+		try {
+			Session ses= HibernateUtil.getSession().openSession();
+			Query query = ses.createQuery("from SeekerActivity where uid=:e");
+			query.setParameter("e", uid);
+		
+			List<SeekerActivity> result=query.list();
+			
+			return result;
+		
+		}
+		catch(Exception e) {
+			
+		}
+		
+		
+		return null;
 	}
 
 	

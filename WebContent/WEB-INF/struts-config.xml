@@ -17,6 +17,7 @@
 		
 		<form-bean name="updateSitterForm" type="com.hmj.FormBeans.UpdateSitterForm"/>
 		<form-bean name="updateSeekerForm" type="com.hmj.FormBeans.UpdateSeekerForm"/>
+		<form-bean name="jobUpdateForm" type="com.hmj.FormBeans.UpdateJobForm"/>
 		<!-- <form-bean name="updateJobForm" type="com.hmj.FormBeans.UpdateJobForm"/> -->
 	</form-beans>
 	
@@ -34,7 +35,10 @@
 		<action path="/logout"  type="com.hmj.action.LogoutAction" scope="session" validate="false" >
 			<forward name="success" path="/logout.jsp"/>
 		</action>
-		
+		<action path="/updateChoosenParameterSeeker" name="updateSeekerForm"  type="com.hmj.action.UpdateProfileSeekerAction" scope="request" validate="true" input="/profileUpdateDetail.jsp">
+			<forward name="success" path="/profileUpdatedSeeker.jsp"/>
+			<forward name="failure" path="/ViewProfile.do"/>
+		</action>
 		
 		<!--  <action path="/registerAuth" name="registerForm" type="com.hmj.action.HitRegisterAction" scope="request" validate="false" >
 			<forward name="success" path="/register.jsp"/>
@@ -43,6 +47,7 @@
 	
 		<action path="/seeker"  type="com.hmj.action.SeekerAction" scope="session" validate="false">
 			<forward name="success" path="/PerformSeeker.jsp"/>
+			<forward name="failure" path="/PerformSeeker.jsp"/>
 			<forward name="loginFirst" path="/error.jsp"/>
 			<forward name="notSeeker" path="/notSeeker.jsp"/>
 		</action>
@@ -85,11 +90,11 @@
 			<forward name="noJobs" path="/noJobs.jsp"/>
 		</action>
 		
-		<action path="/updateChoosenJob" name="jobIdForm" type="com.hmj.action.UpdateChoosenJobAction" scope="request" validate="true" input="updateJob.jsp">
+		<action path="/updateChoosenJob" name="jobIdForm" type="com.hmj.action.UpdateChoosenJobAction" scope="request" validate="false" input="updateJob.jsp">
 			<forward name="success" path="/jobUpdateDetail.jsp"/>
 		</action>
 		
-		<action path="/updateChoosenParameter" name="createJobForm" type="com.hmj.action.UpdateParameterJobAction" scope="request" validate="true" input="/jobUpdateDetail.jsp">
+		<action path="/updateChoosenParameter" name="jobUpdateForm" type="com.hmj.action.UpdateParameterJobAction" scope="request" validate="true" input="/jobUpdateDetail.jsp">
 			<forward name="success" path="/updatedJob.jsp"/>
 			<forward name="noJobs" path="/noJobs.jsp"/>
 			<forward name="failure" path="/updateChoosenParameter.do"/>
@@ -111,17 +116,14 @@
 		</action>
 		
 		
-		<action path="/profileUpdateDetail.jsp" name="updateSeekerForm"  type="com.hmj.action.UpdateProfileSeekerAction" scope="session" validate="true" input="/updateChoosenParameterSeeker.do">
-			<forward name="success" path="/profileUpdatedSeeker.jsp"/>
-			<forward name="failure" path="/ViewProfile.do"/>
-		</action>
 		
-		<action path="/ViewProfileSitter" name="updateSitterForm"  type="com.hmj.action.ViewProfileSitterAction" scope="session" validate="false">
+		
+		<action path="/ViewProfileSitter" type="com.hmj.action.ViewProfileSitterAction" scope="request" validate="false">
 			<forward name="success" path="/profileUpdateDetailSitter.jsp"/>
 		
 		</action>
 		
-		<action path="/UpdateChoosenParameterSitter" name="updateSitterForm" type="com.hmj.action.UpdateProfileSitterAction" scope="session" validate="true" input="/ViewProfileSitter.do">
+		<action path="/UpdateChoosenParameterSitter" name="updateSitterForm" type="com.hmj.action.UpdateProfileSitterAction" scope="request" validate="true" input="/profileUpdateDetailSitter.jsp">
 			<forward name="success" path="/profileUpdatedSitter.jsp"/>
 			<forward name="failure" path="/ViewProfileSitter.do"/>
 		</action>

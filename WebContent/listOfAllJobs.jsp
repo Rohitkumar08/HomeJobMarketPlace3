@@ -9,6 +9,7 @@
 <style>
 table, th, td {
     border: 1px solid black;
+    cellpadding:15;
 }
 </style>
 </head>
@@ -16,9 +17,9 @@ table, th, td {
 <c:import url="headerSitter.jsp"></c:import>
 <center>
 <h3>LIST OF ALL JOBS</h3>
-<table border="2" style="background-color:salmon" cellpadding="10" cellspacing="5px">
+<table border="2"  width="80%" style="background-color:salmon"  >
 
-<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>START TIME</th><th>END TIME</th><th>PAY PER HOUR</th></tr>
+<tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>PAY PER HOUR</th></tr>
 
 	<c:forEach items="${jobs}" var ="job">
 
@@ -27,8 +28,7 @@ table, th, td {
 			<td > <c:out value="${job.getJobTitle()}"></c:out></td>
 			<td><c:out value="${job.getStartDate()}"></c:out></td>
 			<td><c:out value="${job.getEndDate()}"></c:out></td>
-			<td><c:out value="${job.getStartTime()}"></c:out></td>
-			<td><c:out value="${job.getEndTime()}"></c:out></td>
+			
 			<td><c:out value="${job.getPayPerHour()}"></c:out></td>
 			
 		</tr>

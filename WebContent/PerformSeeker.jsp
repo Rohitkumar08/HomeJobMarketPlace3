@@ -25,7 +25,7 @@
 <th>Recent Activities</th>
 	<c:forEach items="${activity}" var ="activity">
 		<tr>
-			<td><c:out  value="${activity}"></c:out></td>
+			<td><c:out  value="${activity.getMessage()}"></c:out></td>
 		</tr>
 	</c:forEach>
 </table>
