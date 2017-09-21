@@ -42,7 +42,7 @@
 					<html:errors property="emailError" /></td>
 				</tr>
 				<tr>
-					<td>password:</td>
+					<td>Password:</td>
 					<td><html:password property="password"/>
 					<html:errors property="pwdError" /></td>
 				</tr>

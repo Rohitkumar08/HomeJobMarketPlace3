@@ -11,8 +11,23 @@
 	<!-- <discriminator column="user_type"/> -->
 	
 		<property name="expectedPay" column="Expected_pay" not-null="true"/>
-		<property name="status" not-null="true"/>
-		<property name="jobStatus" column="job_status" not-null="true"/>
+		
+		
+		<property name="status" column="status">
+	    <type name="org.hibernate.type.EnumType">
+	        <param name="enumClass">com.hmj.enums.Status</param>
+	        <param name="type">12</param>
+	    </type>
+		</property>
+	
+		<property name="jobStatus" column="job_status">
+	    <type name="org.hibernate.type.EnumType">
+	        <param name="enumClass">com.hmj.enums.Status</param>
+	        <param name="type">12</param>
+	    </type>
+		</property>
+		
+		
 			<many-to-one name="sitter" class="com.hmj.model.Sitter"
             column="member_id" unique="true" not-null="true"
             cascade="all" />

@@ -1,6 +1,6 @@
 package com.hmj.model;
 
-
+import com.hmj.enums.Status;
 
 public class Member {
 	private int id;
@@ -21,12 +21,11 @@ public class Member {
 	private String phone;
 	private String email;
 	private String password;
-	private String status;
-	
-	public String getStatus() {
+	private Status status;
+	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 	public String getPassword() {

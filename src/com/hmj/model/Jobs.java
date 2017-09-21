@@ -2,6 +2,8 @@ package com.hmj.model;
 
 import java.util.Date;
 
+import com.hmj.enums.Status;
+
 public class Jobs {
 	private int id;
 	public int getId() {
@@ -12,12 +14,13 @@ public class Jobs {
 	}
 	private String jobTitle;
 	private int postedBy;
-	private String status;
+	private Status status;
 	
-	public String getStatus() {
+	
+	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 	public String getJobTitle() {

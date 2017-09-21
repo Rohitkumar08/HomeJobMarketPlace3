@@ -15,10 +15,10 @@
 
 <center>
 <html:form action="/applyThisJob" method="POST">
+<h2>LIST OF CURRENTLY AVAILABLE JOBS</h2>
 <table border="2" style="background-color:salmon" cellpadding="15" width="85%">
 
-<tr><th colspan="5">LIST OF CURRENTLY AVAILABLE JOBS</th></tr>
-<tr><td style="color:blue">JOB TITLE</td><td style="color:blue">START DATE</td><td style="color:blue">END DATE</td><td style="color:blue">PAY PER HOUR</td></tr>
+<tr><th style="color:blue">JOB TITLE</th><th style="color:blue">START DATE</th><th style="color:blue">END DATE</th><th style="color:blue">PAY PER HOUR</th></tr>
 
 	<c:forEach items="${jobs}" var ="job">
 

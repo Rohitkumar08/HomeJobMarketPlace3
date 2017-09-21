@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import com.hmj.enums.Status;
 import com.hmj.model.Jobs;
 import com.hmj.model.Member;
 import com.hmj.model.Seeker;
@@ -102,7 +103,7 @@ public class UserData {
 		hql="from Member where email=:e and status=:status";
 		Query query = ses.createQuery(hql);
 		query.setParameter("e", email);
-		query.setParameter("status", "ACTIVE");
+		query.setParameter("status", Status.ACTIVE);
 		Member mem= (Member) query.uniqueResult();
 		return mem;
 	
@@ -150,8 +151,7 @@ public class UserData {
 				q2.executeUpdate();
 				tx2.commit();
 				
-				
-				
+		
 				Transaction tx3 =ses.beginTransaction();
 				Query q3= ses.createQuery("update Applications set jobStatus=:status where jobs.id in (:jobIds)");
 				q3.setParameter("status", "DELETED");
@@ -159,12 +159,7 @@ public class UserData {
 				q3.executeUpdate();
 				tx3.commit();
 				
-				
-			
-			
-			
-			
-		
+	
 			
 			SeekerActivity seekerAct = new SeekerActivity();
 			seekerAct.setUid(mem.getId());
@@ -188,46 +183,37 @@ public class UserData {
 	
 	}
 
-	public int updateSeekerDetails(Seeker seeker, int uid) {
+	public boolean updateSeekerDetails(Member mem,Seeker seeker, int uid) {
 		// TODO Auto-generated method stub
 		try {
 			Session ses= HibernateUtil.getSession().openSession();
-			//Tra
-		//	Session session = HibernateUtil.
-			Transaction tx1= ses.beginTransaction();
-			System.out.println("*inside seeker dao***");
-			System.out.println(seeker.getFirstName()+"*************"+seeker.getPhone());
-			
-			Query query1=ses.createQuery("update Member set firstName=:name,lastName=:lastname, phone=:phone where id=:uid");
-			query1.setParameter("name", seeker.getFirstName());
-			query1.setParameter("lastname", seeker.getLastName());
-			query1.setParameter("phone", seeker.getPhone());
-			query1.setParameter("uid", uid);
-			int res1=query1.executeUpdate();
-			tx1.commit();
-			
-			System.out.println(seeker.getSpouseName()+"****************"+seeker.getNoOfChilds());
+		
 			Transaction tx= ses.beginTransaction();
-			Query query=ses.createQuery("update Seeker set noOfChilds=:noOfChilds,spouseName=:spouseName where id=:uid");
-			query.setParameter("noOfChilds", seeker.getNoOfChilds());
-			query.setParameter("spouseName", seeker.getSpouseName());
-			query.setParameter("uid", uid);
-			
-			System.out.println("befire execute update statement");
-			int res=query.executeUpdate();
-			System.out.println("inside update dao     "+res);
+			ses.merge(mem);
 			tx.commit();
 			
-			ActivityUtil.add("Seeker profile updated");
-				return res;
+			Transaction tx1= ses.beginTransaction();
+			
+			ses.merge(seeker);
+			tx1.commit();
+
+			SeekerActivity seekerAct =new SeekerActivity();
+			seekerAct.setUid(uid);
+			seekerAct.setMessage("Seeker Profile Updated");
+
+			Transaction transaction2  = ses.beginTransaction();
+			
+			ses.save(seekerAct);
+			transaction2.commit();
+			
+			return true;
 			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return false;
 		}
 	
-		return 0;
 	}
 
 
@@ -242,43 +228,27 @@ public class UserData {
 	
 	}
 
-	public int updateSitterDetails(Sitter sitter, int uid) {
+	public boolean updateSitterDetails(Member mem, Sitter sitter, int uid) {
 		// TODO Auto-generated method stub
 		try {
 			Session ses= HibernateUtil.getSession().openSession();
-			//Tra
-		//	Session session = HibernateUtil.
+
 			Transaction tx1= ses.beginTransaction();
 			System.out.println("*inside sitter dao***");
-			System.out.println(sitter.getFirstName()+"*************"+sitter.getPhone());
-			
-			Query query1=ses.createQuery("update Member set firstName=:name,lastName=:lastname, phone=:phone where id=:uid");
-			query1.setParameter("name", sitter.getFirstName());
-			query1.setParameter("lastname", sitter.getLastName());
-			query1.setParameter("phone", sitter.getPhone());
-			query1.setParameter("uid", uid);
-			int res1=query1.executeUpdate();
+			ses.merge(mem);
 			tx1.commit();
 			
 			Transaction tx= ses.beginTransaction();
-			Query query=ses.createQuery("update Sitter set expectedPay=:expectedPay,yearsOfExperience=:yoe where id=:uid");
-			query.setParameter("expectedPay", sitter.getExpectedPay());
-			query.setParameter("yoe", sitter.getYearsOfExperience());
-			query.setParameter("uid", uid);
-			
-			System.out.println("befire execute update statement");
-			int res=query.executeUpdate();
-			System.out.println("inside update dao     "+res);
+			ses.merge(sitter);
 			tx.commit();
-				return res;
-			
-			
+	
+		return true;
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+		return false;
 		}
 	
-		return 0;
 	}
 
 	public List<Member> getSearchedEmails(String keyWord) {
@@ -290,7 +260,7 @@ public class UserData {
 		Query query = ses.createQuery("from Member where email LIKE :keyword and memberType=:utype and status=:status");
 		query.setParameter("keyword", "%"+keyWord+"%");
 		query.setParameter("utype", "Seeker");
-		query.setParameter("status", "ACTIVE");
+		query.setParameter("status", Status.ACTIVE);
 		mem= query.list();
 //		if(mem!=null)
 //		System.out.println("$$$$$$$$$$$$$$"+mem.get(0).getEmail());
@@ -313,7 +283,7 @@ public class UserData {
 			System.out.println(pipedEmail+"***"+uid);
 			Query query1=ses.createQuery("update Member set status=:ustatus, email=:uemail where id=:uid");
 			query1.setParameter("uid", uid);
-			query1.setParameter("ustatus", "INACTIVE");
+			query1.setParameter("ustatus", Status.INACTIVE);
 			query1.setParameter("uemail", pipedEmail);
 			int res1=query1.executeUpdate();
 			System.out.println("inside member update");

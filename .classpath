@@ -13,5 +13,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/struts"/>
 	<classpathentry kind="lib" path="/Users/rohit/Downloads/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="/Users/rohit/Downloads/mysql-connector.jar"/>
+	<classpathentry kind="lib" path="/Users/rohit/Downloads/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="/Users/rohit/Downloads/hamcrest-junit-2.0.0.0.jar"/>
+	<classpathentry kind="lib" path="/Users/rohit/Downloads/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

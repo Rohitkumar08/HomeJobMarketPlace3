@@ -3,6 +3,7 @@ package com.hmj.service;
 import java.util.List;
 
 import com.hmj.dao.UserData;
+import com.hmj.enums.Status;
 import com.hmj.model.*;
 import com.hmj.util.FactoryUtil;
 
@@ -30,7 +31,7 @@ public class MemberServiceImp {
 		 mem.setEmail(email);
 		 mem.setPassword(password);
 		 mem.setMemberType(memberType);
-		 mem.setStatus("ACTIVE");
+		 mem.setStatus(Status.ACTIVE);
 		
 		 if(memberType.equals("Seeker")){
 			 int noOfChild= Integer.parseInt(noOfChilds);
@@ -40,7 +41,7 @@ public class MemberServiceImp {
 			 seeker.setEmail(email);
 			 seeker.setPassword(password);
 			 seeker.setMemberType(memberType);
-			 seeker.setStatus("ACTIVE");
+			 seeker.setStatus(Status.ACTIVE);
 			 seeker.setNoOfChilds(noOfChild);
 			 seeker.setSpouseName(spouseName);
 			 
@@ -57,7 +58,7 @@ public class MemberServiceImp {
 			 sitter.setEmail(email);
 			 sitter.setPassword(password);
 			 sitter.setMemberType(memberType);
-			 sitter.setStatus("ACTIVE");
+			 sitter.setStatus(Status.ACTIVE);
 			 sitter.setExpectedPay(expectedPay);
 			 sitter.setYearsOfExperience(yearsOfExperience);
 			id=ud.registerSitter(sitter);
@@ -117,7 +118,7 @@ public class MemberServiceImp {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
-		 Seeker seeker = (Seeker) FactoryUtil.mapClassInstance.get(FactoryUtil.SEEKER);
+		 
 		 int noOfChild;
 		 try {
 			 
@@ -127,6 +128,9 @@ public class MemberServiceImp {
 			 
 			 return false;
 		 }
+		 mem=ud.getMemberDetailsDao(uid);
+		Seeker seeker= ud.getUserDetailsDao(uid);
+		
 		
 		 mem.setFirstName(firstName);
 		 mem.setLastName(lastName);
@@ -138,11 +142,11 @@ public class MemberServiceImp {
 		 seeker.setSpouseName(spouseName);
 		 
 		 
-		int updatedUserData= ud.updateSeekerDetails(seeker, uid);
+		if(ud.updateSeekerDetails(mem,seeker, uid))
+			return true;
+		else
+			return false;
 		
-		
-		
-		return true;
 	}
 
 	public boolean deleteSeekerDetails(int uid, String email) {
@@ -151,11 +155,11 @@ public class MemberServiceImp {
 		 //Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 		 Member mem= ud.getMemberDetailsDao(uid);
 		System.out.println(mem.getStatus());
-		 mem.setStatus("INACTIVE");
-		// String pipe=mem.getId();
+		 mem.setStatus(Status.INACTIVE);
+
 		 String pipedEmail=email.concat(""+mem.getId());
 		 mem.setEmail(pipedEmail);
-		//int res=ud.deleteSeeker(uid,email);
+
 		 ud.deleteMember(mem);
 		
 		return true;
@@ -175,7 +179,7 @@ public class MemberServiceImp {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
 		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
-		 Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
+	
 		 int expectedPay;
 		 int yearsOfExperience;
 		 try {
@@ -196,7 +200,8 @@ public class MemberServiceImp {
 			 
 			 return false;
 		 }
-		 
+		 mem=ud.getMemberDetailsDao(uid);
+			Sitter sitter= ud.getSitterUserDetailsDao(uid);
 		
 		 mem.setFirstName(firstName);
 		 mem.setLastName(lastName);
@@ -208,11 +213,11 @@ public class MemberServiceImp {
 		sitter.setYearsOfExperience(yearsOfExperience);
 		 
 		 
-		int updatedUserData= ud.updateSitterDetails(sitter, uid);
-		
-		
-		
-		return true;
+		if(ud.updateSitterDetails(mem, sitter, uid))
+			return true;
+		else
+			return false;
+	
 	}
 
 	public List<Member> getSearchData(String keyWord) {

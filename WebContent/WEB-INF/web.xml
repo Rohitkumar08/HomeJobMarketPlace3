@@ -25,14 +25,16 @@
     <filter-name>loginAuth</filter-name>
     <filter-class>com.hmj.filter.LoginAuthFilter</filter-class>
   </filter>
+  
   <filter>
-    <filter-name>createJobFilter</filter-name>
-    <filter-class>com.hmj.filter.CreateJobFilter</filter-class>
+    <filter-name>SeekerFilter</filter-name>
+    <filter-class>com.hmj.filter.SeekerFilter</filter-class>
   </filter>
-  <filter>
-    <filter-name>deleteJobFilter</filter-name>
-    <filter-class>com.hmj.filter.DeleteJobFilter</filter-class>
+    <filter>
+    <filter-name>SitterFilter</filter-name>
+    <filter-class>com.hmj.filter.SitterFilter</filter-class>
   </filter>
+
   <filter-mapping>
     <filter-name>loginAuth</filter-name>
     <url-pattern>/login.jsp</url-pattern>
@@ -46,11 +48,20 @@
     <url-pattern>/sitter.do</url-pattern>
   </filter-mapping>
   <filter-mapping>
-    <filter-name>createJobFilter</filter-name>
+    <filter-name>SeekerFilter</filter-name>
     <url-pattern>/createJob.do</url-pattern>
+     <url-pattern>/deleteJob.do</url-pattern>
+      <url-pattern>/updateJob.do</url-pattern>
+      <url-pattern>/ViewProfile.do</url-pattern>
+      <url-pattern>/deleteSeeker.do</url-pattern>
   </filter-mapping>
-  <filter-mapping>
-    <filter-name>deleteJobFilter</filter-name>
-    <url-pattern>/deleteJob.do</url-pattern>
+  
+   <filter-mapping>
+    <filter-name>SitterFilter</filter-name>
+    <url-pattern>/applyNewJob.do</url-pattern>
+     <url-pattern>/deleteJobApp.do</url-pattern>
+     <url-pattern>/listOfJobs.do</url-pattern>
+     <url-pattern>/ViewProfileSitter.do</url-pattern>
   </filter-mapping>
+ 
 </web-app>

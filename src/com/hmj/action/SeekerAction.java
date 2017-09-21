@@ -1,5 +1,6 @@
 package com.hmj.action;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,16 +36,13 @@ public class SeekerAction extends Action{
 		if(activities==null) {
 			return mapping.findForward("failure");
 		}
-		List<SeekerActivity> finalList= activities.subList(activities.size()-10, activities.size());
+		List<SeekerActivity> finalList=new ArrayList<SeekerActivity>();
 		
-		
-//		Set<String> activities1=new HashSet<String>();
-//		for(SeekerActivity s:activities) {
-//			
-//			activities1.add(s.getMessage());
-//			
-//			
-//		}
+		if(activities.size()<10)
+			finalList= activities;
+		else
+			 finalList= activities.subList(activities.size()-10, activities.size());
+
 		session.setAttribute("activity", finalList);
 		
 		System.out.println("inside session"+session.getAttribute("uname"));

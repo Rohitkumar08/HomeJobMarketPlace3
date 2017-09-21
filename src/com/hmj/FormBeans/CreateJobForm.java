@@ -204,7 +204,7 @@ public class CreateJobForm extends ActionForm{
 						d1 = sdf.parse(startTime1);
 						d2 = sdf.parse(endTime1);
 						 long elapsed = d2.getTime() - d1.getTime(); 
-						 System.out.println(elapsed);
+					 System.out.println(elapsed);
 						 if (elapsed<=0) {
 							    System.out.println("earlier");
 							    System.out.println("");

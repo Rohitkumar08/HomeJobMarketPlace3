@@ -10,6 +10,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.hmj.Validations.Validator;
+import com.hmj.enums.Status;
+
 public class RegisterForm extends ActionForm {
 
 	private  String firstName;
@@ -53,15 +56,10 @@ public class RegisterForm extends ActionForm {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	private String email;
 	private String password;
-	private String status;
+	
 	private  String noOfChilds;
 	private String yearsOfExperience;
 	
@@ -108,43 +106,32 @@ public class RegisterForm extends ActionForm {
 		 ActionErrors ae=new ActionErrors();
 		 
 		 //-----------validation for first name-------------------
+		 Validator validate= new Validator();
 		 
-		 Pattern p = Pattern.compile("[a-zA-Z]{3,30}");
-			Matcher m = p.matcher(firstName);
-			boolean b = m.find();
-		 if(!b){
+		 if(!validate.validateFirstName(firstName)){
 			 ae.add("firstName", new ActionMessage("firstNameError"));
 	 
 		 }
 		 //--------------
-		 
-		 m=p.matcher(lastName);
-		b = m.find();
-		 if(!b){
+		
+		 if(!validate.validateFirstName(lastName)){
 			 ae.add("lastName", new ActionMessage("lastNameError"));
 	 
 		 }
 		 
 		 
 		 //----validation for EMAIL---------
-		 
-		 final String EMAIL_REGEX="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})";
-		    //static Pattern object, since pattern is fixed
-		    Pattern pattern;
-		    //non-static Matcher object because it's created from the input String
-		    Matcher matcher;
-		    pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
-		    matcher = pattern.matcher(email);
-		    if(matcher.matches()){
-		    	
+
+		    if(!validate.validateEmail(email)){
+		    	ae.add("emailError", new ActionMessage("emailError"));
 		    }
-		    else{
-		    		ae.add("emailError", new ActionMessage("emailError"));
-		    
-		    }
+
+		    if(!validate.validatePhoneNo(phone)){
+		    	ae.add("phone", new ActionMessage("phoneNoError"));
+		    }  
 		 
 		 
-		 //---------------------
+		 //---------------------validaton for password
 		
 		 
 		 Pattern p1 = Pattern.compile("[a-zA-Z0-9@]{3,30}");
@@ -155,11 +142,7 @@ public class RegisterForm extends ActionForm {
 	 
 		 }
 		 //-------------------------------validation for phone no----------
-		
-		 if (!(phone.matches("\\d{10}"))) {
-			 System.out.println("Inside validation");
-			 ae.add("phone", new ActionMessage("phoneNoError"));
-		 }
+	
 		 
 		 //-------------------validation for seeker additional fields--------------
 		 
@@ -186,6 +169,9 @@ public class RegisterForm extends ActionForm {
 				if(spouseName==null){
 					ae.add("spouseName", new ActionMessage("spouseNameError"));
 				}
+				Pattern p = Pattern.compile("[a-zA-Z]{3,30}");
+				Matcher m = p.matcher(firstName);
+				boolean b = m.find();
 				m = p.matcher(spouseName);
 				b = m.find();
 				if(!b){

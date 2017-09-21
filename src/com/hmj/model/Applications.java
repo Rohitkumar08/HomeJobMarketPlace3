@@ -1,22 +1,25 @@
 package com.hmj.model;
 
+import com.hmj.enums.Status;
+
 public class Applications {
 	private Jobs jobs;
 	private Sitter sitter;
-	private String status;
-	private String jobStatus;
-public String getJobStatus() {
-		return jobStatus;
-	}
-	public void setJobStatus(String jobStatus) {
-		this.jobStatus = jobStatus;
-	}
-public String getStatus() {
+	private Status status;
+	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
+	public Status getJobStatus() {
+		return jobStatus;
+	}
+	public void setJobStatus(Status jobStatus) {
+		this.jobStatus = jobStatus;
+	}
+	private Status jobStatus;
+
 	//	private String status;
 //	
 //	public String getStatus() {

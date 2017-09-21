@@ -9,7 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-
+import com.hmj.enums.JobStatus;
+import com.hmj.enums.Status;
 import com.hmj.model.Applications;
 import com.hmj.model.Jobs;
 import com.hmj.model.SeekerActivity;
@@ -61,7 +62,7 @@ public class JobsData {
 			System.out.println("*inside dao***");
 			Query<Jobs> query=ses.createQuery("from Jobs where postedBy=:id and status=:status");
 			query.setParameter("id", uid);
-			query.setParameter("status", "ACTIVE");
+			query.setParameter("status", Status.ACTIVE);
 			lst = query.list();
 			
 			System.out.println("wdfwwrfrwfwf");
@@ -115,23 +116,15 @@ public class JobsData {
 		
 			Transaction tx= ses.beginTransaction();
 			System.out.println("*inside dao***");
-			Query query=ses.createQuery("update Jobs set jobTitle=:jobTitle, startDate=:startDate, endDate=:endDate,payPerHour=:payPerHour where id=:jobId");
-			query.setParameter("jobId", jobId);
-			query.setParameter("jobTitle", job.getJobTitle());
-			query.setParameter("startDate", job.getStartDate());
-			query.setParameter("endDate", job.getEndDate());
-			
-			query.setParameter("payPerHour", job.getPayPerHour());
-			System.out.println("befire execute update statement");
-			int res=query.executeUpdate();
-			System.out.println("inside update dao     "+res);
-			ses.save(seekerAct);
+			ses.merge(job);
 			tx.commit();
+
+			Transaction tx2= ses.beginTransaction();
+			ses.save(seekerAct);
+			tx2.commit();
 			
-			ActivityUtil.add(job.getJobTitle()+" Job profile updated");
-				return true;
-			
-			
+			return true;
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,13 +145,13 @@ public class JobsData {
 			System.out.println();
 			Query query=ses.createQuery("update Jobs set status=:new where id=:id ");
 			
-			query.setParameter("new", "INACTIVE");
+			query.setParameter("new", Status.INACTIVE);
 			query.setParameter("id", id);
 			int res=query.executeUpdate();
 			
 			query=ses.createQuery("update Applications set jobStatus=:new where jobs.id=:id ");
 			
-			query.setParameter("new", "DELETED");
+			query.setParameter("new", Status.DELETED);
 			query.setParameter("id", id);
 			query.executeUpdate();
 			System.out.println("inside update dao     "+res);
@@ -196,7 +189,7 @@ public class JobsData {
 			}
 			query=ses.createQuery("from Jobs where id not in (:jobsList) and status=:status");
 			query.setParameter("jobsList", jobsList);
-			query.setParameter("status", "ACTIVE");
+			query.setParameter("status", Status.ACTIVE);
 			result=query.list();
 			System.out.println(result.get(0).getJobTitle());
 			
@@ -218,7 +211,7 @@ public class JobsData {
 			Session ses= HibernateUtil.getSession().openSession();
 			System.out.println("*inside dao***");
 			Query query=ses.createQuery("from Jobs where status=:status");
-			query.setParameter("status", "ACTIVE");
+			query.setParameter("status", Status.ACTIVE);
 			result=query.list();
 			
 			
@@ -255,8 +248,8 @@ public class JobsData {
 			app.setExpectedPay(sitter.getExpectedPay());
 			app.setJobs(job);
 			app.setSitter(sitter);
-			app.setStatus("ACTIVE");
-			app.setJobStatus("ACTIVE");
+			app.setStatus(Status.ACTIVE);
+			app.setJobStatus(Status.ACTIVE);
 			int res= (int) ses.save(app);
 			
 			System.out.println("applied successfully...."+res);
@@ -282,7 +275,7 @@ public class JobsData {
 			Transaction tx= ses.beginTransaction();
 			Query q= ses.createQuery("from Applications where sitter.id=:uid and status=:status");
 			q.setParameter("uid", uid);
-			q.setParameter("status", "ACTIVE");
+			q.setParameter("status", Status.ACTIVE);
 			List<Applications> lst = q.list();
 			
 
@@ -327,13 +320,13 @@ public class JobsData {
 			Session ses= HibernateUtil.getSession().openSession();
 			Transaction tx= ses.beginTransaction();
 			Query q= ses.createQuery("update Applications set status=:status where jobs.id=:jobId and sitter.id=:sid");
-			q.setParameter("status",	"INACTIVE");
+			q.setParameter("status",	Status.INACTIVE);
 			q.setParameter("jobId",	jobId);
 			q.setParameter("sid",uid);
 			q.executeUpdate();
 			
 			tx.commit();
-			ActivityUtil.add("Job Application was deleted");
+		
 			return true;
 			
 	}catch(Exception e) {
