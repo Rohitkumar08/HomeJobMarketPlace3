@@ -9,12 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import com.hmj.enums.JobStatus;
 import com.hmj.enums.Status;
-import com.hmj.model.Applications;
-import com.hmj.model.Jobs;
-import com.hmj.model.SeekerActivity;
-import com.hmj.model.Sitter;
+import com.hmj.model.*;
+
 
 import com.hmj.util.ActivityUtil;
 
@@ -27,9 +24,10 @@ public class JobsData {
 	
 	public int createJob(Jobs job, SeekerActivity seekerAct) {
 		int id=0;
+		Session  ses=null;
 		try{
 			
-			Session ses= HibernateUtil.getSession().openSession();
+		ses= HibernateUtil.getSession().openSession();
 			
 			System.out.println("*inside dao***");
 			Transaction transaction  = ses.beginTransaction();
@@ -46,56 +44,55 @@ public class JobsData {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			
+			return 0;
+		}finally {
+			ses.close();
 		}
-		return 0;
+		
 	}
 
-
+	@SuppressWarnings({ "unchecked" })
 	public List<Jobs> fetchSeekerJobs(int uid) {
 		// TODO Auto-generated method stub
-		System.out.println("ajay");
+		
 		List<Jobs> lst= new ArrayList<Jobs>();
+		Session ses=null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 			
 			System.out.println("*inside dao***");
 			Query<Jobs> query=ses.createQuery("from Jobs where postedBy=:id and status=:status");
 			query.setParameter("id", uid);
 			query.setParameter("status", Status.ACTIVE);
 			lst = query.list();
-			
-			System.out.println("wdfwwrfrwfwf");
 			ses.close();
 			
-	return lst;
+			return lst;
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+			return null;
+		}finally {
+			ses.close();
 		}
 		
-		return lst;
 	}
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Jobs findDetailsOfJob(int jobId) {
 		// TODO Auto-generated method stub
 		
-		ActivityUtil activityUtil=new ActivityUtil();
+		Session  ses= null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 		
 			System.out.println("*inside dao***");
 			Query query=ses.createQuery("from Jobs where id=:id");
 			query.setParameter("id", jobId);
 			List<Jobs> job=query.list();
-		
-				
+	
 				Jobs jb=job.get(0);
-				
-				
-				ActivityUtil.add(jb.getJobTitle()+" details displayed");	
+			
 				System.out.println("inside dao"+jb.getJobTitle());
 				return jb;
 			
@@ -103,16 +100,19 @@ public class JobsData {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
+			
+		}finally {
+			ses.close();
 		}
-		return null;
 		
 	}
 
 	public boolean updateThisJob(int jobId, Jobs job, SeekerActivity seekerAct) {
 		// TODO Auto-generated method stub
-		
+		Session  ses= null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 		
 			Transaction tx= ses.beginTransaction();
 			System.out.println("*inside dao***");
@@ -126,18 +126,20 @@ public class JobsData {
 			return true;
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			return false;
+		}finally {
+			ses.close();
 		}
 		
-		return false;
+		
 	}
-
+	@SuppressWarnings({ "rawtypes" })
 	public boolean deleteThisJob(int id, SeekerActivity seekerAct) {
 		// TODO Auto-generated method stub
-		
+		Session  ses = null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 			
 			Transaction tx= ses.beginTransaction();
 			System.out.println("*inside dao***");
@@ -162,20 +164,22 @@ public class JobsData {
 			
 			
 		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
 		
-		return false;
+			return false;
+		}finally {
+			ses.close();
+		}
+	
 	}
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<Jobs> listAllJobsSitters(int uid) {
 		// TODO Auto-generated method stub
 		List<Applications> lst=null;
 		List<Integer> jobsList=new ArrayList<>();
 		List<Jobs> result=null;
+		Session  ses = null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 			System.out.println("*inside dao***");
 			Query query=ses.createQuery("from Applications where sitter.id=:uid");
 			query.setParameter("uid", uid);
@@ -197,18 +201,19 @@ public class JobsData {
 			return result;
 				
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return result;
+		}finally {
+			ses.close();
 		}
 		
-		return result;
 	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<Jobs> listAllJobs(int uid) {
 		// TODO Auto-generated method stub
-		
+		Session  ses = null;
 		List<Jobs> result=null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 			System.out.println("*inside dao***");
 			Query query=ses.createQuery("from Jobs where status=:status");
 			query.setParameter("status", Status.ACTIVE);
@@ -219,18 +224,19 @@ public class JobsData {
 			return result;
 				
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return result;
+		}finally {
+			ses.close();
 		}
 		
-		return result;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public int applyJobDao(int jobId, int uid) {
 		// TODO Auto-generated method stub
-	
+		Session  ses = null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 			Transaction tx= ses.beginTransaction();
 			Query q= ses.createQuery("from Sitter where id=:uid");
 			q.setParameter("uid", uid);
@@ -257,22 +263,21 @@ public class JobsData {
 
 			return res;
 			
-
-				
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return 0;
+		}finally {
+			ses.close();
 		}
-		
-		return 0;
+	
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<Applications> fetchSitterApps(int uid) {
 		// TODO Auto-generated method stub
 		
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
-			Transaction tx= ses.beginTransaction();
+			Session  ses= HibernateUtil.getSession().openSession();
+			
 			Query q= ses.createQuery("from Applications where sitter.id=:uid and status=:status");
 			q.setParameter("uid", uid);
 			q.setParameter("status", Status.ACTIVE);
@@ -282,23 +287,21 @@ public class JobsData {
 			return lst;
 				
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		
-		
-		
-		return null;
 	}
 //------------method for view all applicants-----
 	public List<Applications> fetchSitterDetails(int uid, int jobId) {
 		// TODO Auto-generated method stub
 		
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			Session  ses= HibernateUtil.getSession().openSession();
 			
+			@SuppressWarnings("rawtypes")
 			Query q= ses.createQuery("from Applications where jobs.id=:jobId");
 			q.setParameter("jobId",	jobId);
+			@SuppressWarnings("unchecked")
 			List<Applications> lst = q.list();
 			System.out.println("&&&&&&&"+lst.size());
 			return lst;
@@ -307,15 +310,13 @@ public class JobsData {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		
-		
-		
-		return null;
 	}
-
+	@SuppressWarnings({ "rawtypes" })
 	public boolean deleteThisAppDao(int jobId, int uid) {
 		// TODO Auto-generated method stub
+		
 		try {
 			Session ses= HibernateUtil.getSession().openSession();
 			Transaction tx= ses.beginTransaction();

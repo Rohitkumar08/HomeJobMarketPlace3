@@ -12,6 +12,10 @@ import org.apache.struts.action.ActionMessage;
 
 public class LoginForm extends ActionForm{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String email;
 	private String password;
 	public String getEmail() {

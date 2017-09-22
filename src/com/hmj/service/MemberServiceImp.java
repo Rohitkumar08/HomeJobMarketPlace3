@@ -231,12 +231,7 @@ public class MemberServiceImp {
 
 	public int deleteSitterDetails(int uid, String email) {
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
-		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
-		 
 		 int res=ud.deleteSitter(uid,email);
-
-		
-		// TODO Auto-generated method stub
 		return res;
 	}
 

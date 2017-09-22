@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.hmj.model.Applications;
-import com.hmj.model.Sitter;
+
 import com.hmj.service.JobServiceImp;
 import com.hmj.util.FactoryUtil;
 
@@ -23,7 +23,6 @@ public class ShowApplicantsAction extends Action{
 			HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
-		Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
 		HttpSession session= request.getSession();
 		int uid=(int) session.getAttribute("uid");
 		
@@ -32,10 +31,10 @@ public class ShowApplicantsAction extends Action{
 			System.out.println(selected[0].substring(16));
 			
 			List<Applications> applicants =jbs.showApplicants(uid,jobId);
-//			System.out.println("^^^^^^^^^^^^^"+applicants.get(0).getExpectedPay()+" ,"+applicants.get(0).getSitter().getFirstName());
+	//		System.out.println("^^^^^^^^^^^^^"+applicants.get(0).getExpectedPay()+" ,"+applicants.get(0).getSitter().getFirstName());
 			if(applicants.size()!=0){
 				
-				//System.out.println("*****************"+applicants.get(0).getFirstName());
+	//	System.out.println("*****************"+applicants.get(0).getSitter().getFirstName());
 				
 				request.setAttribute("sitter", applicants);
 				return mapping .findForward("success");

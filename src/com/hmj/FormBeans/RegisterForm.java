@@ -11,10 +11,13 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import com.hmj.Validations.Validator;
-import com.hmj.enums.Status;
 
 public class RegisterForm extends ActionForm {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private  String firstName;
 	private String phone;
 	private String lastName;

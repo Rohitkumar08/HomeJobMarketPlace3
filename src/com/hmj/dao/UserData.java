@@ -1,11 +1,8 @@
 package com.hmj.dao;
 
 
-import java.util.Iterator;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -33,41 +30,38 @@ public class UserData {
 
 	public int registerSeeker(Seeker seeker) {
 		// TODO Auto-generated method stub
-		
-		Session ses= HibernateUtil.getSession().openSession();
-		//Tra
-	//	Session session = HibernateUtil.
-		System.out.println("*inside dao***");
+		Session  ses=null;
+		try {
+	
+		ses= HibernateUtil.getSession().openSession();
 		Transaction transaction  = ses.beginTransaction();
-		
 		int id=(int) ses.save(seeker);
-		
 		transaction.commit();
 		
 		SeekerActivity seekerAct =new SeekerActivity();
 		seekerAct.setUid(id);
 		seekerAct.setMessage("Seeker Profile Created");
-		
-		
 		Transaction transaction2  = ses.beginTransaction();
-		
 		ses.save(seekerAct);
 		transaction2.commit();
-		
-		
 		ses.close();
-		
-		ActivityUtil.add("Seeker profile created");
-		
 		System.out.println("successfully registered seeker");
 		return id;
+		}catch(Exception e ) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			ses.close();
+		}
+		
 	}
 
 	public int registerSitter(Sitter sitter) {
-		// TODO Auto-generated method stub
-		Session ses= HibernateUtil.getSession().openSession();
-		//Tra
-	//	Session session = HibernateUtil.
+		Session  ses=null;
+		try {
+			
+		
+		ses= HibernateUtil.getSession().openSession();
 		System.out.println("*inside dao***");
 		Transaction transaction  = ses.beginTransaction();
 		int id=(int) ses.save(sitter);
@@ -76,13 +70,24 @@ public class UserData {
 		ses.close();
 		System.out.println("successfully registered sitter");
 		return id;
+		}catch(Exception e ) {
+			return 0;
+		}
+		finally {
+			
+			ses.close();
+		}
 	}
 
-
+	@SuppressWarnings({ "rawtypes" })
 	public boolean checkEmail(String email) {
-		int count=0;
 		System.out.println("**"+email);
-		Session ses= HibernateUtil.getSession().openSession();
+		
+		Session  ses=null;
+		try {
+			
+		
+		ses= HibernateUtil.getSession().openSession();
 		String hql = "from com.hmj.model.Member m where m.email=:e";
 		Query query = ses.createQuery(hql);
 		query.setParameter("e",email);
@@ -95,34 +100,67 @@ public class UserData {
 				return true;
 			
 		}
+		}catch(Exception e) {
+			return false;
+			
+		}finally {
+			ses.close();
+		}
 	}
-
+	@SuppressWarnings({ "rawtypes" })
 	public Member getPassword(String email) {
 		// TODO Auto-generated method stub
-		Session ses= HibernateUtil.getSession().openSession();
+		Session  ses=null;
+		Member mem=(Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+		
+		try {
+			
+		
+		ses= HibernateUtil.getSession().openSession();
 		hql="from Member where email=:e and status=:status";
 		Query query = ses.createQuery(hql);
 		query.setParameter("e", email);
 		query.setParameter("status", Status.ACTIVE);
-		Member mem= (Member) query.uniqueResult();
+		mem= (Member) query.uniqueResult();
+		
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+			ses.close();
+		}
 		return mem;
-	
 	}
+	
+	@SuppressWarnings("rawtypes")
 	public Member getMemberDetailsDao(int uid) {
 		// TODO Auto-generated method stub
-		Session ses= HibernateUtil.getSession().openSession();
+		Session  ses=null;
+		Member seeker=(Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+		try {
+			
 		
+		ses= HibernateUtil.getSession().openSession();
 		Query query = ses.createQuery("from Member where id=:e");
 		query.setParameter("e", uid);
-		Member seeker= (Member) query.uniqueResult();
+		seeker= (Member) query.uniqueResult();
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			ses.close();
+		}
 		return seeker;
-	
 	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void deleteMember(Member mem) {
 		// TODO Auto-generated method stub
 		List<Integer> jobIds=new ArrayList<>();
+		Session ses=null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 			//Tra
 		//	Session session = HibernateUtil.
 			Transaction tx1= ses.beginTransaction();
@@ -169,24 +207,37 @@ public class UserData {
 		}catch(Exception e) {
 			
 		}
+		finally {
+			ses.close();
+		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Seeker getUserDetailsDao(int uid) {
 		// TODO Auto-generated method stub
-		Session ses= HibernateUtil.getSession().openSession();
-		
+		Session ses=null;
+		 Seeker seeker =(Seeker) FactoryUtil.mapClassInstance.get(FactoryUtil.SEEKER); 
+		try {
+			ses= HibernateUtil.getSession().openSession();
 		Query query = ses.createQuery("from Seeker where id=:e");
 		query.setParameter("e", uid);
-		Seeker seeker= (Seeker) query.uniqueResult();
+		seeker= (Seeker) query.uniqueResult();
 		
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			ses.close();
+		}
 		return seeker;
-	
 	}
 
 	public boolean updateSeekerDetails(Member mem,Seeker seeker, int uid) {
 		// TODO Auto-generated method stub
+		Session  ses=null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+		ses= HibernateUtil.getSession().openSession();
 		
 			Transaction tx= ses.beginTransaction();
 			ses.merge(mem);
@@ -213,25 +264,40 @@ public class UserData {
 			// TODO Auto-generated catch block
 			return false;
 		}
+		finally {
+			ses.close();
+		}
 	
 	}
 
 
+	@SuppressWarnings("rawtypes")
 	public Sitter getSitterUserDetailsDao(int uid) {
 		// TODO Auto-generated method stub
-		Session ses= HibernateUtil.getSession().openSession();
-		
+		Session  ses= null;
+		 Sitter sitter = (Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
+		try {
+			ses= HibernateUtil.getSession().openSession();
+
 		Query query = ses.createQuery("from Sitter where id=:e");
 		query.setParameter("e", uid);
-		Sitter sitter= (Sitter) query.uniqueResult();
+		sitter= (Sitter) query.uniqueResult();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+			ses.close();
+			
+		}
 		return sitter;
 	
 	}
 
 	public boolean updateSitterDetails(Member mem, Sitter sitter, int uid) {
 		// TODO Auto-generated method stub
+		Session  ses= null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 
 			Transaction tx1= ses.beginTransaction();
 			System.out.println("*inside sitter dao***");
@@ -248,13 +314,19 @@ public class UserData {
 			// TODO Auto-generated catch block
 		return false;
 		}
+		finally {
+			ses.close();
+		}
 	
 	}
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<Member> getSearchedEmails(String keyWord) {
 		// TODsO Auto-generated method stub
 		List<Member> mem =null;
-		Session ses= HibernateUtil.getSession().openSession();
+		Session  ses= null;
+		try {
+			ses= HibernateUtil.getSession().openSession();
+
 		System.out.println(keyWord);
 		
 		Query query = ses.createQuery("from Member where email LIKE :keyword and memberType=:utype and status=:status");
@@ -262,21 +334,25 @@ public class UserData {
 		query.setParameter("utype", "Seeker");
 		query.setParameter("status", Status.ACTIVE);
 		mem= query.list();
-//		if(mem!=null)
-//		System.out.println("$$$$$$$$$$$$$$"+mem.get(0).getEmail());
-		
 		return mem;
-
+		}
+		catch(Exception e) {
+		
+			return null;
+		}
+		finally {
+			ses.close();
+		}
 		
 	}
 
+	@SuppressWarnings("rawtypes")
 	public int deleteSitter(int uid, String email) {
 		// TODO Auto-generated method stub
-		
+		Session ses=null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
-			//Tra
-		//	Session session = HibernateUtil.
+			ses= HibernateUtil.getSession().openSession();
+	
 			Transaction tx1= ses.beginTransaction();
 			System.out.println("*inside sitter dao***");
 			String pipedEmail=email.concat(""+uid);
@@ -296,30 +372,21 @@ public class UserData {
 			query1.executeUpdate();
 			System.out.println("inside application update");
 			tx.commit();
-//			Transaction tx= ses.beginTransaction();
-//			Query query=ses.createQuery("update Jobs set status=:status where postedBy=:uid");
-//			query.setParameter("status", "INACTIVE");
-//			query.setParameter("uid", uid);
-//			System.out.println("befire execute update statement");
-//			int res=query.executeUpdate();
-//			System.out.println("inside update dao"+res);
-//			tx.commit();
-//			System.out.println("outside job update");	
-//			return res;
-			
 			return res1;
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			ses.close();
 		}
 		return 0;
 	}
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<SeekerActivity> getUserActivity(int uid) {
 		// TODO Auto-generated method stub
-		
+		Session ses= null;
 		try {
-			Session ses= HibernateUtil.getSession().openSession();
+			ses= HibernateUtil.getSession().openSession();
 			Query query = ses.createQuery("from SeekerActivity where uid=:e");
 			query.setParameter("e", uid);
 		
@@ -329,15 +396,10 @@ public class UserData {
 		
 		}
 		catch(Exception e) {
-			
+			return null;
+		}finally {
+			ses.close();
 		}
-		
-		
-		return null;
-	}
 
-	
-	
-	
-	
+	}
 }

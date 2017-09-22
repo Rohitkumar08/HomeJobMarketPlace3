@@ -5,9 +5,6 @@ package com.hmj.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-
-
 import com.hmj.dao.JobsData;
 import com.hmj.enums.Status;
 import com.hmj.model.*;
@@ -15,6 +12,7 @@ import com.hmj.util.FactoryUtil;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 
+@SuppressWarnings("restriction")
 public class JobServiceImp {
 
 	Sitter sitter=(Sitter) FactoryUtil.mapClassInstance.get(FactoryUtil.SITTER);
@@ -152,7 +150,6 @@ public List<Jobs> listAllJobsForSitters(int uid) {
 }
 
 public int applyThisJob(int jobId, int uid) {
-	// TODO Auto-generated method stub
 	
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
 	int applied = jd.applyJobDao(jobId,uid);
@@ -164,12 +161,7 @@ public int applyThisJob(int jobId, int uid) {
 public List<Applications> fetchAllJobsSitter(int uid) {
 	// TODO Auto-generated method stub
 	JobsData jd= (JobsData) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSDATA);
-	Applications app= new Applications();
-//	app.set
 	List<Applications> lst = jd.fetchSitterApps(uid);
-	
-	
-	
 	return lst;
 }
 

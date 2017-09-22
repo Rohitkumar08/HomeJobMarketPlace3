@@ -1,10 +1,7 @@
 package com.hmj.action;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +13,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.hmj.model.SeekerActivity;
 import com.hmj.service.MemberServiceImp;
-import com.hmj.util.ActivityUtil;
 import com.hmj.util.FactoryUtil;
 
 public class SeekerAction extends Action{

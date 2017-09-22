@@ -3,7 +3,6 @@ package com.hmj.action;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,12 +17,10 @@ import com.hmj.model.Member;
 import com.hmj.model.Seeker;
 import com.hmj.model.Sitter;
 import com.hmj.service.MemberServiceImp;
-import com.hmj.util.ActivityUtil;
 import com.hmj.util.FactoryUtil;
 
 public class LoginAction extends Action {
 	
-	private static final long serialVersionUID = 1L;
 	public static final String SALT = "my-salt-text";
 	Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
 	MemberServiceImp svc = (MemberServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBERSERVICEIMP);

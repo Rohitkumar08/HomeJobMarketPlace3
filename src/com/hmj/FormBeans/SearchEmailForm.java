@@ -9,6 +9,10 @@ import org.apache.struts.action.ActionMessage;
 
 public class SearchEmailForm extends ActionForm{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String searchEmail;
 
 	public String getSearchEmail() {

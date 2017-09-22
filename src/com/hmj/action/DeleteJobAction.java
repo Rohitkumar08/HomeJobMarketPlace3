@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.hmj.model.Applications;
-import com.hmj.model.Jobs;
+
 import com.hmj.service.JobServiceImp;
 import com.hmj.util.FactoryUtil;
 

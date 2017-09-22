@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.hmj.FormBeans.CreateJobForm;
 import com.hmj.FormBeans.UpdateJobForm;
 import com.hmj.service.JobServiceImp;
 import com.hmj.util.FactoryUtil;

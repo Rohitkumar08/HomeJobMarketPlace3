@@ -31,12 +31,5 @@ public class FactoryUtil {
 		 mapClassInstance.put(JOBSERVICEIMP, new JobServiceImp());
 		 mapClassInstance.put(JOBSDATA, new JobsData());
 	}
-//	public static  <T> T getInstance(String className){
-//		
-//		System.out.println("*****************************");
-//		return (T) mapClassInstance.get(className);
-//		
-//	}
-//	
-	
+
 }

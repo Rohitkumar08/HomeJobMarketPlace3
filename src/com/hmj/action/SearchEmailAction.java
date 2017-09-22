@@ -1,9 +1,6 @@
 package com.hmj.action;
 
 import java.util.List;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
