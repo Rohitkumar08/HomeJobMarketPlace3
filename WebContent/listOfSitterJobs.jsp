@@ -17,15 +17,15 @@ table, th, td {
 <body>
 <c:import url="headerSitter.jsp"></c:import>
 <center>
-<html:form action="/deleteThisApp" method="POST">
+
 <table border="2" style="background-color:salmon" width="90%">
 <h2>LIST OF ALL APPLIED JOBS</h2>
 <tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>PAY PER HOUR</th></tr>
 
 	<c:forEach items="${apps}" var ="job">
-
+		<html:form action="/deleteThisApp" method="POST">
 		<tr>
-		
+		<input type="hidden" name="id" value="${job.getJobs().getId()}"/>
 			<td ><c:out value="${job.getJobs().getJobTitle()}"></c:out></td>
 			<td ><c:out value="${job.getJobs().getStartDate()}"></c:out></td>
 			<td><c:out value="${job.getJobs().getEndDate()}"></c:out></td>
@@ -35,13 +35,14 @@ table, th, td {
 			<td><input type="submit"  value="JOB IS DELETED" disabled /></td>
 			</c:if>
 			<c:if test="${job.getJobStatus() eq 'ACTIVE'}">
-			<td><input type="submit" name="inputed" value="Delete" onclick="this.value += ' <c:out  value="${job.getJobs().getId()}"/>'"></td>
+			<%-- <td><input type="submit" name="inputed" value="Delete" onclick="this.value += ' <c:out  value="${job.getJobs().getId()}"/>'"></td> --%>
+			<td><input type="submit" value="Delete"/></td>
 			</c:if>
 		</tr>
+	</html:form>
 	
 	</c:forEach>
 </table>
-</html:form>
 
 
 

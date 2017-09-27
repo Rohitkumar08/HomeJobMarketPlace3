@@ -9,7 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<center>Successfully logged out....!!!!!</center>
+
 <c:import url="index.jsp"></c:import>
+<center><p style="color:red">Successfully logged out....!!!!!</p></center>
 </body>
 </html>

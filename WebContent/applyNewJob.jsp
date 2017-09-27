@@ -14,26 +14,27 @@
 <c:import url="headerSitter.jsp"></c:import>
 
 <center>
-<html:form action="/applyThisJob" method="POST">
+
 <h2>LIST OF CURRENTLY AVAILABLE JOBS</h2>
 <table border="2" style="background-color:salmon" cellpadding="15" width="85%">
 
 <tr><th style="color:blue">JOB TITLE</th><th style="color:blue">START DATE</th><th style="color:blue">END DATE</th><th style="color:blue">PAY PER HOUR</th></tr>
 
 	<c:forEach items="${jobs}" var ="job">
-
+		<html:form action="/applyThisJob" method="POST">
 		<tr>
-			<input type="hidden"  value="${job.getId()}"/>
+			<input type="hidden" name="id" value="${job.getId()}"/>
 			<td ><c:out  value="${job.getJobTitle()}"></c:out></td>
 			<td ><c:out  value="${job.getStartDate()}"></c:out></td>
 			<td ><c:out  value="${job.getEndDate()}"></c:out></td>
 			<td ><c:out  value="${job.getPayPerHour()}"></c:out></td>
-			<td ><input type="submit" name="inputed" value="apply" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"></td>
+			<%-- <td ><input type="submit" name="inputed" value="apply" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"></td> --%>
+			<td><input type="submit" value="apply"/></td>
 		</tr>
-	
+		</html:form>
 	</c:forEach>
 </table>
-</html:form>
+
 <a href="sitter.do">GO BACK..</a>
 </center>
 </body>

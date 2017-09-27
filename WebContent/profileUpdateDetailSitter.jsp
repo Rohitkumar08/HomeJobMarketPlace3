@@ -17,7 +17,7 @@
 <html:form action = "UpdateChoosenParameterSitter.do" method="POST"> 
 <table border="0" width="00">
 
-<tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
+<tr><th colspan="2">USER'S PROFILE DETAILS</th></tr>
 
 		<tr>
 		

@@ -25,17 +25,16 @@ public class UpdateChoosenJobAction extends Action {
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
 		
 		
-		String selected[]= request.getParameterValues("inputed");System.out.println(selected[0]);
-		int selectedJobId=Integer.parseInt(selected[0].substring(7));  
-			System.out.println(selected[0].substring(7));
-			int jobId=selectedJobId;
+//		String selected[]= request.getParameterValues("inputed");System.out.println(selected[0]);
+//		int selectedJobId=Integer.parseInt(selected[0].substring(7));  
+//			System.out.println(selected[0].substring(7));
+//			int jobId=selectedJobId;
+		int jobId= Integer.parseInt(request.getParameter("id"));
+		System.out.println(jobId);
 			Jobs job = jbs.getJobDetails(jobId);
 			
 			  request.setAttribute("jobUpdateForm", job);
-			
-	          
-		
-	
+
 		return mapping.findForward("success");
 	}
 	

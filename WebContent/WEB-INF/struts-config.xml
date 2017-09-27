@@ -22,14 +22,14 @@
 	</form-beans>
 	
  
-	<!-- <global-exceptions>
+	 <global-exceptions>
 				
   		<exception
   			    key="error.global.mesage"
 	      type="java.lang.NullPointerException"
 	      path="/error.jsp" />
 	</global-exceptions>
-	-->
+	
 	<action-mappings>
 	
 		<action path="/logout"  type="com.hmj.action.LogoutAction" scope="session" validate="false" >

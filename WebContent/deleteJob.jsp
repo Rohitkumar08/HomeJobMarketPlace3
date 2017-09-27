@@ -16,38 +16,32 @@ table, th, td {
 </style>
 </head>
 <body>
-<%-- <% 
 
-	if(session.getAttribute("uname")==null)
-		response.sendRedirect("error.jsp");
-
-
-
-%> --%>
 <c:import url="header.jsp"></c:import>
 
 <center>
-<html:form action ="deleteChoosenJob.do" method="POST" >
+
 <h2>LIST OF ALL JOBS POSTED BY YOU</h2>
 <table border="2" style="background-color:salmon" width="85%">
 
 <tr><th>JOB TITLE</th><th>START DATE</th><th>END DATE</th><th>PAY PER HOUR</th></tr>
 	<c:forEach items="${jobs}" var ="job">
-
+		<html:form action ="deleteChoosenJob.do" method="POST" >
 		<tr>
-			<input type="hidden"  value="${job.getId()}"/>
+			<input type="hidden" name="id"  value="${job.getId()}"/>
 			<td ><c:out  value="${job.getJobTitle()}"></c:out></td>
 			<td ><c:out  value="${job.getStartDate()}"></c:out></td>
 			<td ><c:out  value="${job.getEndDate()}"></c:out></td>
 		
 			<td ><c:out  value="${job.getPayPerHour()}"></c:out></td>
-			<td><input type="submit" name="inputed" value="delete"  onclick="this.value += ' <c:out  value="${job.getId()}" />'"/></td>
+			<%-- <td><input type="submit" name="inputed" value="delete"  onclick="this.value += ' <c:out  value="${job.getId()}" />'"/></td> --%>
+			<td><input type="submit" value="delete"></td>
 		</tr>
-	
+		</html:form>
 	</c:forEach>
 </table>
 
-</html:form>
+
 <a href="seeker.do"><b>GO BACK.....</b></a>
 
 </center>

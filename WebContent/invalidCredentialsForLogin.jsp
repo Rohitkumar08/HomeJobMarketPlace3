@@ -9,7 +9,7 @@
 </head>
 <body>
 <center>
-<p style="color:red">****invalid credentials please try again****
+<p style="color:red">****invalid login credentials try again****
 <c:import url="login.jsp"></c:import>
 </center>
 </body>

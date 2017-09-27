@@ -12,12 +12,9 @@
 
 <c:import url="header.jsp"></c:import>
 <center>
-
+<h3>JOB DETAILS</h3>
 <html:form action = "/updateChoosenParameter"> 
 <table border="2" width="400" style="background-color:salmon">
-
-<tr><th colspan="2">CHOOSE THE PARAMETER WHICH YOU WANT TO EDIT</th></tr>
-
 		<tr>
 			<html:hidden property="id"/>
 			<td>JOB TITLE</td>

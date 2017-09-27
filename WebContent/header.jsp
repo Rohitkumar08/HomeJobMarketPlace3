@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
@@ -20,15 +20,19 @@ $(document).ready(function(){
 
 <div class="container">
 <span style="float:left">
-<a href="seeker.do"><img src="images/images.jpeg" width="50%" height="50%"/></a>
+<a href="seeker.do"><img src="images/images.jpeg" width="55%" height="55%"/></a>
 </span>
 <span style="float:right">
 <a href="ViewProfile.do"   data-toggle="tooltip" title="Edit your profile"><button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-user"></span> <c:out value="${sessionScope.uname}"/> 
         </button></a>
-<b><a href="logout.do">Logout</a></b>
+<b><a href="logout.do"><button class="btn btn-warning" style="position: relative; ">Logout
+</button></a></b>
+
 
 </span>
+
 </div>
+<hr>
 </body>
 </html>

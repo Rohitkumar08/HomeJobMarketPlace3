@@ -9,8 +9,10 @@
 </head>
 <body>
 <center>
-<p style="color:red">****Email not found please register with us first****
+
+
 <c:import url="login.jsp"></c:import>
+<p style="color:red">****Email not found please register with us first****
 </center>
 </body>
 </html>

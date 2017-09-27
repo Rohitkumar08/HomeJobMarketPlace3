@@ -24,11 +24,14 @@ public class DeleteChoosenJobAction  extends Action{
 		JobIdForm jobIdForm= (JobIdForm) form;
 		System.out.println(jobIdForm.getId());
 		
-		String selected[]= request.getParameterValues("inputed");
-		int selectedJobId=Integer.parseInt(selected[0].substring(7));  //job title choosen for edit purpose
-			System.out.println(selected[0].substring(7));
-			int jobId=selectedJobId;
-		System.out.println(request.getParameter("inputed"));
+//		String selected[]= request.getParameterValues("inputed");
+//		int selectedJobId=Integer.parseInt(selected[0].substring(7));  //job title choosen for edit purpose
+//			System.out.println(selected[0].substring(7));
+//			int jobId=selectedJobId;
+//		System.out.println(request.getParameter("inputed"));
+		
+		int jobId=Integer.parseInt(request.getParameter("id"));
+		System.out.println(jobId);
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
 		
 		int uid= (int) session.getAttribute("uid");

@@ -21,11 +21,12 @@ public class DeleteThisAppAction extends Action{
 		
 		HttpSession session = request.getSession();
 	
-		String selected[]= request.getParameterValues("inputed");
-		int selectedJobId=Integer.parseInt(selected[0].substring(7));  //job title choosen for edit purpose
-			System.out.println(selected[0].substring(7));
-			int jobId=selectedJobId;
-		System.out.println(request.getParameter("inputed"));
+//		String selected[]= request.getParameterValues("inputed");
+//		int selectedJobId=Integer.parseInt(selected[0].substring(7));  //job title choosen for edit purpose
+//			System.out.println(selected[0].substring(7));
+//			int jobId=selectedJobId;
+	
+		int jobId= Integer.parseInt(request.getParameter("id"));
 		int uid=(int) session.getAttribute("uid");
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
 		 boolean deleted= jbs.deleteApp(jobId,uid);

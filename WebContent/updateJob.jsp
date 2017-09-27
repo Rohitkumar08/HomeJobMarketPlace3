@@ -16,38 +16,32 @@ table, th, td {
 </style>
 </head>
 <body>
-<%-- <% 
 
-	if(session.getAttribute("uname")==null)
-		response.sendRedirect("error.jsp");
-
-
-
-%> --%>
 <c:import url="header.jsp"></c:import>
 
 <center>
-<html:form action ="updateChoosenJob.do" method="POST">
+
 <h2>LIST OF ALL JOBS POSTED BY YOU</h2>
 <table margin-left="50px" width="90%"  style="background-color:salmon" >
 
 <tr><th align="center">JOB TITLE</th><th align="center">START DATE</th><th align="center">END DATE</th><th align="center">PAY PER HOUR</th>
 	<c:forEach items="${jobs}" var ="job">
-
+		<html:form action ="updateChoosenJob.do" method="POST">
 		<tr>
-			<input type="hidden"  value="${job.getId()}"/>
+			<input type="hidden" name="id" value="${job.getId()}"/>
 			
 			<td ><c:out  value="${job.getJobTitle()}"></c:out></td>
 			<td ><c:out  value="${job.getStartDate()}"></c:out></td>
 			<td ><c:out  value="${job.getEndDate()}"></c:out></td>
 			<td><c:out  value="${job.getPayPerHour()}"></c:out></td>
-			<td><input type="submit" name="inputed" value="update" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"/></td>
+			<%-- <td><input type="submit" name="inputed" value="update" onclick="this.value += ' <c:out  value="${job.getId()}"/>'"/></td> --%>
+			<td><input type="submit"  value="update"></td>
 		</tr>
-	
+		</html:form>
 	</c:forEach>
 </table>
 
-</html:form>
+
 <a href="seeker.do"><b>GO BACK.....</b></a>
 
 </center>

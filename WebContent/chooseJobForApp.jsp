@@ -21,7 +21,7 @@ table, th, td {
 	<c:import url="header.jsp"></c:import>
 
 	<center>
-		<html:form action="/ShowApplicants" method="POST">
+		
 			<h3>LIST OF ALL JOBS</h3>
 			<table border="2" style="background-color: salmon" width="85%">
 
@@ -34,24 +34,25 @@ table, th, td {
 				</tr>
 
 				<c:forEach items="${jobs}" var="job">
-
+					<html:form action="/ShowApplicants" method="POST">
 					<tr>
-
+						<input type="hidden" name="id" value="${job.getId()}"/>
 						<td><c:out value="${job.getJobTitle()}"></c:out></td>
 						<td><c:out value="${job.getStartDate()}"></c:out></td>
 						<td><c:out value="${job.getEndDate()}"></c:out></td>
 						
 						<td><c:out value="${job.getPayPerHour()}"></c:out></td>
 
-						<td><input type="submit" name="inputed"
+						<%-- <td><input type="submit" name="inputed"
 							value="Show Applicants"
-							onclick="this.value += ' <c:out  value="${job.getId()}"/>'"></td>
+							onclick="this.value += ' <c:out  value="${job.getId()}"/>'"></td> --%>
+							<td><input type="submit"  value="Show Applicants"></td>
 					</tr>
-
+					</html:form>
 				</c:forEach>
 			</table>
 
-		</html:form>
+		
 		<br> <a href="seeker.do">GO BACK</a>
 
 	</center>

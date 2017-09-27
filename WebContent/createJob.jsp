@@ -6,7 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
 <title>Insert title here</title>
+<style>
+tr,td{
+height:35px;
+
+}
+h2{
+font:verdana
+}
+
+</style>
 </head>
 <body>
 
@@ -14,7 +27,7 @@
 <center>
 <html:form action="/CreateJob" method="POST">
 <h2>CREATE A NEW JOB</h2>
-<table border="1" width="80%" height="90%" style="background-color: salmon">
+<table border="0" width="00" height="100%" style="background-color: white">
 
 <tr><td>Job Title :</td><td> <html:text property="jobTitle" /><html:errors property="jobTitle"/></td></tr>
 <tr><td>Start Date(yyyy-mm-dd) : </td><td><html:text property="startDate" /><html:errors property="startDateFormat"/><html:errors property="startDate"/>
@@ -33,9 +46,11 @@
 </td></tr>
 <tr><td>Pay Per Hour:</td><td><html:text property="payPerHour" /><html:errors property="payPerHour"/></td></tr>
 
-<tr><td colspan="2" align="right" ><input type="submit" value="submit" style="font-size:7pt;"></td></tr>
+
 
 </table>
+<br>
+<input type="submit" class="btn btn-success" value="submit" style="">
 </html:form>
 
 

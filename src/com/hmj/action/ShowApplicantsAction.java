@@ -26,16 +26,16 @@ public class ShowApplicantsAction extends Action{
 		HttpSession session= request.getSession();
 		int uid=(int) session.getAttribute("uid");
 		
-		String selected[]= request.getParameterValues("inputed");
-		int jobId=Integer.parseInt(selected[0].substring(16));
-			System.out.println(selected[0].substring(16));
+//		String selected[]= request.getParameterValues("inputed");
+//		int jobId=Integer.parseInt(selected[0].substring(16));
+//			System.out.println(selected[0].substring(16));
 			
+		
+		int jobId= Integer.parseInt(request.getParameter("id"));
+		System.out.println(jobId);
 			List<Applications> applicants =jbs.showApplicants(uid,jobId);
-	//		System.out.println("^^^^^^^^^^^^^"+applicants.get(0).getExpectedPay()+" ,"+applicants.get(0).getSitter().getFirstName());
-			if(applicants.size()!=0){
-				
-	//	System.out.println("*****************"+applicants.get(0).getSitter().getFirstName());
-				
+	
+			if(applicants.size()!=0){				
 				request.setAttribute("sitter", applicants);
 				return mapping .findForward("success");
 			}

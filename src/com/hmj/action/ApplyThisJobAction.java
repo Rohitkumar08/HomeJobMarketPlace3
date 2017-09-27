@@ -22,12 +22,15 @@ public class ApplyThisJobAction extends Action{
 		JobServiceImp jbs = (JobServiceImp) FactoryUtil.mapClassInstance.get(FactoryUtil.JOBSERVICEIMP);
 
 		HttpSession session= request.getSession();
+//		
+//		String selected[]= request.getParameterValues("inputed");
+//		int selectedJobId=Integer.parseInt(selected[0].substring(6));  //job title choosen for edit purpose
+//			System.out.println(selected[0].substring(6));
+//			int jobId=selectedJobId;
 		
-		String selected[]= request.getParameterValues("inputed");
-		int selectedJobId=Integer.parseInt(selected[0].substring(6));  //job title choosen for edit purpose
-			System.out.println(selected[0].substring(6));
-			int jobId=selectedJobId;
-			
+		
+		int jobId= Integer.parseInt(request.getParameter("id"));	
+		System.out.println(jobId);
 		int uid= (int) session.getAttribute("uid");
 		 int applied= jbs.applyThisJob(jobId,uid);
 		 System.out.println(applied);
