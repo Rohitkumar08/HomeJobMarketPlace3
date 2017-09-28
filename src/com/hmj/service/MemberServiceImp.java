@@ -276,13 +276,13 @@ public class MemberServiceImp {
 
 
 
-	public Seeker addSeeker(Seeker seeker) {
+	public Member addMember(Member mem) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
-		int id=ud.registerSeeker(seeker);
 		
-		
-		return seeker;
+		int id=ud.registerMember(mem);
+	
+		return mem;
 	}
 
 	

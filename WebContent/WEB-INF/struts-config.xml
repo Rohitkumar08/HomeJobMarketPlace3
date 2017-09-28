@@ -18,6 +18,7 @@
 		<form-bean name="updateSitterForm" type="com.hmj.FormBeans.UpdateSitterForm"/>
 		<form-bean name="updateSeekerForm" type="com.hmj.FormBeans.UpdateSeekerForm"/>
 		<form-bean name="jobUpdateForm" type="com.hmj.FormBeans.UpdateJobForm"/>
+		<form-bean name="forgotForm" type="com.hmj.FormBeans.ForgotPwdForm"/>
 		<!-- <form-bean name="updateJobForm" type="com.hmj.FormBeans.UpdateJobForm"/> -->
 	</form-beans>
 	
@@ -32,6 +33,10 @@
 	
 	<action-mappings>
 	
+		<action path="/forgotPwd" name="forgotForm" type="com.hmj.action.forgotPwdAction" scope="request" validate="true" input="/forgotPassword.jsp">
+			<forward name="success" path="/resetSuccessfully.jsp"/>
+		</action>
+		
 		<action path="/logout"  type="com.hmj.action.LogoutAction" scope="session" validate="false" >
 			<forward name="success" path="/logout.jsp"/>
 		</action>

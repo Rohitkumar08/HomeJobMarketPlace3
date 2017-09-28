@@ -30,9 +30,10 @@ public class MemberController {
 		return svc.getMember(id);
 	}
 
-	@RequestMapping(value = "/members/seeker", method = RequestMethod.POST, headers = "Accept=application/json")
-	public Seeker addMember(@RequestBody Seeker seeker) {
-		return svc.addSeeker(seeker);
+	@RequestMapping(value = "/members", method = RequestMethod.POST, headers = "Accept=application/json")
+	public Member addMember(@RequestBody Member member) {
+		System.out.println("called method");
+		return svc.addMember(member);
 	}
 	
 }

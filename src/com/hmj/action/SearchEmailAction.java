@@ -1,5 +1,5 @@
 package com.hmj.action;
-
+import com.hmj.mailer.*;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +24,10 @@ public class SearchEmailAction extends Action {
 		String keyWord=request.getParameter("searchEmail");
 		List<Member> emails=svc.getSearchData(keyWord);
 		System.out.println(emails.size());
+		
+		
+		
+		
 		request.setAttribute("member", emails);
 		if(emails.size()==0){
 			

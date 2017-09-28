@@ -447,4 +447,27 @@ public class UserData {
 		return mem;
 		
 	}
+	
+	public int registerMember(Member mem) {
+		// TODO Auto-generated method stub
+		Session  ses=null;
+		try {
+			ses= HibernateUtil.getSession().openSession();
+			Transaction transaction  = ses.beginTransaction();
+			
+				int id=(int) ses.save(mem);
+				transaction.commit();
+		
+		
+		System.out.println("successfully registered member");
+		return id;
+		}catch(Exception e ) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			ses.close();
+		}
+		
+	}
+	
 }

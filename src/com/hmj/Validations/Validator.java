@@ -72,9 +72,11 @@ public boolean validateEmail(String email) {
 	    Pattern pattern;
 	    //non-static Matcher object because it's created from the input String
 	    Matcher matcher;
+	  
 	    pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 	    matcher = pattern.matcher(email);
 	    if(matcher.matches()){
+	    	  System.out.println("validator called");
 	    	return true;
 	    }
 	    else{
