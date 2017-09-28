@@ -1,15 +1,18 @@
 package com.hmj.service;
 
+import java.util.HashMap;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hmj.dao.UserData;
 import com.hmj.enums.Status;
 import com.hmj.model.*;
 import com.hmj.util.FactoryUtil;
 
-
 public class MemberServiceImp {
-
 
 	public int doRegister(String name,String lname, String phone, String email, String password, String memberType, String noOfChilds, String spouseName, String expectedPays, String yearsOfExperiences) {
 		// TODO Auto-generated method stub
@@ -70,6 +73,8 @@ public class MemberServiceImp {
 			return id;
 	}
 
+	
+
 	public String validateUser(String email, String password) {
 		// TODO Auto-generated method stub
 		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
@@ -97,6 +102,20 @@ public class MemberServiceImp {
 			 return "noEmail";
 		 }
 		
+	}
+	private static HashMap<Integer, Member> getMembersMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public  List<Member> getAllMembers() {
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+
+		System.out.println("inside serice api");
+		int key=1;
+		List<Member> listOfMembers = ud.getAllUsers();
+		System.out.println(listOfMembers.get(0).getFirstName());
+		return listOfMembers;
 	}
 
 	public Member getUserData(String email) {
@@ -242,6 +261,28 @@ public class MemberServiceImp {
 		List<SeekerActivity> activities= ud.getUserActivity(uid);
 		
 		return activities;
+	}
+
+
+
+	public Member getMember(int id) {
+		// TODO Auto-generated method stub
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+
+		Member mem = ud.getUserDetailsDaoAPI(id);
+		
+		return mem;
+	}
+
+
+
+	public Seeker addSeeker(Seeker seeker) {
+		// TODO Auto-generated method stub
+		UserData ud = (UserData) FactoryUtil.mapClassInstance.get(FactoryUtil.USERDATA);
+		int id=ud.registerSeeker(seeker);
+		
+		
+		return seeker;
 	}
 
 	

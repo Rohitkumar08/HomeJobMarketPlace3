@@ -14,6 +14,7 @@ import com.hmj.model.Member;
 import com.hmj.model.Seeker;
 import com.hmj.model.SeekerActivity;
 import com.hmj.model.Sitter;
+import com.hmj.service.MemberServiceImp;
 import com.hmj.util.*;
 
 public class UserData {
@@ -401,5 +402,49 @@ public class UserData {
 			ses.close();
 		}
 
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
+	public List<Member> getAllUsers() {
+		// TODO Auto-generated method stub
+		Session ses= null;
+		try {
+			ses= HibernateUtil.getSession().openSession();
+			Query query = ses.createQuery("from Member");
+		
+			List<Member> result=query.list();
+			System.out.println("inside dao api");
+			System.out.println(result.get(0).getFirstName());
+			return result;
+		
+		}
+		catch(Exception e) {
+			return null;
+		}finally {
+			ses.close();
+		}
+		
+	}
+
+	public Member getUserDetailsDaoAPI(int uid) {
+		// TODO Auto-generated method stub
+		Session ses=null;
+		 Member mem= (Member) FactoryUtil.mapClassInstance.get(FactoryUtil.MEMBER);
+
+		try {
+			ses= HibernateUtil.getSession().openSession();
+		Query query = ses.createQuery("from Member where id=:e");
+		query.setParameter("e", uid);
+		mem= (Member) query.uniqueResult();
+		
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			ses.close();
+		}
+		return mem;
+		
 	}
 }
